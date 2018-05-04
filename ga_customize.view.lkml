@@ -22,8 +22,6 @@ view: ga_sessions {
   # SCENARIO 1: Only one property
   sql_table_name: `dyson-ga.19209080.ga_sessions_*` ;;
 
-
-
   # SCENARIO 2: Multiple properties. The property will dynamically look at the selected dataset using a filter.
   # sql_table_name: {% assign prop = ga_sessions.website_selector._sql %}
   #                 {% if prop contains 'Website1' %} `project.dataset.ga_sessions_*`
