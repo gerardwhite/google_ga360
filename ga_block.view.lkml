@@ -76,12 +76,12 @@ explore: ga_sessions_base {
     relationship: one_to_one
   }
 
-  # join: hits_sourcePropertyInfo {
-  #   view_label: "Session: Hits: Property"
-  #   sql: LEFT JOIN UNNEST([hits.sourcePropertyInfo]) as hits_sourcePropertyInfo ;;
-  #   relationship: one_to_one
-  #   required_joins: [hits]
-  # }
+  join: hits_sourcePropertyInfo {
+    view_label: "Session: Hits: Property"
+    sql: LEFT JOIN UNNEST([hits.sourcePropertyInfo]) as hits_sourcePropertyInfo ;;
+    relationship: one_to_one
+    required_joins: [hits]
+  }
 
   # join: hits_eCommerceAction {
   #   view_label: "Session: Hits: eCommerce"
@@ -119,7 +119,7 @@ view: ga_sessions_base {
   extension: required
   dimension: partition_date {
     type: date_time
-    sql: TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d')))  ;;
+    # sql: TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d')))  ;;
   }
 
   dimension: id {
@@ -342,6 +342,15 @@ view: totals_base {
     sql: 1.0 * ${bounces_total} / NULLIF(${ga_sessions.session_count},0) ;;
     value_format_name: percent_2
   }
+
+  measure: bounce_rate_plus {
+    type:  number
+    description: "Use this for Germany. See Alex for more."
+    view_label: "Dyson Special KPIs"
+    sql: ${bounce_rate} + 100 ;;
+    value_format_name: percent_2
+  }
+
   measure: transactions_count {
     type: sum
     sql: ${TABLE}.transactions ;;
@@ -704,7 +713,7 @@ view: hits_eventInfo_base {
 
 }
 
-# view: hits_sourcePropertyInfo {
-# #   extension: required
-#   dimension: sourcePropertyDisplayName {label: "Property Display Name"}
-# }
+view: hits_sourcePropertyInfo {
+#   extension: required
+  dimension: sourcePropertyDisplayName {label: "Property Display Name"}
+}

@@ -20,9 +20,9 @@ view: ga_sessions {
 
 
   # SCENARIO 1: Only one property
-  sql_table_name: `dyson-ga.19209080.ga_sessions_*` ;;
+  # sql_table_name: `dyson-ga.15754036.ga_sessions_*` ;;
 
-  # SCENARIO 2: Multiple properties. The property will dynamically look at the selected dataset using a filter.
+  # # SCENARIO 2: Multiple properties. The property will dynamically look at the selected dataset using a filter.
   # sql_table_name: {% assign prop = ga_sessions.website_selector._sql %}
   #                 {% if prop contains 'Website1' %} `project.dataset.ga_sessions_*`
   #                 {% elsif prop contains 'Website2' %} `project.dataset.ga_sessions_*`
@@ -40,15 +40,25 @@ view: ga_sessions {
 
 
   # SCENARIO 3: Multiple properties. The property will dynamically look at the selected dataset. If using this pattern, change the partition_date definition in the ga_block file  to type: date_time (no sql clause)
-  # sql_table_name: (SELECT *,'Property1' AS Property FROM `dataset_number.ga_sessions_*` WHERE {% condition partition_date %} TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d'))) {% endcondition %}
-  #  UNION ALL SELECT *,'Property2' AS Property FROM `dataset_number2.ga_sessions_*` WHERE {% condition partition_date %} TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d'))) {% endcondition %});;
+  sql_table_name:
+  (SELECT *,'Property1' AS Property
+  FROM `dyson-ga.19209080.ga_sessions_*`
+  WHERE {% condition partition_date %} TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d'))) {% endcondition %}
 
-  #   dimension: property {
-  #     sql: CASE WHEN ${TABLE}.property = 'Property1' THEN 'Name'
-  #         WHEN ${TABLE}.property = 'Property2' THEN 'Name2'
-  #         ELSE NULL END
-  #       ;;
-  #  }
+  UNION ALL
+
+  SELECT *,'Property2' AS Property
+  FROM `dyson-ga.15754036.ga_sessions_*`
+  WHERE {% condition partition_date %} TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d'))) {% endcondition %});;
+
+
+    dimension: property {
+      sql: CASE WHEN ${TABLE}.property = 'Property1' THEN 'Dyson Canada'
+                WHEN ${TABLE}.property = 'Property2' THEN 'Dyson Netherlands'
+                ELSE NULL
+           END
+        ;;
+    }
 
 
 
@@ -97,7 +107,7 @@ view: hits_page {
 # -- Ecommerce Fields
 
 view: hits_transaction {
-  #extends: [hits_transaction_base]  # Comment out to remove fields
+  extends: [hits_transaction_base]  # Comment out to remove fields
 }
 
 view: hits_item {
