@@ -11,7 +11,7 @@ explore: ga_sessions {
   extends: [ga_sessions_block]
 }
 
-
+week_start_day: monday
 # explore: canada_stats {
 
 # }
