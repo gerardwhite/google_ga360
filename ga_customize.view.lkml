@@ -22,43 +22,51 @@ view: ga_sessions {
   # SCENARIO 1: Only one property
   # sql_table_name: `dyson-ga.15754036.ga_sessions_*` ;;
 
-  # # SCENARIO 2: Multiple properties. The property will dynamically look at the selected dataset using a filter.
-  # sql_table_name: {% assign prop = ga_sessions.website_selector._sql %}
-  #                 {% if prop contains 'Website1' %} `project.dataset.ga_sessions_*`
-  #                 {% elsif prop contains 'Website2' %} `project.dataset.ga_sessions_*`
-  #                 {% elsif prop contains 'Website3' %} `project.dataset.ga_sessions_*`
-  #                 {% endif %}
-  #                 ;;
-  #   filter: website_picker {
-  #     suggestions: ["Website1","Website2", "Website3"]
-  #   }
-  #   dimension: website_selector {
-  #     type: string
-  #     hidden: no
-  #     sql: {% parameter website_picker %} ;;
-  #   }
+  # SCENARIO 2: Multiple properties. The property will dynamically look at the selected dataset using a filter.
+  sql_table_name: {% assign prop = ga_sessions.website_selector._sql %}
+                  {% if prop contains 'Dyson Canada' %} `dyson-ga.19209080.ga_sessions_*`
+                  {% elsif prop contains 'Dyson Netherlands' %} `dyson-ga.15754036.ga_sessions_*`
+                  {% endif %}
+                  ;;
+    filter: website_picker {
+      suggestions: ["Dyson Canada","Dyson Netherlands"]
+    }
+
+    dimension: website_selector {
+      type: string
+      hidden: no
+      sql: {% parameter website_picker %} ;;
+    }
+
+#     dimension: market {
+#       type: string
+#       sql: CASE WHEN ${website_picker} = "Dyson Canada" THEN "Canada"
+#                 WHEN ${website_picker} = "Dyson Netherlands" THEN "Netherlands"
+#                 ELSE NULL
+#             END ;;
+#     }
 
 
   # SCENARIO 3: Multiple properties. The property will dynamically look at the selected dataset. If using this pattern, change the partition_date definition in the ga_block file  to type: date_time (no sql clause)
-  sql_table_name:
-  (SELECT *,'Property1' AS Property
-  FROM `dyson-ga.19209080.ga_sessions_*`
-  WHERE {% condition partition_date %} TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d'))) {% endcondition %}
-
-  UNION ALL
-
-  SELECT *,'Property2' AS Property
-  FROM `dyson-ga.15754036.ga_sessions_*`
-  WHERE {% condition partition_date %} TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d'))) {% endcondition %});;
-
-
-    dimension: property {
-      sql: CASE WHEN ${TABLE}.property = 'Property1' THEN 'Dyson Canada'
-                WHEN ${TABLE}.property = 'Property2' THEN 'Dyson Netherlands'
-                ELSE NULL
-           END
-        ;;
-    }
+#   sql_table_name:
+#   (SELECT *,'Property1' AS Property
+#   FROM `dyson-ga.19209080.ga_sessions_*`
+#   WHERE {% condition partition_date %} TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d'))) {% endcondition %}
+#
+#   UNION ALL
+#
+#   SELECT *,'Property2' AS Property
+#   FROM `dyson-ga.15754036.ga_sessions_*`
+#   WHERE {% condition partition_date %} TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d'))) {% endcondition %});;
+#
+#
+#     dimension: property {
+#       sql: CASE WHEN ${TABLE}.property = 'Property1' THEN 'Dyson Canada'
+#                 WHEN ${TABLE}.property = 'Property2' THEN 'Dyson Netherlands'
+#                 ELSE NULL
+#            END
+#         ;;
+#     }
 
 
 
@@ -78,6 +86,8 @@ view: ga_sessions {
   # dimension: custom_dimension_3 {
   #   sql: (SELECT value FROM UNNEST(${TABLE}.customdimensions) WHERE index=3) ;;
   # }
+
+  dimension: reporting_period {}
 }
 
 view: geoNetwork {

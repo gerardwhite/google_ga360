@@ -10,3 +10,8 @@ explore: ga_sessions {
   label: "Google Analytics"
   extends: [ga_sessions_block]
 }
+
+
+# explore: canada_stats {
+
+# }
