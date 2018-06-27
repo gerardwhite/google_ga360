@@ -176,3 +176,8 @@ view: hits_customDimensions {
 view: hits_customVariables {
   extends: [hits_customVariables_base]
 }
+
+# Required calculated fields
+# Average order value (AOV)
+# Value per session
+# 'Segment data' for example shop visits
