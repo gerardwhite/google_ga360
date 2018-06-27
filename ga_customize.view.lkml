@@ -181,3 +181,4 @@ view: hits_customVariables {
 # Average order value (AOV)
 # Value per session
 # 'Segment data' for example shop visits
+# Conversion rate (transactions / sessions)
