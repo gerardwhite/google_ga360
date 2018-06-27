@@ -24,12 +24,32 @@ view: ga_sessions {
 
   # SCENARIO 2: Multiple properties. The property will dynamically look at the selected dataset using a filter.
   sql_table_name: {% assign prop = ga_sessions.website_selector._sql %}
-                  {% if prop contains 'Dyson Canada' %} `dyson-ga.19209080.ga_sessions_*`
-                  {% elsif prop contains 'Dyson Netherlands' %} `dyson-ga.15754036.ga_sessions_*`
+                  {% if prop contains 'Dyson.ca' %} `dyson-ga.19209080.ga_sessions_*`
+                  {% elsif prop contains 'Dyson.nl' %} `dyson-ga.15754036.ga_sessions_*`
+                  {% elsif prop contains 'Dyson.co.uk' %} `dyson-ga.15753450.ga_sessions_*`
+                  {% elsif prop contains 'Dyson.dk' %} `dyson-ga.15753540.ga_sessions_*`
+                  {% elsif prop contains 'Dyson.ie' %} `dyson-ga.15753547.ga_sessions_*`
+                  {% elsif prop contains 'Dyson.at' %} `dyson-ga.15753659.ga_sessions_*`
+                  {% elsif prop contains 'Dyson.com.au' %} `dyson-ga.15753684.ga_sessions_*`
+                  {% elsif prop contains 'Dyson.cn' %} `dyson-ga.15753718.ga_sessions_*`
+                  {% elsif prop contains 'Dyson.fr' %} `dyson-ga.15753748.ga_sessions_*`
+                  {% elsif prop contains 'Dyson.it' %} `dyson-ga.15753993.ga_sessions_*`
+                  {% elsif prop contains 'Dyson.co.jp' %} `dyson-ga.15754005.ga_sessions_*`
+                  {% elsif prop contains 'Dyson.ch' %} `dyson-ga.15754096.ga_sessions_*`
+                  {% elsif prop contains 'fi.dyson.com' %} `dyson-ga.15754211.ga_sessions_*`
+                  {% elsif prop contains 'Dyson.es' %} `dyson-ga.15754187.ga_sessions_*`
+                  {% elsif prop contains 'Dyson.com.ru' %} `dyson-ga.15754364.ga_sessions_*`
+                  {% elsif prop contains 'Dyson.se' %} `dyson-ga.15754524.ga_sessions_*`
+                  {% elsif prop contains 'Dysoncanada.ca' %} `dyson-ga.19209080.ga_sessions_*`
+                  {% elsif prop contains 'Dyson.be' %} `dyson-ga.21379335.ga_sessions_*`
+                  {% elsif prop contains 'Dyson.de' %} `dyson-ga.60583535.ga_sessions_*`
+                  {% elsif prop contains 'Dyson.no' %} `dyson-ga.15754319.ga_sessions_*`
+
+
                   {% endif %}
                   ;;
     filter: website_picker {
-      suggestions: ["Dyson Canada","Dyson Netherlands"]
+      suggestions: ["Dyson.ca","Dyson.nl", "Dyson.co.uk", "Dyson.dk", "Dyson.ie","Dyson.at" ,"Dyson.com.au" ,"Dyson.cn" ,"Dyson.fr" ,"Dyson.it" ,"Dyson.co.jp" ,"Dyson.nl" ,"Dyson.ch" ,"Dyson.es" ,"fi.dyson.com" ,"Dyson.com.ru" ,"Dyson.se" ,"Dysoncanada.ca" ,"Dyson.be" ,"Dyson.de" ,"Dyson.no"]
     }
 
     dimension: website_selector {
