@@ -107,7 +107,6 @@ view: ga_sessions {
   #   sql: (SELECT value FROM UNNEST(${TABLE}.customdimensions) WHERE index=3) ;;
   # }
 
-  dimension: reporting_period {}
 }
 
 view: geoNetwork {

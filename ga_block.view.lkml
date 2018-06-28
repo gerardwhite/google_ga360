@@ -199,6 +199,21 @@ view: ga_sessions_base {
     drill_fields: [fullVisitorId, visitnumber, session_count, totals.hits, totals.page_views, totals.timeonsite]
   }
 
+  dimension: reporting_year {
+    group_label: "Order Date"
+    sql: CASE
+        WHEN extract(year from ${visitStart_date}) = extract( year from current_date())
+        AND ${visitStart_date} < CURRENT_DATE()
+        THEN 'This Year to Date'
+
+        WHEN extract(year from ${visitStart_date}) + 1 = extract(year from current_date())
+        AND extract(dayofyear from ${visitStart_date}) <= extract(dayofyear from current_date())
+        THEN 'Last Year to Date'
+
+      END
+       ;;
+  }
+
   measure: first_time_visitors {
     label: "First Time Visitors"
     type: count
