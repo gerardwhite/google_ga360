@@ -124,9 +124,15 @@ view: ga_sessions_base {
   }
 
   dimension: id {
-    primary_key: yes
+    # primary_key: yes
     sql: CONCAT(CAST(${fullVisitorId} AS STRING), '|', COALESCE(CAST(${visitId} AS STRING),'')) ;;
   }
+
+  dimension: key {
+    primary_key: yes
+    sql: CONCAT(CAST(${fullVisitorId} AS STRING), '|', COALESCE(CAST(${visitId} AS STRING),''), '|', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d')) ;;
+  }
+
   dimension: visitorId {label: "Visitor ID"}
 
   dimension: visitnumber {
@@ -388,6 +394,31 @@ view: totals_base {
     type: number
     sql: ${TABLE}.timeOnScreen ;;
   }
+
+  # Required calculated fields
+# Average order value (AOV)
+
+measure: average_order_value {
+  value_format_name: usd
+  type: average
+  sql: (${TABLE}.transactionRevenue/1000000) ;;
+  }
+
+
+measure: value_per_session {
+  value_format_name: usd
+  type: number
+  sql: ${transactionRevenue_total} / ${ga_sessions.session_count} ;;
+}
+
+# 'Segment data' for example shop visits
+
+measure: conversion_rate {
+  value_format_name: percent_2
+  type: number
+  description: "Transactions / Sessions"
+  sql: ${transactions_count}/${ga_sessions.session_count}  ;;
+}
 }
 
 
