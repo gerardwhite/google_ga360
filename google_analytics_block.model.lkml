@@ -21,3 +21,7 @@ explore: ga_sessions {
 explore: revenue_targets_by_region_2018 {
   label: "Revenue Targets"
 }
+
+explore: weekly_global_stats {
+  description: "Used to compare markets on a high level before drilling. Based on aggregate table"
+}

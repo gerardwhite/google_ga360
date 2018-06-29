@@ -464,17 +464,34 @@ view: totals_base {
 # Average order value (AOV)
 
 measure: average_order_value {
-  value_format_name: usd
+  value_format_name: decimal_2
   type: average
   sql: (${TABLE}.transactionRevenue/1000000) ;;
   }
 
 
+
 measure: value_per_session {
-  value_format_name: usd
+  value_format_name: decimal_2
   type: number
   sql: ${transactionRevenue_total} / ${ga_sessions.session_count} ;;
 }
+
+
+  measure: average_order_value_gbp {
+    value_format_name: gbp
+    type: average
+    sql: (${TABLE}.transactionRevenue/1000000)/${tax_xrates_by_country_2018_v2.xrate} ;;
+  }
+
+
+
+
+  measure: value_per_session_gbp {
+    value_format_name: gbp
+    type: number
+    sql: ${transactionRevenue_total_gbp} / ${ga_sessions.session_count} ;;
+  }
 
 # 'Segment data' for example shop visits
 

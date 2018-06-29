@@ -31,6 +31,9 @@ view: ga_sessions {
   {% if prop contains 'www.dyson.ca' %} `dyson-ga.19209080.ga_sessions_*`
   {% elsif prop contains 'www.dyson.nl' %} `dyson-ga.15754036.ga_sessions_*`
   {% elsif prop contains 'www.dyson.co.uk' %} `dyson-ga.15753450.ga_sessions_*`
+  {% elsif prop contains 'www.dyson.com' %} `dyson-ga.15753478.ga_sessions_*`
+
+
   {% elsif prop contains 'www.dyson.dk' %} `dyson-ga.15753540.ga_sessions_*`
   {% elsif prop contains 'www.dyson.ie' %} `dyson-ga.15753547.ga_sessions_*`
   {% elsif prop contains 'www.dyson.at' %} `dyson-ga.15753659.ga_sessions_*`
