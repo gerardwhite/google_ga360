@@ -359,10 +359,46 @@ view: totals_base {
     type: sum
     sql: ${TABLE}.bounces ;;
   }
+
+
+  #  REDS AND GREENS
+
+  measure: bounces_total_rg {
+    view_label: "🚥 Reds and Greens 🚥"
+    label: "Bounces Total"
+    type: sum
+    sql: ${TABLE}.bounces ;;
+    html:
+    {% if value <= 20 %}
+    <div style="color: white; background-color: darkred; font-size: 100%; text-align:center">{{ rendered_value }}</div>
+    {% elsif value <= 50 %}
+    <div style="color: black; background-color: goldenrod; font-size: 100%; text-align:center">{{ rendered_value }}</div>
+    {% else %}
+    <div style="color: white; background-color: darkgreen; font-size: 100%; text-align:center">{{ rendered_value }}</div>
+    {% endif %} ;;
+  }
+
+  measure: bounce_rate_rg {
+    view_label: "🚥 Reds and Greens 🚥"
+    label: "Bounce Rate"
+    type:  number
+    sql: 1.0 * ${bounces_total} / NULLIF(${ga_sessions.session_count},0) ;;
+    value_format_name: percent_2
+    html:
+    {% if value <= 20 %}
+    <div style="color: white; background-color: darkred; font-size: 100%; text-align:center">{{ rendered_value }}</div>
+    {% elsif value <= 50 %}
+    <div style="color: black; background-color: goldenrod; font-size: 100%; text-align:center">{{ rendered_value }}</div>
+    {% else %}
+    <div style="color: white; background-color: darkgreen; font-size: 100%; text-align:center">{{ rendered_value }}</div>
+    {% endif %} ;;
+  }
+
   measure: bounce_rate {
     type:  number
     sql: 1.0 * ${bounces_total} / NULLIF(${ga_sessions.session_count},0) ;;
     value_format_name: percent_2
+
   }
 
 #   measure: bounce_rate_plus {
