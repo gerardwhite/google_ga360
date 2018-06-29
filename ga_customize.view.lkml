@@ -10,6 +10,10 @@ explore: ga_sessions_block {
       value: "7 days ago for 7 days"
       ## Partition Date should always be set to a recent date to avoid runaway queries
    }
+  filters: {
+    field: ga_sessions.website_picker
+    value: "www.dyson.co.uk"
+  }
   }
 }
 
@@ -24,33 +28,33 @@ view: ga_sessions {
 
   # SCENARIO 2: Multiple properties. The property will dynamically look at the selected dataset using a filter.
   sql_table_name: {% assign prop = ga_sessions.website_selector._sql %}
-                  {% if prop contains 'Dyson.ca' %} `dyson-ga.19209080.ga_sessions_*`
-                  {% elsif prop contains 'Dyson.nl' %} `dyson-ga.15754036.ga_sessions_*`
-                  {% elsif prop contains 'Dyson.co.uk' %} `dyson-ga.15753450.ga_sessions_*`
-                  {% elsif prop contains 'Dyson.dk' %} `dyson-ga.15753540.ga_sessions_*`
-                  {% elsif prop contains 'Dyson.ie' %} `dyson-ga.15753547.ga_sessions_*`
-                  {% elsif prop contains 'Dyson.at' %} `dyson-ga.15753659.ga_sessions_*`
-                  {% elsif prop contains 'Dyson.com.au' %} `dyson-ga.15753684.ga_sessions_*`
-                  {% elsif prop contains 'Dyson.cn' %} `dyson-ga.15753718.ga_sessions_*`
-                  {% elsif prop contains 'Dyson.fr' %} `dyson-ga.15753748.ga_sessions_*`
-                  {% elsif prop contains 'Dyson.it' %} `dyson-ga.15753993.ga_sessions_*`
-                  {% elsif prop contains 'Dyson.co.jp' %} `dyson-ga.15754005.ga_sessions_*`
-                  {% elsif prop contains 'Dyson.ch' %} `dyson-ga.15754096.ga_sessions_*`
-                  {% elsif prop contains 'fi.dyson.com' %} `dyson-ga.15754211.ga_sessions_*`
-                  {% elsif prop contains 'Dyson.es' %} `dyson-ga.15754187.ga_sessions_*`
-                  {% elsif prop contains 'Dyson.com.ru' %} `dyson-ga.15754364.ga_sessions_*`
-                  {% elsif prop contains 'Dyson.se' %} `dyson-ga.15754524.ga_sessions_*`
-                  {% elsif prop contains 'Dysoncanada.ca' %} `dyson-ga.19209080.ga_sessions_*`
-                  {% elsif prop contains 'Dyson.be' %} `dyson-ga.21379335.ga_sessions_*`
-                  {% elsif prop contains 'Dyson.de' %} `dyson-ga.60583535.ga_sessions_*`
-                  {% elsif prop contains 'Dyson.no' %} `dyson-ga.15754319.ga_sessions_*`
+  {% if prop contains 'www.dyson.ca' %} `dyson-ga.19209080.ga_sessions_*`
+  {% elsif prop contains 'www.dyson.nl' %} `dyson-ga.15754036.ga_sessions_*`
+  {% elsif prop contains 'www.dyson.co.uk' %} `dyson-ga.15753450.ga_sessions_*`
+  {% elsif prop contains 'www.dyson.dk' %} `dyson-ga.15753540.ga_sessions_*`
+  {% elsif prop contains 'www.dyson.ie' %} `dyson-ga.15753547.ga_sessions_*`
+  {% elsif prop contains 'www.dyson.at' %} `dyson-ga.15753659.ga_sessions_*`
+  {% elsif prop contains 'www.dyson.com.au' %} `dyson-ga.15753684.ga_sessions_*`
+  {% elsif prop contains 'www.dyson.cn' %} `dyson-ga.15753718.ga_sessions_*`
+  {% elsif prop contains 'www.dyson.fr' %} `dyson-ga.15753748.ga_sessions_*`
+  {% elsif prop contains 'www.dyson.it' %} `dyson-ga.15753993.ga_sessions_*`
+  {% elsif prop contains 'www.dyson.co.jp' %} `dyson-ga.15754005.ga_sessions_*`
+  {% elsif prop contains 'www.dyson.ch' %} `dyson-ga.15754096.ga_sessions_*`
+  {% elsif prop contains 'fi.dyson.com' %} `dyson-ga.15754211.ga_sessions_*`
+  {% elsif prop contains 'www.dyson.es' %} `dyson-ga.15754187.ga_sessions_*`
+  {% elsif prop contains 'www.dyson.com.ru' %} `dyson-ga.15754364.ga_sessions_*`
+  {% elsif prop contains 'www.dyson.se' %} `dyson-ga.15754524.ga_sessions_*`
+  {% elsif prop contains 'www.dysoncanada.ca' %} `dyson-ga.19209080.ga_sessions_*`
+  {% elsif prop contains 'www.dyson.be' %} `dyson-ga.21379335.ga_sessions_*`
+  {% elsif prop contains 'www.dyson.de' %} `dyson-ga.60583535.ga_sessions_*`
+  {% elsif prop contains 'www.dyson.no' %} `dyson-ga.15754319.ga_sessions_*`
 
 
                   {% endif %}
                   ;;
     filter: website_picker {
-      suggestions: ["Dyson.ca","Dyson.nl", "Dyson.co.uk", "Dyson.dk", "Dyson.ie","Dyson.at" ,"Dyson.com.au" ,"Dyson.cn" ,"Dyson.fr" ,"Dyson.it" ,"Dyson.co.jp" ,"Dyson.nl" ,"Dyson.ch" ,"Dyson.es" ,"fi.dyson.com" ,"Dyson.com.ru" ,"Dyson.se" ,"Dysoncanada.ca" ,"Dyson.be" ,"Dyson.de" ,"Dyson.no"]
-    }
+      suggestions: ["www.dyson.ca", "www.dyson.com", "www.dyson.nl", "www.dyson.co.uk", "www.dyson.dk", "www.dyson.ie","www.dyson.at" ,"www.dyson.com.au" ,"www.dyson.cn" ,"www.dyson.fr" ,"www.dyson.it" ,"www.dyson.co.jp" ,"www.dyson.nl" ,"www.dyson.ch" ,"www.dyson.es" ,"fi.dyson.com" ,"www.dyson.com.ru" ,"www.dyson.se" ,"www.dysoncanada.ca" ,"www.dyson.be" ,"www.dyson.de" ,"www.dyson.no"]
+      }
 
     dimension: website_selector {
       type: string

@@ -413,13 +413,27 @@ view: totals_base {
     type: sum
     sql: ${TABLE}.transactions ;;
   }
+
   measure: transactionRevenue_total {
-    label: "Transaction Revenue Total"
+    description: "This is in the local currency"
+    label: "Transaction Revenue Total (local)"
     type: sum
     sql: (${TABLE}.transactionRevenue/1000000) ;;
-    value_format_name: usd_0
+#     value_format_name: usd_0
     drill_fields: [transactions_count, transactionRevenue_total]
   }
+
+  measure: transactionRevenue_total_gbp {
+    description: "This is in GBP"
+    label: "Transaction Revenue Total (£)"
+    value_format_name: gbp
+    type: sum
+    sql: (${TABLE}.transactionRevenue/1000000) / ${tax_xrates_by_country_2018_v2.xrate} ;;
+    drill_fields: [transactions_count, transactionRevenue_total]
+  }
+
+
+
   measure: newVisits_total {
     label: "New Visits Total"
     type: sum
