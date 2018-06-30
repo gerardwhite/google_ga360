@@ -143,18 +143,27 @@ view: weekly_global_stats {
   }
 
   dimension: ga_sessions_channelgrouping_1 {
+    label: "Channel Grouping"
     type: string
     sql: ${TABLE}.ga_sessions_channelgrouping_1 ;;
   }
 
-  dimension: device_ismobile_1 {
-    type: string
-    sql: ${TABLE}.device_ismobile_1 ;;
+  dimension: Is_mobile {
+    type: yesno
+    sql: ${TABLE}.device_ismobile_1 = true;;
   }
 
   dimension: ga_sessions_website_selector {
+    label: "GA Property"
     type: string
     sql: ${TABLE}.ga_sessions_website_selector ;;
+
+    link: {
+      label: "{{tax_xrates_by_country_2018_v2.country_and_icon._value}} Dashboard"
+      url: "/8?Property={{ value | encode_uri }}"
+      icon_url: "http://www.looker.com/favicon.ico"
+    }
+
   }
 
   dimension: ga_sessions_session_count {
@@ -197,11 +206,15 @@ view: weekly_global_stats {
     sql: ${totals_transactions_count} ;;
   }
 
+  measure:  number_of_sessions{
+    type: sum
+    sql: ${ga_sessions_session_count} ;;
+  }
+
   set: detail {
     fields: [
       ga_sessions_visitstart_week_1,
       ga_sessions_channelgrouping_1,
-      device_ismobile_1,
       ga_sessions_website_selector,
       ga_sessions_session_count,
       totals_pageviews_total,

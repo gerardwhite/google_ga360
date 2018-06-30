@@ -11,6 +11,22 @@ view: tax_xrates_by_country_2018_v2 {
     sql: ${TABLE}.country ;;
   }
 
+  dimension: country_icon {
+    type: string
+    sql: case when ${country} = 'United Kingdom' then '🇬🇧'
+              when ${country} = 'Germany' then '🇩🇪'
+              when ${country} = 'France' then '🇫🇷'
+              when ${country} = 'Japan' then '🇯🇵'
+              when ${country} = 'United States' then '🇺🇸'
+ else null
+          end;;
+  }
+
+  dimension: country_and_icon {
+    type: string
+    sql: concat(${country_icon},' ', ${country}) ;;
+  }
+
   dimension: countrycode {
     primary_key: yes
     hidden: yes
