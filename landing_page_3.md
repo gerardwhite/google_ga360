@@ -24,7 +24,7 @@ Latest Release Notes
 
 This month we released new reports for the business. These dashboards can be found here:
 
-[Global Dashboard](https://dyson.eu.looker.com/dashboards/37) | [Market Dashboard](https://dyson.eu.looker.com/dashboards/39) | [Link 1](https://dyson.eu.looker.com/dashboards/35) | [Link 2](https://dyson.eu.looker.com/dashboards/12) | [Link 3](https://dyson.eu.looker.com/dashboards/31) | [Link 4](https://dyson.eu.looker.com/dashboards/30)
+[🌍Global Dashboard](https://dysonuk.eu.looker.com/dashboards/9?Channel%20grouping=&filter_config=%7B%22Channel%20grouping%22:%5B%7B%22type%22:%22%3D%22,%22values%22:%5B%7B%22constant%22:%22%22%7D,%7B%7D%5D,%22id%22:2%7D%5D%7D) | [Market Dashboard](https://dysonuk.eu.looker.com/dashboards/8?Property=www.dyson.com) | [Link 1](https://dyson.eu.looker.com/dashboards/35) | [Link 2](https://dyson.eu.looker.com/dashboards/12) | [Link 3](https://dyson.eu.looker.com/dashboards/31) | [Link 4](https://dyson.eu.looker.com/dashboards/30)
 
   <table style="border:none;">
   <tr>
