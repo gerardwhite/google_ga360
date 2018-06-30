@@ -160,7 +160,7 @@ view: weekly_global_stats {
 
     link: {
       label: "{{tax_xrates_by_country_2018_v2.country_and_icon._value}} Dashboard"
-      url: "/8?Property={{ value | encode_uri }}"
+      url: "/dashboards/8?Property={{ value | encode_uri }}"
       icon_url: "http://www.looker.com/favicon.ico"
     }
 
