@@ -19,12 +19,12 @@ Looker is an analytics data platform that is designed to help you use your data 
 <br><br />
 
 <h2 style="color: #33cccc ">
-Latest Release Notes
+Current Dashboards
 </h2>
+[🌍Global Dashboard](https://dysonuk.eu.looker.com/dashboards/9?Channel%20grouping=&filter_config=%7B%22Channel%20grouping%22:%5B%7B%22type%22:%22%3D%22,%22values%22:%5B%7B%22constant%22:%22%22%7D,%7B%7D%5D,%22id%22:2%7D%5D%7D)
 
-This month we released new reports for the business. These dashboards can be found here:
-
-[🌍Global Dashboard](https://dysonuk.eu.looker.com/dashboards/9?Channel%20grouping=&filter_config=%7B%22Channel%20grouping%22:%5B%7B%22type%22:%22%3D%22,%22values%22:%5B%7B%22constant%22:%22%22%7D,%7B%7D%5D,%22id%22:2%7D%5D%7D) | [Market Dashboard](https://dysonuk.eu.looker.com/dashboards/8?Property=www.dyson.com) | [Link 1](https://dyson.eu.looker.com/dashboards/35) | [Link 2](https://dyson.eu.looker.com/dashboards/12) | [Link 3](https://dyson.eu.looker.com/dashboards/31) | [Link 4](https://dyson.eu.looker.com/dashboards/30)
+|     :---:    |     :---:      |         :---: |     :---:      |     :---:      |
+| [🇺🇸 United States](https://dysonuk.eu.looker.com/dashboards/8?Property=www.dyson.com) | [🇬🇧 United Kingdom](https://dysonuk.eu.looker.com/dashboards/8?Property=www.dyson.co.uk) |[🇫🇷 France](https://dysonuk.eu.looker.com/dashboards/8?Property=www.dyson.fr) |[🇩🇪 Germany](https://dysonuk.eu.looker.com/dashboards/8?Property=www.dyson.de)  |[🇯🇵 Japan](https://dysonuk.eu.looker.com/dashboards/8?Property=www.dyson.co.jp)  |
 
   <table style="border:none;">
   <tr>
