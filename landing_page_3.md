@@ -8,8 +8,10 @@ Welcome to the Dyson Control Tower
 </h2>
 
 <span style="font-weight: 300; float: center">
-<b>Proof-of-Concept v.1</b>
-</span>
+<b>Stage: Proof-of-Concept v 0.1</b> <br>
+<b>NOT FOR PRODUCTION USE</b>
+
+
 <br><br />
 
 Dyson Control Tower is a single trading platform that enables markets to run our direct business in real time.
