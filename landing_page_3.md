@@ -21,10 +21,26 @@ Looker is an analytics data platform that is designed to help you use your data 
 <h2 style="color: #33cccc ">
 Current Dashboards
 </h2>
-[🌍Global Dashboard](https://dysonuk.eu.looker.com/dashboards/9?Channel%20grouping=&filter_config=%7B%22Channel%20grouping%22:%5B%7B%22type%22:%22%3D%22,%22values%22:%5B%7B%22constant%22:%22%22%7D,%7B%7D%5D,%22id%22:2%7D%5D%7D)
-
-|     :---:    |     :---:      |         :---: |     :---:      |     :---:      |
-| [🇺🇸 United States](https://dysonuk.eu.looker.com/dashboards/8?Property=www.dyson.com) | [🇬🇧 United Kingdom](https://dysonuk.eu.looker.com/dashboards/8?Property=www.dyson.co.uk) |[🇫🇷 France](https://dysonuk.eu.looker.com/dashboards/8?Property=www.dyson.fr) |[🇩🇪 Germany](https://dysonuk.eu.looker.com/dashboards/8?Property=www.dyson.de)  |[🇯🇵 Japan](https://dysonuk.eu.looker.com/dashboards/8?Property=www.dyson.co.jp)  |
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;border-color:#999;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#999;color:#fff;background-color:#26ADE4;}
+.tg .tg-mqa1{font-weight:bold;border-color:#000000;text-align:center;vertical-align:top}
+</style>
+<table class="tg">
+  <tr>
+    <th class="tg-mqa1" colspan="2"></th>
+    <th class="tg-mqa1"><a href="https://dysonuk.eu.looker.com/dashboards/9?Channel%20grouping=&filter_config=%7B%22Channel%20grouping%22:%5B%7B%22type%22:%22%3D%22,%22values%22:%5B%7B%22constant%22:%22%22%7D,%7B%7D%5D,%22id%22:2%7D%5D%7D">🌍Global Dashboard</a></th>
+    <th class="tg-mqa1" colspan="2"></th>
+  </tr>
+  <tr>
+    <td class="tg-mqa1"><a href="https://dysonuk.eu.looker.com/dashboards/8?Property=www.dyson.com">🇺🇸United States</a></td>
+    <td class="tg-mqa1"><a href="https://dysonuk.eu.looker.com/dashboards/8?Property=www.dyson.co.jp">🇯🇵Japan</a></td>
+    <td class="tg-mqa1"><a href="https://dysonuk.eu.looker.com/dashboards/8?Property=www.dyson.co.uk">🇬🇧United Kingdom</a></td>
+    <td class="tg-mqa1"><a href="https://dysonuk.eu.looker.com/dashboards/8?Property=www.dyson.de">🇩🇪Germany</a></td>
+    <td class="tg-mqa1"><a href="https://dysonuk.eu.looker.com/dashboards/8?Property=www.dyson.fr">🇫🇷France</a></td>
+  </tr>
+</table>
 
   <table style="border:none;">
   <tr>
