@@ -1,4 +1,5 @@
 view: weekly_global_stats {
+  view_label: "Dyson Global"
   derived_table: {
     sql_trigger_value: select current_date ;;
     sql: -- France
@@ -132,15 +133,35 @@ view: weekly_global_stats {
        ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [detail*]
+
+
+  dimension_group: start {
+    type: time
+    timeframes: [week, month, year]
+    sql: PARSE_DATE('%Y-%m-%d', ${TABLE}.ga_sessions_visitstart_week_1 );;
+
   }
 
-  dimension: ga_sessions_visitstart_week_1 {
-    type: string
-    sql: ${TABLE}.ga_sessions_visitstart_week_1 ;;
-  }
+#   dimension: start_date {
+#         type: string
+#      sql: ${TABLE}.ga_sessions_visitstart_week_1 ;;
+#     }
+
+#   dimension: reporting_year {
+#     group_label: "Order Date"
+#     sql: CASE
+#         WHEN extract(year from ${start_week}) = extract( year from current_date())
+#         AND ${start_week} < CURRENT_DATE()
+#         THEN 'This Year to Date'
+#
+#         WHEN extract(year from ${start_week}) + 1 = extract(year from current_date())
+#         AND extract(dayofyear from ${start_week}) <= extract(dayofyear from current_date())
+#         THEN 'Last Year to Date'
+#
+#       END
+#        ;;
+#   }
+
 
   dimension: ga_sessions_channelgrouping_1 {
     label: "Channel Grouping"
@@ -148,7 +169,7 @@ view: weekly_global_stats {
     sql: ${TABLE}.ga_sessions_channelgrouping_1 ;;
   }
 
-  dimension: Is_mobile {
+  dimension: is_mobile {
     type: yesno
     sql: ${TABLE}.device_ismobile_1 = true;;
   }
@@ -168,36 +189,43 @@ view: weekly_global_stats {
 
   dimension: ga_sessions_session_count {
     type: number
+    hidden: yes
     sql: ${TABLE}.ga_sessions_session_count ;;
   }
 
   dimension: totals_pageviews_total {
     type: number
+    hidden: yes
     sql: ${TABLE}.totals_pageviews_total ;;
   }
 
   dimension: totals_transactions_count {
     type: number
+    hidden: yes
     sql: ${TABLE}.totals_transactions_count ;;
   }
 
   dimension: totals_conversion_rate {
     type: number
+    hidden: yes
     sql: ${TABLE}.totals_conversion_rate ;;
   }
 
   dimension: totals_value_per_session_gbp {
     type: number
+    hidden: yes
     sql: ${TABLE}.totals_value_per_session_gbp ;;
   }
 
   dimension: totals_average_order_value_gbp {
     type: number
+    hidden: yes
     sql: ${TABLE}.totals_average_order_value_gbp ;;
   }
 
   measure: average_order_value_gbp {
     type: average
+    value_format_name: gbp
     sql: ${totals_average_order_value_gbp} ;;
   }
 
@@ -211,11 +239,28 @@ view: weekly_global_stats {
     sql: ${ga_sessions_session_count} ;;
   }
 
+  measure:  number_of_pageviews{
+    type: sum
+    sql: ${totals_pageviews_total} ;;
+  }
+
+  measure: average_conversion_rate {
+    type: average
+    sql: ${totals_conversion_rate} ;;
+    value_format_name: percent_2
+  }
+
+  measure: average_value_per_session {
+    type:  average
+    sql: ${totals_value_per_session_gbp} ;;
+    value_format_name: gbp
+  }
+
+
+
   set: detail {
     fields: [
-      ga_sessions_visitstart_week_1,
       ga_sessions_channelgrouping_1,
-      ga_sessions_website_selector,
       ga_sessions_session_count,
       totals_pageviews_total,
       totals_transactions_count,
