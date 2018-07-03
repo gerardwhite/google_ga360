@@ -258,15 +258,24 @@ view: weekly_global_stats {
 
   dimension: days_elapsed_2018 {
     type: number
-    label: "By Day"
-    sql: DATEDIFF( day, (2018,01,01), now()) ;;
+    label: "Days lapsed in 2018"
+    sql:  date_diff(current_date(), date(2018,01,01), day)  ;;
   }
+
+  measure: percent_through_2018 {
+    type: average
+    label: "Percent through 2018"
+    sql:  ${days_elapsed_2018}/365  ;;
+    value_format_name: percent_2
+  }
+
 
 
   set: detail {
     fields: [
       ga_sessions_channelgrouping_1,
       days_elapsed_2018,
+      percent_through_2018,
       ga_sessions_session_count,
       totals_pageviews_total,
       totals_transactions_count,
