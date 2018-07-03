@@ -256,11 +256,17 @@ view: weekly_global_stats {
     value_format_name: gbp
   }
 
+  dimension: days_elapsed_2018 {
+    type: number
+    label: "By Day"
+    sql: DATEDIFF( day, (2018,01,01), now()) ;;
+  }
 
 
   set: detail {
     fields: [
       ga_sessions_channelgrouping_1,
+      days_elapsed_2018,
       ga_sessions_session_count,
       totals_pageviews_total,
       totals_transactions_count,

@@ -49,7 +49,7 @@ view: code_snippets {
   dimension: days_elapsed_2018 {
     type: number
     label: "By Day"
-    sql: DATEDIFF( day, date(2018,01,01), now()) ;;
+    sql: DATEDIFF( day, (2018,01,01), now()) ;;
   }
 
 
