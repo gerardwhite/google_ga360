@@ -20,13 +20,14 @@ view: tax_xrates_by_country_2018_v2 {
 
   dimension: country_icon {
     type: string
-    sql: case when ${country} = 'United Kingdom' then '🇬🇧'
-              when ${country} = 'Germany' then '🇩🇪'
-              when ${country} = 'France' then '🇫🇷'
-              when ${country} = 'Japan' then '🇯🇵'
-              when ${country} = 'United States' then '🇺🇸'
+    sql: case when ${country} = 'United Kingdom' then 'gbr'
+              when ${country} = 'Germany' then 'deu'
+              when ${country} = 'France' then 'fra'
+              when ${country} = 'Japan' then 'jap'
+              when ${country} = 'United States' then 'usa'
  else null
           end;;
+    html: <img src="https://restcountries.eu/data/{{ value }}.svg" style="width:50px;height:30px;"/> ;;
   }
 
   dimension: country_and_icon {
