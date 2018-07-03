@@ -43,6 +43,15 @@ view: code_snippets {
   dimension: ga_sessions_returning_visitors {
     type: number
     sql: ${TABLE}.ga_sessions_returning_visitors ;;
+  }
+
+#counts days elapsed of 2018
+  dimension: days_elapsed_2018 {
+    type: number
+    label: "By Day"
+    sql: DATEDIFF( day, date(2018,01,01), now()) ;;
+  }
+
 
     # link: {
     #   label: "Website"
@@ -153,9 +162,9 @@ view: code_snippets {
     # }
 
     # drill_fields: [category, item_name]
-  }
+
 
   set: detail {
-    fields: [ga_sessions_visitstart_date_1, totals_bounces_total, totals_hits_total, ga_sessions_returning_visitors]
+    fields: [ga_sessions_visitstart_date_1, totals_bounces_total, totals_hits_total, ga_sessions_returning_visitors, days_elapsed_2018]
   }
 }
