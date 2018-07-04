@@ -23,7 +23,7 @@ view: tax_xrates_by_country_2018_v2 {
     sql: case when ${country} = 'United Kingdom' then 'gbr'
               when ${country} = 'Germany' then 'deu'
               when ${country} = 'France' then 'fra'
-              when ${country} = 'Japan' then 'jap'
+              when ${country} = 'Japan' then 'jpn'
               when ${country} = 'United States' then 'usa'
               when ${country} = 'Spain' then 'esp'
               when ${country} = 'Sweden' then 'swe'
