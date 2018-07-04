@@ -46,6 +46,26 @@ Embed test here:
 </table>
 
 
+<img id="Image-Maps-Com-image-maps-2018-07-04-105437" src="http://www.image-maps.com/m/private/0/ihgtucud7it3lil4mtii379na6_platform_architecture_map.png" border="0" width="1262" height="595" orgWidth="1262" orgHeight="595" usemap="#image-maps-2018-07-04-105437" alt="" />
+<map name="image-maps-2018-07-04-105437" id="ImageMapsCom-image-maps-2018-07-04-105437">
+<area  alt="" title="" href="https://www.dyson.com" shape="rect" coords="598,47,784,120" style="outline:none;" target="_self"     />
+<area  alt="" title="" href="https://www.dyson.fr" shape="rect" coords="170,177,356,250" style="outline:none;" target="_self"     />
+<area shape="rect" coords="1260,593,1262,595" alt="Image Map" style="outline:none;" title="Image Map" href="http://www.image-maps.com/index.php?aff=mapped_users_0" />
+</map>
+
+
+
+<table width="440">
+<tbody>
+<tr>
+<td>France &gt;</td>
+<td><a href="https://www.dyson.fr">E-commerce &gt;</a></td>
+<td>Vistiors </td>
+</tr>
+</tbody>
+</table>
+
+
 
 <style type="text/css">
 .tg  {border-collapse:collapse;border-spacing:0;border-color:#999;}

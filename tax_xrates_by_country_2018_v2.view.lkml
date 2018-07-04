@@ -25,6 +25,12 @@ view: tax_xrates_by_country_2018_v2 {
               when ${country} = 'France' then 'fra'
               when ${country} = 'Japan' then 'jap'
               when ${country} = 'United States' then 'usa'
+              when ${country} = 'Spain' then 'esp'
+              when ${country} = 'Sweden' then 'swe'
+              when ${country} = 'Italy' then 'ita'
+              when ${country} = 'Korea' then 'kor'
+              when ${country} = 'China' then 'chn'
+
  else null
           end;;
     html: <img src="https://restcountries.eu/data/{{ value }}.svg" style="width:50px;height:30px;"/> ;;
