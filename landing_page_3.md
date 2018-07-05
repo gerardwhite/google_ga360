@@ -12,13 +12,31 @@ Welcome to the Dyson Control Tower
 <b>NOT FOR PRODUCTION USE</b>
 
 
-<br><br />
 
 Dyson Control Tower is a single trading platform that enables markets to run our direct business in real time.
 
 Looker is an analytics data platform that is designed to help you use your data more effectively. It allows you to visualize data and drill into its underlying detail to provide a more accurate picture.
 
-<br><br />
+
+
+<h2 style="color: #33cccc ">
+Navigation quick start:
+</h2>
+
+<table style="width: 826px;">
+<tbody>
+<tr>
+<td style="width: 257px;"><a href="https://dysonuk.eu.looker.com/dashboards/12"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/platform_architecture5.png" alt="" width="219" height="142" /></a></td>
+<td style="width: 305px;"><a href="https://dysonuk.eu.looker.com/browse"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/shared_space3.png" alt="" width="264" height="142" /></a></td>
+<td style="width: 246px;">&nbsp;<a href="https://dysonuk.eu.looker.com/dashboards/9"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/explore.png" alt="" width="204" height="142" /></a></td>
+</tr>
+<tr>
+<td style="width: 257px;"><a href="https://dysonuk.eu.looker.com/dashboards/12">Click</a> to navigate by platform architecture...</td>
+<td style="width: 305px;">'Browse' to a shared space to find the dashboard or view.</td>
+<td style="width: 246px;">Or 'explore' the data from an exisiting view.</td>
+</tr>
+</tbody>
+</table>
 
 <h2 style="color: #33cccc ">
 Current Dashboards
