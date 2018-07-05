@@ -23,9 +23,6 @@ Looker is an analytics data platform that is designed to help you use your data 
 <iframe width="425" height="350" frameborder="0" scrolling="no" src="https://dysonuk.eu.looker.com/embed/D9cS6U18NczU2ai0YoYmSb"></iframe>
 
 
-<h2 style="color: #33cccc ">
-Embed test here:
-</h2>
 
 <h1>Dyson data environment</h1>
 <table width="494">
