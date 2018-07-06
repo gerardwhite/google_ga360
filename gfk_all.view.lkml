@@ -84,6 +84,14 @@ view: gfk_all {
     sql: ${TABLE}.Date_Collected ;;
   }
 
+  measure: average_price {
+    description: "Local currency"
+    value_format_name: decimal_2
+    type: average
+    sql: ${price} ;;
+
+  }
+
   set: detail {
     fields: [
       country,
