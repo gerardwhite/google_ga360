@@ -225,9 +225,34 @@ view: ga_sessions_base {
 
 
 
+## Added measures for last year week comparison. This is prob the easiest way to do it.
+  measure: number_of_visitors_last_week_last_year {
+    type: count
+    drill_fields: [fullVisitorId, visitnumber, session_count, totals.hits, totals.page_views, totals.timeonsite]
+    group_label: "Total Visitor Types"
+    filters: {
+      field: visitStart_week
+      value: "53 weeks ago"
+    }
+  }
 
+  measure: number_of_visitors_last_week {
+    type: count
+    drill_fields: [fullVisitorId, visitnumber, session_count, totals.hits, totals.page_views, totals.timeonsite]
+    group_label: "Total Visitor Types"
+    filters: {
+      field: visitStart_week
+      value: "last week"
+    }
+  }
 
-
+  measure: visitors_last_week_vs_last_year{
+    group_label: "Total Visitor Types"
+    type: number
+    sql: 1.0 * ((${number_of_visitors_last_week}-${number_of_visitors_last_week_last_year})/NULLIF(${number_of_visitors_last_week_last_year},0))  ;;
+    value_format_name: percent_2
+    drill_fields: [fullVisitorId, visitnumber, session_count, totals.hits, totals.page_views, totals.timeonsite]
+  }
 
 
 
