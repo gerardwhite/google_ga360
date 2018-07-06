@@ -18,4 +18,7 @@ include: "*.dashboard.lookml"  # include all dashboards in this project
 #   }
 # }
 
-explore: gfk {}
+explore: gfk_all {
+  group_label: "GfK"
+  label: "GfK Data"
+}
