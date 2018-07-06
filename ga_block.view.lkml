@@ -194,10 +194,42 @@ view: ga_sessions_base {
     drill_fields: [fullVisitorId, visitnumber, session_count, totals.hits, totals.page_views, totals.timeonsite]
   }
 
+
+
+
+
+
   measure: total_visitors {
     type: count
     drill_fields: [fullVisitorId, visitnumber, session_count, totals.hits, totals.page_views, totals.timeonsite]
   }
+
+  measure: number_of_organic_visitors {
+    type: count
+    drill_fields: [fullVisitorId, visitnumber, session_count, totals.hits, totals.page_views, totals.timeonsite]
+    group_label: "Total Visitor Types"
+    filters: {
+      field: channelGrouping
+      value: "Organic Search"
+    }
+  }
+
+  measure: percentage_of_organic_visitors {
+    group_label: "Total Visitor Types"
+    type: number
+    sql: 1.0 * (${number_of_organic_visitors}/NULLIF(${total_visitors},0))  ;;
+    value_format_name: percent_2
+    drill_fields: [fullVisitorId, visitnumber, session_count, totals.hits, totals.page_views, totals.timeonsite]
+  }
+
+
+
+
+
+
+
+
+
 
   dimension: reporting_year {
     group_label: "Order Date"
@@ -401,6 +433,7 @@ view: totals_base {
 
   }
 
+
 #   measure: bounce_rate_plus {
 #     type:  number
 #     description: "Use this for Germany. See Alex for more."
@@ -419,7 +452,7 @@ view: totals_base {
     label: "Transaction Revenue Total (local)"
     type: sum
     sql: (${TABLE}.transactionRevenue/1000000) ;;
-#     value_format_name: usd_0
+    value_format_name: decimal_1
     drill_fields: [transactions_count, transactionRevenue_total]
   }
 
@@ -559,7 +592,8 @@ view: device_base {
   dimension: browserVersion {label:"Browser Version"}
   dimension: operatingSystem {label: "Operating System"}
   dimension: operatingSystemVersion {label: "Operating System Version"}
-  dimension: isMobile {label: "Is Mobile"}
+  dimension: isMobile {label: "Is Mobile" type: yesno}
+  dimension: deviceCategory {label: "Device Category"}
   dimension: flashVersion {label: "Flash Version"}
   dimension: javaEnabled {
     label: "Java Enabled"
