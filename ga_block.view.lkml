@@ -571,7 +571,18 @@ view: trafficSource_base {
   dimension: campaign {}
   dimension: source {}
   dimension: medium {}
-  dimension: keyword {}
+  dimension: keyword {
+    link: {
+      label: "Pause Ad Group"
+      icon_url: "https://www.google.com/s2/favicons?domain=www.adwords.google.com"
+      url: "https://adwords.google.com/"
+    }
+    link: {
+      url: "https://adwords.google.com/"
+      icon_url: "https://www.gstatic.com/awn/awsm/brt/awn_awsm_20171108_RC00/aw_blend/favicon.ico"
+      label: "Change Bid"
+    }
+  }
   dimension: adContent {label: "Ad Content"}
   measure: source_list {
     type: list
@@ -743,7 +754,19 @@ view: hits_page_base {
 
 
 
-  dimension: searchKeyword {label: "Search Keyword"}
+  dimension: searchKeyword {label: "Search Keyword"
+
+    link: {
+      label: "Pause Ad Group"
+      icon_url: "https://www.google.com/s2/favicons?domain=www.adwords.google.com"
+      url: "https://adwords.google.com/"
+    }
+    link: {
+      url: "https://adwords.google.com/"
+      icon_url: "https://www.gstatic.com/awn/awsm/brt/awn_awsm_20171108_RC00/aw_blend/favicon.ico"
+      label: "Change Bid"
+    }
+    }
   dimension: searchCategory{label: "Search Category"}
 }
 
