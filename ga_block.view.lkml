@@ -702,7 +702,47 @@ view: hits_page_base {
     }
   }
   dimension: hostName {label: "Host Name"}
-  dimension: pageTitle {label: "Page Title"}
+  dimension: pageTitle {label: "Page Title"
+
+   link: {
+      label: "View Page"
+      url: "http://{{ ga_sessions.website_selector._value}}{{ pagePath }}"
+    }
+
+    action: {
+          label: "Email web team"
+          url: "https://nonononono"
+          icon_url: "https://sendgrid.com/favicon.ico"
+          param: {
+            name: "some_auth_code"
+            value: "abc123456"
+          }
+          form_param: {
+            name: "Subject"
+            required: yes
+            default: "Page issue: Please check: {{ pageTitle }}"
+          }
+          form_param: {
+            name: "Body"
+            type: textarea
+            required: yes
+            default:
+            "ALERT
+
+            Page {{ pageTitle }} is down, on URL {{ pagePath }}
+
+            See this link for more detail
+
+            ~{{ _user_attributes.first_name}}"
+          }
+        }
+        # required_fields: [name, first_name]
+      }
+
+
+
+
+
   dimension: searchKeyword {label: "Search Keyword"}
   dimension: searchCategory{label: "Search Category"}
 }
