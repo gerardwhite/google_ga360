@@ -117,21 +117,15 @@ explore: ga_sessions_base {
 
 view: ga_sessions_base {
   extension: required
-  dimension: partition_date {
-    type: date_time
-    # sql: _PARTITIONTIME ;;
-    sql: TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d')))  ;;
-  }
+    dimension: partition_date {
+      type: date_time
+      sql: TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d')))  ;;
+    }
 
-  dimension: id {
-    primary_key: yes
-    sql: CONCAT(CAST(${fullVisitorId} AS STRING), '|', COALESCE(CAST(${visitId} AS STRING),''), CAST(FORMAT_TIMESTAMP('%F %T', TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d')))  )) AS STRING) ;;
-  }
-
-#   dimension: key {
-#     primary_key: yes
-#     sql: CONCAT(CAST(${fullVisitorId} AS STRING), '|', COALESCE(CAST(${visitId} AS STRING),''), '|', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d')) ;;
-#   }
+    dimension: id {
+      primary_key: yes
+      sql: CONCAT(CAST(${fullVisitorId} AS STRING), '|', COALESCE(CAST(${visitId} AS STRING),''), CAST(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d'))   AS STRING)) ;;
+    }
 
   dimension: visitorId {label: "Visitor ID"}
 
