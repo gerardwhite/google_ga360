@@ -20,6 +20,6 @@ include: "*.dashboard.lookml"  # include all dashboards in this project
 
 explore: gfk_all {
   sql_always_where: ${date_collected_date} >= '2018-03-01' ;;
-  group_label: "GfK"
+  group_label: "GfK/Adobe"
   label: "GfK Data"
 }

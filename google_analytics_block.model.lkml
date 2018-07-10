@@ -11,6 +11,7 @@ week_start_day: monday
 
 explore: ga_sessions {
   label: "Google Analytics"
+  group_label: "E-Commerce"
   extends: [ga_sessions_block]
   join: tax_xrates_by_country_2018_v2 {
     relationship: many_to_one
@@ -20,10 +21,13 @@ explore: ga_sessions {
 
 explore: revenue_targets_by_region_2018 {
   label: "Revenue Targets"
+  group_label: "E-Commerce"
+
 }
 
 explore: weekly_global_stats {
-  label: "Global Explore"
+  label: "High-level global data"
+  group_label: "E-Commerce"
   description: "Used to compare markets on a high level before drilling. Based on aggregate table"
   join: tax_xrates_by_country_2018_v2 {
     relationship: many_to_one

@@ -20,4 +20,5 @@ include: "*.dashboard.lookml"  # include all dashboards in this project
 
 explore: rt_web_sessions {
   label: "Adobe"
+  group_label: "GfK/Adobe"
 }
