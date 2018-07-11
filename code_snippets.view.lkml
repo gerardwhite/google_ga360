@@ -1,23 +1,7 @@
 view: code_snippets {
   derived_table: {
 #     sql_trigger_value: select current_date ;;
-    sql: SELECT
-        CAST((TIMESTAMP((CAST(TIMESTAMP_SECONDS(ga_sessions.visitStarttime)  AS DATE))))  AS DATE) AS ga_sessions_visitstart_date_1,
-        COALESCE(SUM(totals.bounces ), 0) AS totals_bounces_total,
-        COALESCE(SUM(totals.hits ), 0) AS totals_hits_total,
-        COUNT(CASE WHEN (ga_sessions.visitnumber <> 1) THEN 1 ELSE NULL END) AS ga_sessions_returning_visitors
-      FROM
-                         `dyson-ga.19209080.ga_sessions_*`
-
-                         AS ga_sessions
-      LEFT JOIN UNNEST([ga_sessions.totals]) as totals
-
-      WHERE
-        (((TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d')))  ) >= ((TIMESTAMP_ADD(TIMESTAMP_TRUNC(CURRENT_TIMESTAMP(), DAY), INTERVAL -30 DAY))) AND (TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d')))  ) < ((TIMESTAMP_ADD(TIMESTAMP_ADD(TIMESTAMP_TRUNC(CURRENT_TIMESTAMP(), DAY), INTERVAL -30 DAY), INTERVAL 30 DAY)))))
-      GROUP BY 1
-      ORDER BY 1 DESC
-      LIMIT 500
-       ;;
+    sql:
   }
 
   measure: count {
@@ -164,7 +148,13 @@ view: code_snippets {
     # drill_fields: [category, item_name]
 
 
-  set: detail {
-    fields: [ga_sessions_visitstart_date_1, totals_bounces_total, totals_hits_total, ga_sessions_returning_visitors, days_elapsed_2018]
+  dimension: image_file {
+    hidden: yes
+    sql: ('https://docs.looker.com/assets/images/'||${days_elapsed_2018}||'.jpg') ;;
   }
+
+
+  # set: detail {
+  #   fields: [ga_sessions_visitstart_date_1, totals_bounces_total, totals_hits_total, ga_sessions_returning_visitors, days_elapsed_2018]
+  # }
 }

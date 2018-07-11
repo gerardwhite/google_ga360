@@ -39,7 +39,7 @@ view: rt_web_sessions {
     sql: ${TABLE}.date ;;
   }
 
-  dimension: devicecategory {
+  dimension: device_category {
     type: string
     sql: ${TABLE}.devicecategory ;;
   }
