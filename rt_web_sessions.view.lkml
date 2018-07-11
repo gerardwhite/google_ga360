@@ -1,5 +1,5 @@
 view: rt_web_sessions {
-  sql_table_name: dyson_adobe.rt_web_sessions ;;
+  sql_table_name: `dyson_adobe.web_sessions_*` ;;
 
   dimension: analytics_source {
     type: string
@@ -24,6 +24,14 @@ view: rt_web_sessions {
   dimension: dataset_id {
     type: string
     sql: ${TABLE}.dataset_id ;;
+  }
+
+  dimension: website {
+    type: string
+    sql: CASE WHEN ${dataset_id} = '100052885' then 'www.dyson.com'
+              WHEN ${dataset_id} = '100050803' then 'www.dyson.co.uk'
+              WHEN ${dataset_id} = '100050804' then 'www.dyson.ie'
+              END;;
   }
 
   dimension: date {
