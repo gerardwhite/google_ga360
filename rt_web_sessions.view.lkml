@@ -26,6 +26,8 @@ view: rt_web_sessions {
     sql: ${TABLE}.dataset_id ;;
   }
 
+# Custom dimensions and measures here...
+
   dimension: website {
     type: string
     sql: CASE WHEN ${dataset_id} = '100052885' then 'www.dyson.com'
@@ -33,6 +35,28 @@ view: rt_web_sessions {
               WHEN ${dataset_id} = '100050804' then 'www.dyson.ie'
               END;;
   }
+
+
+# Solution to convert Adobe date format into a Looker friendly version.
+
+  dimension: partition_date {
+    type: date
+    datatype: date
+    sql: CAST(CAST(rt_web_sessions.date  AS TIMESTAMP) AS DATE) ;;
+  }
+
+# Builds dates out into groups:
+
+  dimension_group: adobe {
+    type: time
+    datatype: date
+    timeframes: [date, week,month, month_name, year, day_of_week]
+    sql: ${partition_date} ;;
+  }
+
+
+
+
 
   dimension: date {
     type: string
