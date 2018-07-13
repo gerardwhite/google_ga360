@@ -26,7 +26,7 @@ view: rt_web_sessions {
     sql: ${TABLE}.dataset_id ;;
   }
 
-# Custom dimensions and measures here...
+# Correct dataset IDs by website
 
   dimension: website {
     type: string
