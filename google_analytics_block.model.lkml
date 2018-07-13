@@ -4,7 +4,6 @@ connection: "bq2look"
 include: "*.view"
 
 # include all the dashboards
-# include: "*.dashboard"
 
 week_start_day: monday
 
