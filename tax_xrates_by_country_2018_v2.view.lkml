@@ -30,6 +30,8 @@ view: tax_xrates_by_country_2018_v2 {
               when ${country} = 'Italy' then 'ita'
               when ${country} = 'Korea' then 'kor'
               when ${country} = 'China' then 'chn'
+              when ${country} = 'Switzerland' then 'che'
+              when ${country} = 'Russia' then 'rus'
 
  else null
           end;;
