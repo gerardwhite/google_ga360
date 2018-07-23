@@ -29,6 +29,8 @@ view: tax_xrates_by_country_2018_v2 {
               when ${country} = 'Spain' then 'esp'
               when ${country} = 'Sweden' then 'swe'
               when ${country} = 'Norway' then 'nor'
+              when ${country} = 'Denmark' then 'dnk'
+              when ${country} = 'Belguim' then 'bel'
               when ${country} = 'Italy' then 'ita'
               when ${country} = 'Korea' then 'kor'
               when ${country} = 'China' then 'chn'
