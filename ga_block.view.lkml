@@ -711,8 +711,17 @@ view: hits_page_base {
 
    link: {
       label: "View Page"
+
       url: "http://{{ ga_sessions.website_selector._value}}{{ pagePath }}"
+      icon_url: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/dyson-fav.ico"
     }
+
+    link: {
+      url: "https://adwords.google.com/"
+      icon_url: "https://www.gstatic.com/awn/awsm/brt/awn_awsm_20171108_RC00/aw_blend/favicon.ico"
+      label: "Modifty Adgroups"
+    }
+
 
     action: {
           label: "Email web team"
