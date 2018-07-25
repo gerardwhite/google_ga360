@@ -25,11 +25,13 @@ view: tax_xrates_by_country_2018_v2 {
               when ${country} = 'France' then 'fra'
               when ${country} = 'Japan' then 'jpn'
               when ${country} = 'United States' then 'usa'
-               when ${country} = 'Canada' then 'can'
+              when ${country} = 'Canada' then 'can'
               when ${country} = 'Spain' then 'esp'
               when ${country} = 'Sweden' then 'swe'
               when ${country} = 'Norway' then 'nor'
               when ${country} = 'Denmark' then 'dnk'
+              when ${country} = 'Austria' then 'aut'
+              when ${country} = 'Australia' then 'aut'
               when ${country} = 'Belguim' then 'bel'
               when ${country} = 'Italy' then 'ita'
               when ${country} = 'Korea' then 'kor'
@@ -37,6 +39,11 @@ view: tax_xrates_by_country_2018_v2 {
               when ${country} = 'Switzerland' then 'che'
               when ${country} = 'Russia' then 'rus'
               when ${country} = 'Mexico' then 'mex'
+              when ${country} = 'Brazil' then 'bra'
+              when ${country} = 'Netherlands' then 'nld'
+              when ${country} = 'Poland' then 'pol'
+              when ${country} = 'India' then 'ind'
+              when ${country} = 'Hong Kong' then 'hkg'
 
  else null
           end;;
