@@ -7,6 +7,8 @@ include: "*.view"
 
 week_start_day: monday
 
+explore: uk_temp {}
+
 
 explore: ga_sessions {
   label: "Google Analytics"
@@ -15,6 +17,11 @@ explore: ga_sessions {
   join: tax_xrates_by_country_2018_v2 {
     relationship: many_to_one
     sql_on: ${ga_sessions.website_selector} = ${tax_xrates_by_country_2018_v2.website} ;;
+  }
+
+  join: uk_temp {
+    relationship: many_to_one
+    sql_on: ${ga_sessions.visitStart_date} = ${uk_temp.temp_date} ;;
   }
 }
 
