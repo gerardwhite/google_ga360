@@ -7,7 +7,30 @@ include: "*.view"
 
 week_start_day: monday
 
-explore: uk_temp {}
+datagroup: bqml_datagroup {
+  #Rad datagroup, yo!
+  max_cache_age: "1 hour"
+  sql_trigger: SELECT CURRENT_DATE() ;;
+}
+
+explore: fan_interest_regression_evaluation {
+  label: "Regression Model Evaulation"
+  group_label: "Data Science"
+
+}
+# explore: fan_interest_training {}
+# explore: fan_interest_prediction {}
+
+explore: ga_sessions_data_science {
+  group_label: "Data Science"
+  label: "Google Analytics (w/ Data Science Extensions)"
+  extends: [ga_sessions]
+
+  join: fan_interest_prediction {
+    relationship: many_to_one
+    sql_on: ${ga_sessions.visitStart_date} = ${fan_interest_prediction.visitStart_date} ;;
+  }
+}
 
 
 explore: ga_sessions {
