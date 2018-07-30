@@ -250,6 +250,8 @@ view: ga_sessions_base {
 
 
 
+
+
   dimension: reporting_year {
     group_label: "Order Date"
     sql: CASE
