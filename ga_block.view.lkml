@@ -761,6 +761,10 @@ view: hits_page_base {
 
   dimension: searchKeyword {label: "Search Keyword"
 
+
+
+
+
     link: {
       label: "Pause Ad Group"
       icon_url: "https://www.google.com/s2/favicons?domain=www.adwords.google.com"
