@@ -15,14 +15,13 @@ datagroup: bqml_datagroup {
 
 explore: fan_interest_regression_evaluation {
   label: "Regression Model Evaulation"
-  group_label: "Data Science"
+  group_label: "Data Science (Demo)"
 
 }
-# explore: fan_interest_training {}
-# explore: fan_interest_prediction {}
+
 
 explore: ga_sessions_data_science {
-  group_label: "Data Science"
+  group_label: "Data Science (Demo)"
   label: "Google Analytics (w/ Data Science Extensions)"
   extends: [ga_sessions]
 
@@ -55,7 +54,7 @@ explore: revenue_targets_by_region_2018 {
 }
 
 explore: weekly_global_stats {
-  label: "High-level global data"
+  label: "Google Analytics: Global"
   group_label: "E-Commerce"
   description: "Used to compare markets on a high level before drilling. Based on aggregate table"
   join: tax_xrates_by_country_2018_v2 {
