@@ -721,7 +721,7 @@ view: hits_page_base {
     link: {
       url: "https://adwords.google.com/"
       icon_url: "https://www.gstatic.com/awn/awsm/brt/awn_awsm_20171108_RC00/aw_blend/favicon.ico"
-      label: "Modifty Adgroups"
+      label: "Modify Adgroups"
     }
 
 
