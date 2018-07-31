@@ -761,9 +761,11 @@ view: hits_page_base {
 
   dimension: searchKeyword {label: "Search Keyword"
 
-
-
-
+    link: {
+      label: "Google trends data for {{searchKeyword._value}}"
+      icon_url: "https://www.google.com/s2/favicons?domain=https://trends.google.com"
+      url: "https://trends.google.com/trends/explore?geo=FR&q={{ searchKeyword._value | encode_uri }}"
+    }
 
     link: {
       label: "Pause Ad Group"
