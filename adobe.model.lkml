@@ -1,4 +1,4 @@
-connection: "adobe_connection_bigquery"
+connection: "bq2look"
 
 include: "*.view.lkml"         # include all views in this project
 

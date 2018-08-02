@@ -1,5 +1,5 @@
 view: rt_web_sessions {
-  sql_table_name: `dyson_adobe.web_sessions_*` ;;
+  sql_table_name: `dyson-digitalanalytics-sandbox.dyson_adobe.web_sessions_*` ;;
 
   dimension: analytics_source {
     type: string
