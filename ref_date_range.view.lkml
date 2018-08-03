@@ -1,3 +1,5 @@
+#GW: For every date in range, and combo of country and channel
+
 view: ref_date_range {
   derived_table: {
     datagroup_trigger: bqml_datagroup
@@ -6,7 +8,7 @@ view: ref_date_range {
           GENERATE_DATE_ARRAY(DATE('2017-01-01'), DATE('2018-12-31'), INTERVAL 1 DAY)
           ) AS day
           cross join (
-      --     select
+      --
 
       SELECT distinct
         sap_6plus6.Channel  AS sap_6plus6_channel,
@@ -51,22 +53,23 @@ view: ref_date_range {
     drill_fields: [detail*]
   }
 
-  dimension: day {
-    type: date
+  dimension_group: day {
+    type: time
+    timeframes: [date]
     sql: ${TABLE}.day ;;
   }
 
-  dimension: sap_6plus6_channel {
+  dimension: channel {
     type: string
     sql: ${TABLE}.sap_6plus6_channel ;;
   }
 
-  dimension: sap_6plus6_country {
+  dimension: country {
     type: string
     sql: ${TABLE}.sap_6plus6_country ;;
   }
 
   set: detail {
-    fields: [day, sap_6plus6_channel, sap_6plus6_country]
+    fields: [day_date]
   }
 }

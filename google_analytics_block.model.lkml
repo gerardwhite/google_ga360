@@ -17,7 +17,6 @@ explore: rt_web_sessions {
   group_label: "E-Commerce"
 
 }
-explore: ref_date_range {}
 
 
 explore: ga_sessions {
@@ -36,7 +35,7 @@ explore: ga_sessions {
 }
 
 
-#not used in demo bnut keep code
+#not used in demo but keep code
 explore: weekly_global_stats {
   label: "Google Analytics: Global"
   group_label: "E-Commerce"
@@ -73,6 +72,7 @@ explore: weekly_global_stats {
 #   }
 # }
 
+
 explore: fill_in_dates {
   group_label: "SAP"
   label: "SAP | Test join2"
@@ -82,6 +82,20 @@ explore: fill_in_dates {
     sql_on: ${fill_in_dates.day_date}=${sap_6plus6.month_date} ;;
   }
 }
+
+explore: ref_date_range {
+  group_label: "SAP"
+  label: "SAP | Test join2"
+  join: sap_6plus6 {
+    type: left_outer
+    relationship: one_to_one
+    sql_on: ${ref_date_range.day_date}=${sap_6plus6.month_date}
+            AND ${ref_date_range.channel} = ${sap_6plus6.channel}
+            AND ${ref_date_range.country} = ${ref_date_range.country};;
+  }
+}
+
+
 
 
 ################## SAP ########################
