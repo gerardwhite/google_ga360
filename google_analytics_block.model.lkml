@@ -17,6 +17,7 @@ explore: rt_web_sessions {
   group_label: "E-Commerce"
 
 }
+explore: ref_date_range {}
 
 
 explore: ga_sessions {
