@@ -85,7 +85,7 @@ explore: fill_in_dates {
 
 explore: ref_date_range {
   group_label: "SAP"
-  label: "SAP | Test join2"
+  label: "SAP | Test join2 - with more joins"
   join: sap_6plus6 {
     type: left_outer
     relationship: one_to_one
