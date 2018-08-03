@@ -57,3 +57,165 @@ explore: weekly_global_stats {
     fields: [tax_xrates_by_country_2018_v2.country, tax_xrates_by_country_2018_v2.country_icon, tax_xrates_by_country_2018_v2.country_and_icon]
   }
 }
+
+
+
+
+
+
+# # SAP join tests.
+# explore: sap {
+#   persist_for: "1 hour"
+#   group_label: "SAP"
+#   label: "SAP | Actual revenue"
+#   join: sap_6plus6 {
+#     relationship: many_to_one
+#     sql_on: ${sap.country} = ${sap_6plus6.country}
+#     AND ${sap.channel} = ${sap_6plus6.channels}
+#
+#     ;;
+#   }
+#   always_filter: {
+#     filters: {
+#       field: sap.date_date
+#       value: "30 days ago for 30 days"
+#     }
+#   }
+# }
+
+explore: fill_in_dates {
+  group_label: "SAP"
+  label: "SAP | Test join2"
+  join: sap_6plus6 {
+    type: left_outer
+    relationship: one_to_one
+    sql_on: ${fill_in_dates.day_date}=${sap_6plus6.month_date} ;;
+  }
+}
+
+
+################## SAP ########################
+
+explore: sap {
+  persist_for: "1 hour"
+  group_label: "SAP"
+  label: "SAP | Actual revenue"
+  always_filter: {
+    filters: {
+      field: sap.date_date
+      value: "30 days ago for 30 days"
+    }
+  }
+}
+
+
+explore: sap_6plus6 {
+  persist_for: "1 hour"
+  group_label: "SAP"
+  label: "SAP | Revenue (6+6 LE)"
+  always_filter: {
+    filters: {
+      field: sap_6plus6.month_date
+      value: "30 days ago for 30 days"
+    }
+  }
+}
+
+
+explore: sap_budget {
+  persist_for: "1 hour"
+  group_label: "SAP"
+  label: "SAP | Budget revenue"
+  always_filter: {
+    filters: {
+      field: sap_budget.month_date
+      value: "30 days ago for 30 days"
+    }
+  }
+
+}
+
+
+
+
+
+
+
+################## GFK ########################
+explore: gfk {
+  persist_for: "1 hour"
+  group_label: "GFK"
+  label: "GFK | All"
+  always_filter: {
+    filters: {
+      field: gfk.date_collected_date
+      value: "14 days ago for 14 days"
+    }
+    filters: {
+      field: gfk.country
+      value: "France"
+    }
+  }
+}
+
+
+
+# Joins pages on lookup to URL
+explore: view_pages_last30days_allmarkets {
+  group_label: "GFK"
+  label: "GFK | Pages + URLs"
+  join: view_pagelookup_allmarkets{
+    relationship: many_to_one
+    # Just uses the page URL field:
+    fields: [view_pagelookup_allmarkets.page_url]
+    # Joins on pagePath AND country
+    sql_on: ${view_pages_last30days_allmarkets.page_path} = ${view_pagelookup_allmarkets.page_path}
+      AND ${view_pages_last30days_allmarkets.country} = ${view_pagelookup_allmarkets.country} ;;
+  }
+  always_filter: {
+    filters: {
+      field: view_pages_last30days_allmarkets.partition_date
+      value: "14 days ago for 14 days"
+    }
+    filters: {
+      field: view_pages_last30days_allmarkets.country
+      value: "France"
+    }
+  }
+}
+
+# Product transaction data
+
+explore: products_historical_allmarkets {
+  group_label: "GFK"
+  label: "GFK | Product revenue"
+  join: image_urls3_looker {
+    relationship: many_to_one
+    sql_on: ${products_historical_allmarkets.product_sku} = ${image_urls3_looker.sku} ;;
+  }
+  always_filter: {
+    filters: {
+      field: products_historical_allmarkets.partition_date
+      value: "14 days ago for 14 days"
+    }
+    filters: {
+      field: products_historical_allmarkets.country
+      value: "France"
+    }
+  }
+}
+
+
+################## OTHER ########################
+
+
+
+# Adhoc analysis for Japanese trade-in campaign
+explore: adhoc_jp_trade_in_campaign {
+  group_label: "_Adhoc analysis"
+  label: "Trade in campaign explorer | Japan"
+  join: tax_xrates_by_country_2018_v2 {
+    relationship: many_to_one
+    sql_on: ${adhoc_jp_trade_in_campaign.website} = ${tax_xrates_by_country_2018_v2.website} ;;
+  }
+}
