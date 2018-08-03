@@ -1,7 +1,7 @@
 #GW: A PDT containing average UK temperatures.
 #GW: To do: This table should be imported from a service Dyson subscribe to"
 
-view: uk_temp {
+view: uk_temperatures {
   derived_table: {
     sql_trigger_value: select current_date ;;
     sql: SELECT '20170101' AS Date,5.2 AS Temperature
