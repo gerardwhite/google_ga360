@@ -107,12 +107,54 @@ view: ref_date_range {
     }
 
 
-
-
   dimension: country {
     type: string
     sql: ${TABLE}.sap_6plus6_country ;;
   }
+
+
+######## -  Date calculations  -  ##################
+
+# Finds the number of days in the current month
+  dimension: days_in_the_month {
+    hidden: yes
+    sql:  DATE_DIFF(DATE_TRUNC(DATE_ADD(${day_date}, INTERVAL 1 MONTH), MONTH),
+      DATE_TRUNC(${day_date}, MONTH), DAY) ;;
+  }
+
+
+  measure: number_of_days_in_month {
+    type: average
+    sql: ${days_in_the_month} ;;
+  }
+
+
+####### - Metrics pulled into view from sap_6plus6   #############
+
+  dimension: revenue6plus {
+    type: number
+    sql: ${sap_6plus6.revenue6plus} ;;
+  }
+
+  measure: revenue_forcast_LE{
+    label: "LE 6+6 target"
+    type: sum
+    value_format: "0.0,,\" M\""
+    sql: ${revenue6plus} ;;
+    html: £{{rendered_value}} ;;
+  }
+
+# Divides monthly target by days in this month
+  measure: daily_target {
+    label: "LE 6+6 daily target"
+    type:  number
+    value_format_name: gbp_0
+    sql:  sum(${revenue6plus})/${number_of_days_in_month};;
+  }
+
+
+
+
 
   set: detail {
     fields: [day_date]

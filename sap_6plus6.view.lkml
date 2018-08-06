@@ -217,8 +217,6 @@ view: sap_6plus6 {
 
 
 # Divides monthly target by days in this month
-
-
   measure: daily_target {
     label: "LE 6+6 daily target"
     type:  number
