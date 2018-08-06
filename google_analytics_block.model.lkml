@@ -97,6 +97,22 @@ explore: ref_date_range {
 
 
 
+explore: sap_6plus6le {
+  from: sap_6plus6
+  group_label: "SAP"
+  label: "SAP | Test join3"
+  join: sap {
+    type: left_outer
+    relationship: one_to_one
+    sql_on: ${sap.country}=${sap_6plus6le.country}
+    AND ${sap.channel}=${sap_6plus6le.channels}
+    AND ${sap.date_date} = ${sap_6plus6le.month_date};;
+  }
+}
+
+
+
+
 
 ################## SAP ########################
 
