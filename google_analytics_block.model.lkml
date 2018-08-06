@@ -73,6 +73,10 @@ explore: weekly_global_stats {
 # }
 
 
+
+
+###### Ref date range to build an array. Not sure if we need this as have SAP data for every day date - ######
+
 explore: fill_in_dates {
   group_label: "SAP"
   label: "SAP | Test join2"

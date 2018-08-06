@@ -512,7 +512,7 @@ view: sap {
         value_format_name: percent_1
       }
 
-# Remove this after we get working calc for hours through the month working
+# Remove this after we get working calc for hours through the month working. NEEDS CHANGING
       measure: percent_through_august {
         type: number
         label: "Percent through August"
@@ -547,39 +547,6 @@ view: sap {
     sql: ${days_in_the_month} ;;
   }
 
-
-
-# Gets revenue target from the 6plus6
-#
-#   dimension: revenue6plus {
-#     type: number
-#     sql: ${sap_6plus6.revenue6plus} ;;
-#   }
-#
-#
-#   measure: revenue_forcast_LE{
-#     label: "LE 6+6 target"
-#     type: sum
-#     value_format: "0.0,,\" M\""
-#     sql: ${revenue6plus} ;;
-#     html: £{{rendered_value}} ;;
-#   }
-#
-#
-# # Divides monthly target by days in this month
-#   measure: daily_target {
-#     label: "LE 6+6 daily target"
-#     type:  number
-#     value_format_name: gbp_0
-#     sql:  sum(${revenue6plus})/${number_of_days_in_month};;
-#   }
-#
-# measure: percent_of_daily_target {
-#   type: number
-#   group_label: "Custom SAP measures"
-#   sql: ${total_revenue}/${daily_target};;
-#   value_format_name: percent_1
-# }
 
 
       measure: count {

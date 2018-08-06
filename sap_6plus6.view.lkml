@@ -154,9 +154,6 @@ view: sap_6plus6 {
 
 
 
-
-
-
       dimension: revenue6plus {
         type: number
         sql: ${TABLE}.revenue6plus ;;
