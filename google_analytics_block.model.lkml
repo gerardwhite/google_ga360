@@ -96,17 +96,19 @@ explore: ref_date_range {
 }
 
 
+###### - Working join SAP | SAP 6+6 - ######
 
-explore: sap_6plus6le {
-  from: sap_6plus6
+explore: sap_prim {
+  from: sap
   group_label: "SAP"
   label: "SAP | Test join3"
-  join: sap {
+  join: sap_6plus6 {
     type: left_outer
     relationship: one_to_one
-    sql_on: ${sap.country}=${sap_6plus6le.country}
-    AND ${sap.channel}=${sap_6plus6le.channels}
-    AND ${sap.date_date} = ${sap_6plus6le.month_date};;
+    sql_on: ${sap_prim.country}=${sap_6plus6.country}
+    AND ${sap_prim.channel}=${sap_6plus6.channels}
+    AND ${sap_prim.date_month}=${sap_6plus6.month_month}
+    AND ${sap_prim.date_year}=${sap_6plus6.month_year} ;;
   }
 }
 
@@ -241,20 +243,20 @@ explore: adhoc_jp_trade_in_campaign {
 
 ################## DATA SCIENCE/BQML ########################
 
-
-explore: fan_interest_regression_evaluation {
-  label: "Regression Model Evaulation"
-  group_label: "Data Science (Demo)"
-
-}
-
-explore: ga_sessions_data_science {
-  group_label: "Data Science (Demo)"
-  label: "Google Analytics (w/ Data Science Extensions)"
-  extends: [ga_sessions]
-
-  join: fan_interest_prediction {
-    relationship: many_to_one
-    sql_on: ${ga_sessions.visitStart_date} = ${fan_interest_prediction.visitStart_date} ;;
-  }
-}
+#
+# explore: fan_interest_regression_evaluation {
+#   label: "Regression Model Evaulation"
+#   group_label: "Data Science (Demo)"
+#
+# }
+#
+# explore: ga_sessions_data_science {
+#   group_label: "Data Science (Demo)"
+#   label: "Google Analytics (w/ Data Science Extensions)"
+#   extends: [ga_sessions]
+#
+#   join: fan_interest_prediction {
+#     relationship: many_to_one
+#     sql_on: ${ga_sessions.visitStart_date} = ${fan_interest_prediction.visitStart_date} ;;
+#   }
+# }
