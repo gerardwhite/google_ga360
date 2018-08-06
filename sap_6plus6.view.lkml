@@ -184,6 +184,22 @@ view: sap_6plus6 {
 
 
 
+# This formula won't work as is.
+  measure: revneue_forcast_last_week {
+    label: "LE 6+6 target last week"
+    type: sum
+    value_format: "0.0,,\" M\""
+    sql: ${revenue6plus};;
+    filters: {
+      field: month_date
+      value: "last week"
+    }
+    html: £{{rendered_value}} ;;
+  }
+
+
+
+
       measure: le_revenue_this_year {
         type: sum
         value_format_name: gbp_0
@@ -213,6 +229,24 @@ view: sap_6plus6 {
       }
 
 
+# Use this for last week's performance vs target
+  measure: daily_le7 {
+    label: "Target last week based on daily LE rate"
+    type:  number
+    value_format_name: gbp_0
+    sql:  ${daily_le_rate30}*7;;
+  }
+
+
+  measure: daily_le_rate {
+    label: "LE 6+6 daily target this month"
+    type:  number
+    value_format_name: gbp_0
+    sql:  ${revneue_forcast_this_month}/${number_of_days_in_month};;
+  }
+
+
+
 # Divides monthly target by days in this month
   measure: daily_target {
     label: "LE 6+6 daily target"
@@ -223,13 +257,14 @@ view: sap_6plus6 {
 
 
 
+  measure: daily_le_rate30 {
+    hidden: yes
+    type:  number
+    value_format_name: gbp_0
+    sql:  ${revneue_forcast_this_month}/30;;
+  }
 
-      measure: daily_le_rate {
-        label: "LE 6+6 daily target this month"
-        type:  number
-        value_format_name: gbp_0
-        sql:  ${revneue_forcast_this_month}/${number_of_days_in_month};;
-      }
+
 
 
       measure: count {
