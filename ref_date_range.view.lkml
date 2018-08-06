@@ -64,6 +64,23 @@ view: ref_date_range {
     sql: ${TABLE}.sap_6plus6_channel ;;
   }
 
+
+# Channel cleanup, to 'channels' to align with SAP naming convention:
+  dimension: channels {
+    type: string
+    sql: CASE WHEN ${channel} = "Direct_OnlineStores - Dyson Online Stores" THEN "Dyson Online Store"
+            WHEN ${channel} = "Direct_Marketplaces - Dyson MarketPlaces" THEN "Dyson Marketplaces"
+            WHEN ${channel} = "Direct_SalesService - Dyson Sales & Service" THEN "Dyson Sales & Service"
+            WHEN ${channel} = "Direct_RetailStores - Dyson Retail Stores" THEN "Dyson Retail Stores"
+
+  ELSE null
+  END ;;
+
+    }
+
+
+
+
   dimension: country {
     type: string
     sql: ${TABLE}.sap_6plus6_country ;;

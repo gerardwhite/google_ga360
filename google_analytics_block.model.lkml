@@ -90,7 +90,7 @@ explore: ref_date_range {
     type: left_outer
     relationship: one_to_one
     sql_on: ${ref_date_range.day_date}=${sap_6plus6.month_date}
-            AND ${ref_date_range.channel} = ${sap_6plus6.channel}
+            AND ${ref_date_range.channels} = ${sap_6plus6.channels}
             AND ${ref_date_range.country} = ${ref_date_range.country};;
   }
 }

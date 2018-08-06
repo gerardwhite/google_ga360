@@ -7,7 +7,7 @@ view: sap_6plus6 {
   }
 
 
-# Test on channel clean up
+# Channel cleanup, to 'channels' to align with SAP naming convention:
   dimension: channels {
     type: string
     sql: CASE WHEN ${channel} = "Direct_OnlineStores - Dyson Online Stores" THEN "Dyson Online Store"
