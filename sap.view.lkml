@@ -550,16 +550,10 @@ measure: percent_of_daily_target_achieved {
 
 
 
-# Measures from 6+6
+# Measures pulled in from from SAP 6+6
+# Use this for last week's performance vs target
 
-# #Custom measures
-#   measure: revenue_forcast_LE{
-#     label: "LE 6+6 forecast"
-#     type: sum
-#     value_format: "0.0,,\" M\""
-#     sql: ${sap_6plus6.revenue6plus} ;;
-#     html: £{{rendered_value}} ;;
-#   }
+
 
 
   measure: number_of_days_in_month {

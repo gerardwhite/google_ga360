@@ -184,20 +184,6 @@ view: sap_6plus6 {
 
 
 
-# This formula won't work as is.
-  measure: revneue_forcast_last_week {
-    label: "LE 6+6 target last week"
-    type: sum
-    value_format: "0.0,,\" M\""
-    sql: ${revenue6plus};;
-    filters: {
-      field: month_date
-      value: "last week"
-    }
-    html: £{{rendered_value}} ;;
-  }
-
-
 
 
       measure: le_revenue_this_year {
@@ -258,7 +244,7 @@ view: sap_6plus6 {
 
 
   measure: daily_le_rate30 {
-    hidden: yes
+    hidden: no
     type:  number
     value_format_name: gbp_0
     sql:  ${revneue_forcast_this_month}/30;;
