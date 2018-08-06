@@ -99,19 +99,21 @@ explore: sap_prim {
 
 ################## SAP ########################
 
-# explore: sap {
-#   persist_for: "1 hour"
-#   group_label: "SAP"
-#   label: "SAP | Actual revenue"
-#   always_filter: {
-#     filters: {
-#       field: sap.date_date
-#       value: "30 days ago for 30 days"
-#     }
-#   }
-# }
+# SAP actuals view with % of daily target excluded to avoid join issues with the other explore.
+explore: sap {
+  persist_for: "1 hour"
+  group_label: "SAP"
+  label: "SAP | Actual revenue"
+  always_filter: {
+    filters: {
+      field: sap.date_date
+      value: "30 days ago for 30 days"
+    }
+  }
+  fields: [ALL_FIELDS*, -sap.percent_of_daily_target_achieved]
+}
 
-
+# SAP 6+6 targets
 explore: sap_6plus6 {
   persist_for: "1 hour"
   group_label: "SAP"
@@ -124,7 +126,7 @@ explore: sap_6plus6 {
   }
 }
 
-
+# SAP budget for 2018. Use the 6+6 in prefernce to this.
 explore: sap_budget {
   persist_for: "1 hour"
   group_label: "SAP"
