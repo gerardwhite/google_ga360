@@ -366,6 +366,8 @@ view: sap {
 
 
 
+
+
       measure: revenue_this_quarter {
         type: sum
         value_format_name: gbp_0
