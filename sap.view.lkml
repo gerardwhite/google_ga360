@@ -480,7 +480,6 @@ view: sap {
 
 
 
-
 # Days lapsed in 2018 and % through 2018
       dimension: days_elapsed_2018 {
         type: number
