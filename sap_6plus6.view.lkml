@@ -2,6 +2,7 @@ view: sap_6plus6 {
   sql_table_name: ao_looker_test.sap_6plus6 ;;
 
   dimension: channel {
+    hidden: yes
     type: string
     sql: ${TABLE}.Channel ;;
   }
@@ -161,7 +162,7 @@ view: sap_6plus6 {
 
 #Custom measures
       measure: revenue_forcast_LE{
-        label: "LE 6+6 forecast"
+        label: "LE 6+6 target"
         type: sum
         value_format: "0.0,,\" M\""
         sql: ${revenue6plus} ;;

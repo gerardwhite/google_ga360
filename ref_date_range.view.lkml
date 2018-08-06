@@ -60,6 +60,7 @@ view: ref_date_range {
   }
 
   dimension: channel {
+    hidden: yes
     type: string
     sql: ${TABLE}.sap_6plus6_channel ;;
   }
