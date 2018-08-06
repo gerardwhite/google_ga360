@@ -140,6 +140,7 @@ view: sap {
 
 #Custom measures
     measure: total_revenue {
+      label: "SAP total revneue"
       type: sum
       value_format_name: gbp_0
       sql: ${sales} ;;
@@ -353,6 +354,16 @@ view: sap {
           value: "53 weeks ago"
         }
       }
+
+
+  measure: lw_change_on_lw_last_year{
+    label: "LW % change on revenue LWLY"
+    group_label: "Custom SAP measures"
+    type: number
+    sql: 1.0 * ((${revenue_last_week}-${revenue_last_week_last_year})/NULLIF(${revenue_last_week_last_year},0))  ;;
+    value_format_name: percent_1
+  }
+
 
 
       measure: revenue_this_quarter {
