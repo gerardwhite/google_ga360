@@ -53,15 +53,19 @@ explore: weekly_global_stats {
 
 ###### Ref date range to build an array. Not sure if we need this as have SAP data for every day date - ######
 
-explore: fill_in_dates {
-  group_label: "SAP"
-  label: "SAP | Test join2"
-  join: sap_6plus6 {
-    type: left_outer
-    relationship: one_to_one
-    sql_on: ${fill_in_dates.day_date}=${sap_6plus6.month_date} ;;
-  }
-}
+# Remove commented out code after testing the new SAP join stuff.
+
+# Old test on fill_in_dates
+
+# explore: fill_in_dates {
+#   group_label: "SAP"
+#   label: "SAP | Test join2"
+#   join: sap_6plus6 {
+#     type: left_outer
+#     relationship: one_to_one
+#     sql_on: ${fill_in_dates.day_date}=${sap_6plus6.month_date} ;;
+#   }
+# }
 
 # Gerards work for joining to ref data
 
@@ -76,24 +80,6 @@ explore: fill_in_dates {
 #             AND ${ref_date_range.country} = ${ref_date_range.country};;
 #   }
 # }
-
-
-###### - Working join SAP | SAP 6+6 - ######
-explore: sap_prim {
-  from: sap
-  group_label: "SAP"
-  label: "SAP | Test join3"
-  join: sap_6plus6 {
-    type: left_outer
-    relationship: one_to_one
-    sql_on: ${sap_prim.country}=${sap_6plus6.country}
-    AND ${sap_prim.channel}=${sap_6plus6.channels}
-    AND ${sap_prim.date_month}=${sap_6plus6.month_month}
-    AND ${sap_prim.date_year}=${sap_6plus6.month_year} ;;
-  }
-}
-
-
 
 
 
@@ -141,7 +127,20 @@ explore: sap_budget {
 }
 
 
-
+###### - Working join SAP | SAP 6+6 - ######
+explore: sap_prim {
+  from: sap
+  group_label: "SAP"
+  label: "SAP | Actual vs target"
+  join: sap_6plus6 {
+    type: left_outer
+    relationship: one_to_one
+    sql_on: ${sap_prim.country}=${sap_6plus6.country}
+          AND ${sap_prim.channel}=${sap_6plus6.channels}
+          AND ${sap_prim.date_month}=${sap_6plus6.month_month}
+          AND ${sap_prim.date_year}=${sap_6plus6.month_year} ;;
+  }
+}
 
 
 
