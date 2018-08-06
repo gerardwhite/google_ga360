@@ -229,14 +229,14 @@ explore: adhoc_jp_trade_in_campaign {
 # explore: fan_interest_regression_evaluation {
 #   label: "Regression Model Evaulation"
 #   group_label: "Data Science (Demo)"
-#
+
 # }
 
 # explore: ga_sessions_data_science {
 #   group_label: "Data Science (Demo)"
 #   label: "Google Analytics (w/ Data Science Extensions)"
 #   extends: [ga_sessions]
-#
+
 #   join: fan_interest_prediction {
 #     relationship: many_to_one
 #     sql_on: ${ga_sessions.visitStart_date} = ${fan_interest_prediction.visitStart_date} ;;
