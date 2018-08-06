@@ -109,6 +109,8 @@ view: sap_6plus6 {
                 WHEN ${region} = "91 - Singapore " THEN "Singapore"
                 WHEN ${region} = "89 - China - Shanghai" THEN "China"
                 WHEN ${region} = "60 - Norway " THEN "Norway"
+                WHEN ${region} = "9A - New Zealand" THEN "New Zealand"
+                WHEN ${region} = "9A - New Zealand " THEN "New Zealand"
 
 
                 ELSE ${region}
@@ -144,6 +146,7 @@ view: sap_6plus6 {
 
 # Finds the number of days in the current month
       dimension: days_in_the_month {
+        hidden: yes
         sql:  DATE_DIFF(DATE_TRUNC(DATE_ADD(${month_date}, INTERVAL 1 MONTH), MONTH),
           DATE_TRUNC(${month_date}, MONTH), DAY) ;;
       }
@@ -171,6 +174,7 @@ view: sap_6plus6 {
 
 
       measure: revneue_forcast_this_month {
+        label: "LE 6+6 target this month"
         type: sum
         value_format: "0.0,,\" M\""
         sql: ${revenue6plus};;
@@ -212,8 +216,21 @@ view: sap_6plus6 {
       }
 
 
-# Divides monthly budget by days in this month
+# Divides monthly target by days in this month
+
+
+  measure: daily_target {
+    label: "LE 6+6 daily target"
+    type:  number
+    value_format_name: gbp_0
+    sql:  sum(${revenue6plus})/${number_of_days_in_month};;
+  }
+
+
+
+
       measure: daily_le_rate {
+        label: "LE 6+6 daily target this month"
         type:  number
         value_format_name: gbp_0
         sql:  ${revneue_forcast_this_month}/${number_of_days_in_month};;

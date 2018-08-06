@@ -40,6 +40,8 @@ view: ref_date_range {
                       WHEN sap_6plus6.Region = "91 - Singapore " THEN "Singapore"
                       WHEN sap_6plus6.Region = "89 - China - Shanghai" THEN "China"
                       WHEN sap_6plus6.Region = "60 - Norway " THEN "Norway"
+                      WHEN sap_6plus6.Region = "9A - New Zealand " THEN "New Zealand"
+                      WHEN sap_6plus6.Region = "9A - New Zealand" THEN "New Zealand"
 
 
                       ELSE sap_6plus6.Region
@@ -58,6 +60,31 @@ view: ref_date_range {
     timeframes: [date]
     sql: ${TABLE}.day ;;
   }
+
+
+
+  dimension_group: date {
+    type: time
+    timeframes: [
+      raw,
+      date,
+      day_of_month,
+      week,
+      week_of_year,
+      day_of_week,
+      day_of_year,
+      month,
+      month_name,
+      month_num,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    datatype: date
+    sql: ${TABLE}.day ;;
+  }
+
+
 
   dimension: channel {
     hidden: yes
