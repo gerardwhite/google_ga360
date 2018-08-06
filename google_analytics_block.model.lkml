@@ -51,30 +51,6 @@ explore: weekly_global_stats {
 
 
 
-
-# # SAP join tests.
-# explore: sap {
-#   persist_for: "1 hour"
-#   group_label: "SAP"
-#   label: "SAP | Actual revenue"
-#   join: sap_6plus6 {
-#     relationship: many_to_one
-#     sql_on: ${sap.country} = ${sap_6plus6.country}
-#     AND ${sap.channel} = ${sap_6plus6.channels}
-#
-#     ;;
-#   }
-#   always_filter: {
-#     filters: {
-#       field: sap.date_date
-#       value: "30 days ago for 30 days"
-#     }
-#   }
-# }
-
-
-
-
 ###### Ref date range to build an array. Not sure if we need this as have SAP data for every day date - ######
 
 explore: fill_in_dates {
@@ -87,21 +63,22 @@ explore: fill_in_dates {
   }
 }
 
-explore: ref_date_range {
-  group_label: "SAP"
-  label: "SAP | Test join2 - with more joins"
-  join: sap_6plus6 {
-    type: left_outer
-    relationship: one_to_one
-    sql_on: ${ref_date_range.day_date}=${sap_6plus6.month_date}
-            AND ${ref_date_range.channels} = ${sap_6plus6.channels}
-            AND ${ref_date_range.country} = ${ref_date_range.country};;
-  }
-}
+# Gerards work for joining to ref data
+
+# explore: ref_date_range {
+#   group_label: "SAP"
+#   label: "SAP | Test join2 - with more joins"
+#   join: sap_6plus6 {
+#     type: left_outer
+#     relationship: one_to_one
+#     sql_on: ${ref_date_range.day_date}=${sap_6plus6.month_date}
+#             AND ${ref_date_range.channels} = ${sap_6plus6.channels}
+#             AND ${ref_date_range.country} = ${ref_date_range.country};;
+#   }
+# }
 
 
 ###### - Working join SAP | SAP 6+6 - ######
-
 explore: sap_prim {
   from: sap
   group_label: "SAP"
@@ -122,17 +99,17 @@ explore: sap_prim {
 
 ################## SAP ########################
 
-explore: sap {
-  persist_for: "1 hour"
-  group_label: "SAP"
-  label: "SAP | Actual revenue"
-  always_filter: {
-    filters: {
-      field: sap.date_date
-      value: "30 days ago for 30 days"
-    }
-  }
-}
+# explore: sap {
+#   persist_for: "1 hour"
+#   group_label: "SAP"
+#   label: "SAP | Actual revenue"
+#   always_filter: {
+#     filters: {
+#       field: sap.date_date
+#       value: "30 days ago for 30 days"
+#     }
+#   }
+# }
 
 
 explore: sap_6plus6 {
