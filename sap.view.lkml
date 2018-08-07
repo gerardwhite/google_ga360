@@ -7,11 +7,19 @@ view: sap {
     type: string
     sql: ${TABLE}.Channel ;;
 
-    # link: {
-    #   label: "{{sap.channel._value}} report"
-    #   url: "/dashboards/26?Region={{ sap.website._value | encode_uri }}"
-    #   icon_url: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/GA2.png"
-    # }
+#     link: {
+#       label: "{{sap.channel._value}} report"
+#       url: "/dashboards/26?Region={{ sap.website._value | encode_uri }}"
+#       icon_url: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/GA2.png"
+#     }
+
+    link: {
+      label: "{{sap.channel._value}} report"
+      url: "https://dysonuk.eu.looker.com/dashboards/26?Region=www.dyson.fr"
+      icon_url: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/GA2.png"
+    }
+
+
 
   }
 
