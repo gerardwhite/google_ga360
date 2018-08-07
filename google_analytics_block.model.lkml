@@ -75,7 +75,7 @@ explore: weekly_global_stats {
 #   join: sap_6plus6 {
 #     type: left_outer
 #     relationship: one_to_one
-#     sql_on: ${ref_date_range.day_date}=${sap_6plus6.month_date}
+#     sql_on: ${ref_date_range.day_date}=${sap_6plus6.date_date}
 #             AND ${ref_date_range.channels} = ${sap_6plus6.channels}
 #             AND ${ref_date_range.country} = ${ref_date_range.country};;
 #   }
@@ -129,23 +129,25 @@ explore: sap_budget {
 
 
  ###### - Working join SAP | SAP 6+6 - ######
-# explore: sap_prim {
-#   from: sap
-#   group_label: "SAP"
-#   label: "SAP | Actual vs target"
-#   join: sap_6plus6 {
-#     type: left_outer
-#     relationship: one_to_one
-#     sql_on: ${sap_prim.country}=${sap_6plus6.country}
-#           AND ${sap_prim.channel}=${sap_6plus6.channels}
-#           AND ${sap_prim.date_month}=${sap_6plus6.month_month}
-#           AND ${sap_prim.date_year}=${sap_6plus6.month_year} ;;
-#   }
-#   fields: [sap_prim.channel, sap_prim.country, sap_prim.sales, sap_prim.orders,
-#            sap_6plus6.revenue6plus, sap_6plus6.revenue_forcast_LE]
-# }
+explore: sap_prim {
+  from: sap
+  group_label: "SAP"
+  label: "SAP | Actual vs target"
+  join: sap_6plus6 {
+    type: left_outer
+    relationship: one_to_one
+    sql_on: ${sap_prim.country}=${sap_6plus6.country}
+          AND ${sap_prim.channel}=${sap_6plus6.channels}
+          AND ${sap_prim.date_month}=${sap_6plus6.date_month}
+          AND ${sap_prim.date_year}=${sap_6plus6.date_year} ;;
+  }
+
+}
 
 
+# Fields to test for reducing connections
+# fields: [sap_prim.channel, sap_prim.country, sap_prim.sales, sap_prim.orders,
+#   sap_6plus6.revenue6plus, sap_6plus6.revenue_forcast_LE]
 
 
 ################## GFK ########################
