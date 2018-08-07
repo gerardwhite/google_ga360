@@ -19,8 +19,6 @@ view: sap {
       icon_url: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/GA2.png"
     }
 
-
-
   }
 
 
@@ -570,34 +568,49 @@ measure: percent_of_daily_target_achieved {
   }
 
 # references a 6plus6 dimension
-#
-#   dimension: revenue6plus {
-#     type: number
-#     sql: ${sap_6plus6.revenue6plus} ;;
-#   }
-#
-#
-#   measure: revenue_forcast_LE{
-#     label: "LE 6+6 target"
+
+  # dimension: revenue6plus {
+  #   type: number
+  #   sql: ${sap_6plus6.revenue6plus} ;;
+  # }
+
+
+  # measure: revenue_forcast_LE{
+  #   label: "LE 6+6 target"
+  #   type: sum
+  #   value_format: "0.0,,\" M\""
+  #   sql: ${revenue6plus} ;;
+  #   html: £{{rendered_value}} ;;
+  # }
+
+
+# # Dividing by 2 alligns some of the revenue figures... one to ask Gerard about
+#   measure: revneue_forcast_this_month_over2 {
+#     label: "LE 6+6 target this month2"
 #     type: sum
 #     value_format: "0.0,,\" M\""
-#     sql: ${revenue6plus} ;;
-#     html: £{{rendered_value}} ;;
-#   }
-#
-#
-#
-#   measure: revneue_forcast_this_month {
-#     label: "LE 6+6 target this month"
-#     type: sum
-#     value_format: "0.0,,\" M\""
-#     sql: ${revenue6plus};;
+#     sql: ${revenue6plus}/2;;
 #     filters: {
 #       field: date_month
 #       value: "this month"
 #     }
 #     html: £{{rendered_value}} ;;
 #   }
+
+
+#   measure: revneue_forcast_last_month {
+#     label: "LE 6+6 target last month"
+#     type: sum
+#     value_format: "0.0,,\" M\""
+#     sql: ${revenue6plus};;
+#     filters: {
+#       field: date_month
+#       value: "last month"
+#     }
+#     html: £{{rendered_value}} ;;
+#   }
+
+
 
 
 

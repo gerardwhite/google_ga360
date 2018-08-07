@@ -251,6 +251,19 @@ view: sap_6plus6 {
   }
 
 
+# Test on last month for join testing
+  measure: revneue_forcast_last_month {
+    label: "LE 6+6 target last month"
+    type: sum
+    value_format: "0.0,,\" M\""
+    sql: ${revenue6plus};;
+    filters: {
+      field: date_month
+      value: "last month"
+    }
+    html: £{{rendered_value}} ;;
+  }
+
 
 
       measure: count {
