@@ -67,7 +67,7 @@ explore: weekly_global_stats {
 #   }
 # }
 
-# Gerards work for joining to ref data
+# Gerard's work for joining to ref data
 
 # explore: ref_date_range {
 #   group_label: "SAP"
@@ -106,7 +106,7 @@ explore: sap_6plus6 {
   label: "SAP | Revenue (6+6 LE)"
   always_filter: {
     filters: {
-      field: sap_6plus6.month_date
+      field: sap_6plus6.date_date
       value: "30 days ago for 30 days"
     }
   }
@@ -137,9 +137,11 @@ explore: sap_prim {
     relationship: one_to_one
     sql_on: ${sap_prim.country}=${sap_6plus6.country}
           AND ${sap_prim.channel}=${sap_6plus6.channels}
-          AND ${sap_prim.date_month}=${sap_6plus6.month_month}
-          AND ${sap_prim.date_year}=${sap_6plus6.month_year} ;;
+          AND ${sap_prim.date_month}=${sap_6plus6.date_month}
+          AND ${sap_prim.date_year}=${sap_6plus6.date_year} ;;
   }
+  fields: [sap_prim.channel, sap_prim.country, sap_prim.sales, sap_prim.orders,
+           sap_6plus6.revenue6plus, sap_6plus6.revenue_forcast_LE]
 }
 
 

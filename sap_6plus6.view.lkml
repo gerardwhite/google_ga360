@@ -29,26 +29,26 @@ view: sap_6plus6 {
       sql: ${TABLE}.dateString ;;
     }
 
-    dimension_group: month {
-      type: time
-      timeframes: [
-        raw,
-        date,
-        day_of_month,
-        week,
-        week_of_year,
-        day_of_week,
-        day_of_year,
-        month,
-        month_name,
-        month_num,
-        quarter,
-        year
-      ]
-      convert_tz: no
-      datatype: date
-      sql: ${TABLE}.monthDate ;;
-    }
+  dimension_group: date {
+    type: time
+    timeframes: [
+      raw,
+      date,
+      day_of_month,
+      week,
+      week_of_year,
+      day_of_week,
+      day_of_year,
+      month,
+      month_name,
+      month_num,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    datatype: date
+    sql: ${TABLE}.Date ;;
+  }
 
 
 
@@ -57,7 +57,7 @@ view: sap_6plus6 {
     dimension: is_before_MTD {
       type: yesno
       group_label: "YTD|MTD fields"
-      sql: EXTRACT(DAY FROM ${month_date}) < EXTRACT(DAY FROM current_date() );;
+      sql: EXTRACT(DAY FROM ${date_date}) < EXTRACT(DAY FROM current_date() );;
     }
 
 
@@ -65,7 +65,7 @@ view: sap_6plus6 {
     dimension: is_before_YTD {
       type: yesno
       group_label: "YTD|MTD fields"
-      sql: EXTRACT(DAYOFYEAR FROM ${month_date}) < EXTRACT(DAYOFYEAR FROM (current_date() ));;
+      sql: EXTRACT(DAYOFYEAR FROM ${date_date}) < EXTRACT(DAYOFYEAR FROM (current_date() ));;
     }
 
 
@@ -130,8 +130,8 @@ view: sap_6plus6 {
       dimension: is_the_current_month {
         type: yesno
         group_label: "YTD|MTD fields"
-        sql: EXTRACT(MONTH FROM ${month_date}) = EXTRACT(MONTH FROM (current_date() ))
-          AND EXTRACT(YEAR FROM ${month_date}) = EXTRACT(YEAR FROM (current_date() ))
+        sql: EXTRACT(MONTH FROM ${date_date}) = EXTRACT(MONTH FROM (current_date() ))
+          AND EXTRACT(YEAR FROM ${date_date}) = EXTRACT(YEAR FROM (current_date() ))
           ;;
       }
 
@@ -139,7 +139,7 @@ view: sap_6plus6 {
       dimension: is_current_month_both_years {
         type: yesno
         group_label: "YTD|MTD fields"
-        sql: EXTRACT(MONTH FROM ${month_date}) = EXTRACT(MONTH FROM (current_date() ))
+        sql: EXTRACT(MONTH FROM ${date_date}) = EXTRACT(MONTH FROM (current_date() ))
           ;;
       }
 
@@ -147,8 +147,8 @@ view: sap_6plus6 {
 # Finds the number of days in the current month
       dimension: days_in_the_month {
         hidden: yes
-        sql:  DATE_DIFF(DATE_TRUNC(DATE_ADD(${month_date}, INTERVAL 1 MONTH), MONTH),
-          DATE_TRUNC(${month_date}, MONTH), DAY) ;;
+        sql:  DATE_DIFF(DATE_TRUNC(DATE_ADD(${date_date}, INTERVAL 1 MONTH), MONTH),
+          DATE_TRUNC(${date_date}, MONTH), DAY) ;;
       }
 
 
@@ -176,7 +176,7 @@ view: sap_6plus6 {
         value_format: "0.0,,\" M\""
         sql: ${revenue6plus};;
         filters: {
-          field: month_date
+          field: date_date
           value: "this month"
         }
         html: £{{rendered_value}} ;;
@@ -192,7 +192,7 @@ view: sap_6plus6 {
         group_label: "Custom SAP measures"
         sql: ${revenue6plus} ;;
         filters: {
-          field: month_date
+          field: date_date
           value: "this year"
         }
       }
@@ -203,7 +203,7 @@ view: sap_6plus6 {
         group_label: "Custom SAP measures"
         sql: ${revenue6plus} ;;
         filters: {
-          field: month_date
+          field: date_date
           value: "last year"
         }
       }

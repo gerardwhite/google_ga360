@@ -148,7 +148,7 @@ view: sap {
 
 #Custom measures
     measure: total_revenue {
-      label: "SAP total revneue"
+      label: "Total Revenue"
       type: sum
       value_format_name: gbp_0
       sql: ${sales} ;;
@@ -550,6 +550,8 @@ view: sap {
 
 
 
+
+
 measure: percent_of_daily_target_achieved {
   type: number
   sql: ${sap_prim.total_revenue}/${sap_6plus6.daily_target};;
@@ -562,13 +564,40 @@ measure: percent_of_daily_target_achieved {
 # Use this for last week's performance vs target
 
 
-
-
   measure: number_of_days_in_month {
     type: average
     sql: ${days_in_the_month} ;;
   }
 
+# references a 6plus6 dimension
+#
+#   dimension: revenue6plus {
+#     type: number
+#     sql: ${sap_6plus6.revenue6plus} ;;
+#   }
+#
+#
+#   measure: revenue_forcast_LE{
+#     label: "LE 6+6 target"
+#     type: sum
+#     value_format: "0.0,,\" M\""
+#     sql: ${revenue6plus} ;;
+#     html: £{{rendered_value}} ;;
+#   }
+#
+#
+#
+#   measure: revneue_forcast_this_month {
+#     label: "LE 6+6 target this month"
+#     type: sum
+#     value_format: "0.0,,\" M\""
+#     sql: ${revenue6plus};;
+#     filters: {
+#       field: date_month
+#       value: "this month"
+#     }
+#     html: £{{rendered_value}} ;;
+#   }
 
 
 
