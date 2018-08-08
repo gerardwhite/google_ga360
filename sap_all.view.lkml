@@ -367,7 +367,7 @@ FROM `dyson-ga.ao_looker_test.sap_budget`
 
   measure: revenue_this_month {
     type: sum
-    value_format_name: gbp_0
+    value_format: "0.0,,\" M\""
     group_label: "Custom SAP measures"
     sql: ${sales} ;;
     filters: {
@@ -378,6 +378,7 @@ FROM `dyson-ga.ao_looker_test.sap_budget`
       field: source
       value: "SAP Actual"
     }
+    html: £{{rendered_value}} ;;
   }
 
 
@@ -600,19 +601,27 @@ FROM `dyson-ga.ao_looker_test.sap_budget`
 
 ###############  Comparison Measures #########################
 
-  measure: revenue_vs_target {
+  measure: percent_of_target {
     group_label: "Custom SAP measures"
     type: number
-    sql: 1.0 * ((${total_revenue}-${revenue_forcast_LE})/NULLIF(${revenue_forcast_LE},0))  ;;
-    value_format_name: percent_2
+    sql: 1.0 * ((${total_revenue})/NULLIF(${revenue_forcast_LE},0))  ;;
+    value_format_name: percent_1
   }
 
-  measure: revenue_vs_target_this_month {
+  measure: percent_of_target_this_month {
     group_label: "Custom SAP measures"
     type: number
-    sql: 1.0 * ((${revenue_this_month}-${revneue_forcast_this_month})/NULLIF(${revneue_forcast_this_month},0))  ;;
-    value_format_name: percent_2
+    sql: 1.0 * ((${revenue_this_month})/NULLIF(${revneue_forcast_this_month},0))  ;;
+    value_format_name: percent_1
   }
+
+  measure: yoy_growth_target {
+    group_label: "Custom SAP measures"
+    type: number
+    sql: 1.0 * ((${revenue_forcast_LE}-${revenue_last_year})/NULLIF(${revenue_last_year},0))  ;;
+    value_format_name: percent_1
+  }
+
 
 
 
