@@ -53,8 +53,6 @@ explore: weekly_global_stats {
 
 ###### Ref date range to build an array. Not sure if we need this as have SAP data for every day date - ######
 
-# Remove commented out code after testing the new SAP join stuff.
-
 # Old test on fill_in_dates
 
 # explore: fill_in_dates {
@@ -67,19 +65,22 @@ explore: weekly_global_stats {
 #   }
 # }
 
-# Gerard's work for joining to ref data
 
-# explore: ref_date_range {
-#   group_label: "SAP"
-#   label: "SAP | Test join2 - with more joins"
-#   join: sap_6plus6 {
-#     type: left_outer
-#     relationship: one_to_one
-#     sql_on: ${ref_date_range.day_date}=${sap_6plus6.date_date}
-#             AND ${ref_date_range.channels} = ${sap_6plus6.channels}
-#             AND ${ref_date_range.country} = ${ref_date_range.country};;
-#   }
-# }
+explore: ref_date_range {
+  group_label: "SAP"
+  label: "SAP | Test join2 - with more joins"
+  join: sap_6plus6 {
+    type: left_outer
+    relationship: one_to_one
+    sql_on: ${ref_date_range.date_month}=${sap_6plus6.date_month}
+            AND ${ref_date_range.date_year}=${sap_6plus6.date_year}
+            AND ${ref_date_range.channels} = ${sap_6plus6.channels}
+            AND ${ref_date_range.country} = ${sap_6plus6.country};;
+  }
+}
+
+
+
 
 
 
@@ -128,7 +129,7 @@ explore: sap_budget {
 }
 
 
-# ###### - Working join SAP | SAP 6+6 - ######
+# ###### - Test join on SAP | SAP 6+6 - needs help!! ######
 # explore: sap_prim {
 #   from: sap
 #   group_label: "SAP"
