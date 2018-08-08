@@ -3,7 +3,7 @@ connection: "bq2look"
 # include all the views
 include: "*.view"
 
-
+# sets start of week to Monday
 week_start_day: monday
 
 datagroup: bqml_datagroup {
@@ -11,13 +11,11 @@ datagroup: bqml_datagroup {
   sql_trigger: SELECT CURRENT_DATE() ;;
 }
 
-
 explore: rt_web_sessions {
   label: "Adobe"
   group_label: "E-Commerce"
 
 }
-
 
 explore: ga_sessions {
   label: "Google Analytics"
@@ -51,20 +49,52 @@ explore: weekly_global_stats {
 
 
 
-###### Ref date range to build an array. Not sure if we need this as have SAP data for every day date - ######
+################## ~ SAP ~~~~~~~~~~~~~~~~~~~~~~~~~~~ ############################
+################## ~ SINGLE-LEVEL SAP EXPLORES ~~~~~~ ###########################
 
-# Old test on fill_in_dates
 
-# explore: fill_in_dates {
-#   group_label: "SAP"
-#   label: "SAP | Test join2"
-#   join: sap_6plus6 {
-#     type: left_outer
-#     relationship: one_to_one
-#     sql_on: ${fill_in_dates.day_date}=${sap_6plus6.month_date} ;;
-#   }
-# }
+# # SAP actuals view with % of daily target excluded to avoid join issues with the other explore.
+explore: sap {
+  persist_for: "1 hour"
+  group_label: "SAP"
+  label: "SAP | Actual revenue"
+  always_filter: {
+    filters: {
+      field: sap.date_date
+      value: "30 days ago for 30 days"
+    }
+  }
+}
+#
+# code to exclude fields if required: [ALL_FIELDS*, -sap.percent_of_daily_target_achieved]
 
+# SAP 6+6 targets
+explore: sap_6plus6 {
+  persist_for: "1 hour"
+  group_label: "SAP"
+  label: "SAP | Revenue (6+6 LE)"
+  always_filter: {
+    filters: {
+      field: sap_6plus6.date_date
+      value: "30 days ago for 30 days"
+    }
+  }
+}
+# SAP budget for 2018. Use the 6+6 in prefernce to this.
+explore: sap_budget {
+  persist_for: "1 hour"
+  group_label: "SAP"
+  label: "SAP | Budget revenue"
+  always_filter: {
+    filters: {
+      field: sap_budget.date_date
+      value: "30 days ago for 30 days"
+    }
+  }
+}
+
+
+################## ~ ALL SAP VIEWS JOINED TOGETHER ~~ ###########################
 
 # Joins sap and 6plus6 together using data array/scaffold
 # Data array/scaffold:
@@ -101,62 +131,7 @@ explore: ref_date_range {
 }
 
 
-
-
-
-
-
-
-
-
-################## SAP ########################
-
-# # SAP actuals view with % of daily target excluded to avoid join issues with the other explore.
-explore: sap {
-  persist_for: "1 hour"
-  group_label: "SAP"
-  label: "SAP | Actual revenue"
-  always_filter: {
-    filters: {
-      field: sap.date_date
-      value: "30 days ago for 30 days"
-    }
-  }
-
-}
-#
-# fields: [ALL_FIELDS*, -sap.percent_of_daily_target_achieved]
-
-# SAP 6+6 targets
-explore: sap_6plus6 {
-  persist_for: "1 hour"
-  group_label: "SAP"
-  label: "SAP | Revenue (6+6 LE)"
-  always_filter: {
-    filters: {
-      field: sap_6plus6.date_date
-      value: "30 days ago for 30 days"
-    }
-  }
-
-}
-
-# SAP budget for 2018. Use the 6+6 in prefernce to this.
-explore: sap_budget {
-  persist_for: "1 hour"
-  group_label: "SAP"
-  label: "SAP | Budget revenue"
-  always_filter: {
-    filters: {
-      field: sap_budget.date_date
-      value: "30 days ago for 30 days"
-    }
-  }
-
-}
-
-
-# ###### - Test join on SAP | SAP 6+6 - needs help!! ######
+# ###### - Early SAP join testing work.  Delete this once the above is validated ######
 # explore: sap_prim {
 #   from: sap
 #   group_label: "SAP"
