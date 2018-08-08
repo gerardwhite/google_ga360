@@ -278,6 +278,12 @@ FROM `dyson-ga.ao_looker_test.sap_budget`
       field: source
       value: "SAP Actual"
     }
+
+   html: {% if value <= {{revenue_forcast_LE._value}} %}
+        <div style="color: white; background-color: darkred; font-size: 100%; text-align:center;border-radius: 5px">{{ rendered_value }}</div>
+      {% elsif value >= {{revenue_forcast_LE._value}} %}
+        <div style="color: black; background-color: green; font-size: 100%; text-align:center;border-radius: 5px">{{ rendered_value }}</div>
+      {% endif %}  ;;
   }
 
 

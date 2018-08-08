@@ -17,7 +17,6 @@ explore: rt_web_sessions {
 
 }
 
-explore: sap_6plus6_daily {}
 explore: ga_sessions {
   label: "Google Analytics"
   group_label: "E-Commerce"
