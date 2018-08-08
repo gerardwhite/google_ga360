@@ -38,7 +38,7 @@ SELECT dateMonth as date
       ,null as orders
       ,null as revenue6plus
       ,budgetNetRevenue
-      ,'Targets' as source
+      ,'budget' as source
       ,DATE_DIFF(DATE_TRUNC(DATE_ADD(dateMonth, INTERVAL 1 MONTH), MONTH), DATE_TRUNC(dateMonth, MONTH), DAY) as days_in_month
 FROM `dyson-ga.ao_looker_test.sap_budget`
  ;;
