@@ -81,6 +81,16 @@ explore: ref_date_range {
             AND ${ref_date_range.channels} = ${sap_6plus6.channels}
             AND ${ref_date_range.country} = ${sap_6plus6.country};;
   }
+
+  join: sap_budget {
+    type: left_outer
+    relationship: one_to_one
+    sql_on: ${ref_date_range.date_month}=${sap_budget.date_month}
+            AND ${ref_date_range.date_year}=${sap_budget.date_year}
+            AND ${ref_date_range.channels} = ${sap_budget.channel}
+            AND ${ref_date_range.country} = ${sap_budget.country};;
+  }
+
 # Joins sap to data array/scaffold at daily level
   join: sap {
     type: left_outer
@@ -94,14 +104,7 @@ explore: ref_date_range {
 
 
 
-#   join: sap_budget {
-#     type: left_outer
-#     relationship: one_to_one
-#     sql_on: ${ref_date_range.date_month}=${sap_budget.month_month}
-#             AND ${ref_date_range.date_year}=${sap_budget.month_year}
-#             AND ${ref_date_range.channels} = ${sap_budget.channel}
-#             AND ${ref_date_range.country} = ${sap_budget.country};;
-#   }
+
 
 
 
