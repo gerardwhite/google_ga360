@@ -21,7 +21,48 @@ view: sap_6plus6 {
 
     }
 
+  dimension: country_icon {
+    type: string
+    sql: case when ${country} = 'United Kingdom' then 'gbr'
+              when ${country} = 'Germany' then 'deu'
+              when ${country} = 'France' then 'fra'
+              when ${country} = 'Japan' then 'jpn'
+              when ${country} = 'United States' then 'usa'
+              when ${country} = 'Canada' then 'can'
+              when ${country} = 'Spain' then 'esp'
+              when ${country} = 'Sweden' then 'swe'
+              when ${country} = 'Norway' then 'nor'
+              when ${country} = 'Denmark' then 'dnk'
+              when ${country} = 'Austria' then 'aut'
+              when ${country} = 'Australia' then 'aus'
+              when ${country} = 'Belguim' then 'bel'
+              when ${country} = 'Italy' then 'ita'
+              when ${country} = 'Korea' then 'kor'
+              when ${country} = 'China' then 'chn'
+              when ${country} = 'Switzerland' then 'che'
+              when ${country} = 'Russia' then 'rus'
+              when ${country} = 'Mexico' then 'mex'
+              when ${country} = 'Brazil' then 'bra'
+              when ${country} = 'Netherlands' then 'nld'
+              when ${country} = 'Poland' then 'pol'
+              when ${country} = 'India' then 'ind'
+              when ${country} = 'Hong Kong' then 'hkg'
+              when ${country} = 'Ireland' then 'irl'
+              when ${country} = 'Finland' then 'fin'
+              when ${country} = 'Singapore' then 'sgp'
 
+
+ else null
+          end;;
+    html: <img src="https://restcountries.eu/data/{{ value }}.svg" style="width:50px;height:30px;"/> ;;
+
+    # Adds drill down links to country maps
+    link: {
+      label: "{{sap.country._value}} SAP report"
+      url: "/dashboards/55?Country={{ sap.country._value | encode_uri }}"
+      icon_url: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/SAPfavicon.ico"
+    }
+  }
 
 
     dimension: date_string {
