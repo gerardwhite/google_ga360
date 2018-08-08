@@ -86,6 +86,10 @@ explore: ref_date_range {
   }
 }
 
+
+
+
+
 ################## ~ SINGLE-LEVEL SAP EXPLORES ~~~~~~ ###########################
 
 # # SAP actuals view:
@@ -129,7 +133,8 @@ explore: sap_budget {
 
 explore: sap_all {
   group_label: "SAP"
-  hidden: yes
+  label: "SAP | All"
+  hidden: no
 
 }
 
