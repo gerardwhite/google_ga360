@@ -66,11 +66,13 @@ explore: weekly_global_stats {
 # }
 
 
+# Joins SAP to SAP 6plus6 using data array/scaffold
+# Data array/scaffold:
 explore: ref_date_range {
   group_label: "SAP"
   label: "SAP | Test join2 - with more joins"
 
-
+# Joins 6plus6 to scaffold at monthly level
   join: sap_6plus6 {
     type: left_outer
     relationship: one_to_one
@@ -79,6 +81,18 @@ explore: ref_date_range {
             AND ${ref_date_range.channels} = ${sap_6plus6.channels}
             AND ${ref_date_range.country} = ${sap_6plus6.country};;
   }
+# Joins sap to scaffold at daily level
+  join: sap {
+    type: left_outer
+    relationship: one_to_one
+    sql_on: ${ref_date_range.date_date}=${sap.date_date}
+            AND ${ref_date_range.channels} = ${sap.channel}
+            AND ${ref_date_range.country} = ${sap.country};;
+  }
+}
+
+
+
 
 #   join: sap_budget {
 #     type: left_outer
@@ -88,18 +102,6 @@ explore: ref_date_range {
 #             AND ${ref_date_range.channels} = ${sap_budget.channel}
 #             AND ${ref_date_range.country} = ${sap_budget.country};;
 #   }
-
-
-  join: sap {
-    type: left_outer
-    relationship: one_to_one
-    sql_on: ${ref_date_range.date_date}=${sap.date_date}
-            AND ${ref_date_range.channels} = ${sap.channel}
-            AND ${ref_date_range.country} = ${sap.country};;
-  }
-
-}
-
 
 
 
