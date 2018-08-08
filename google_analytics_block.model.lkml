@@ -128,6 +128,11 @@ explore: sap_budget {
 
 }
 
+explore: sap_all {
+  group_label: "SAP"
+  hidden: yes
+
+}
 
 # ###### - Test join on SAP | SAP 6+6 - needs help!! ######
 # explore: sap_prim {
