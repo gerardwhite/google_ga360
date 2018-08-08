@@ -1,5 +1,7 @@
-# GW: This view calculates daily 6plus6 numbers. It should not be exposed in an Explore,
-#  but is used in the sap_all SQL (keeps the SQL readable/managable)
+# GW: This view calculates daily 6plus6 numbers.
+# Use this as an Explore to check daily numbers are correct
+#  it is used in the sap_all SQL (keeps the SQL readable/managable)
+
 
 view: sap_6plus6_daily {
   derived_table: {
