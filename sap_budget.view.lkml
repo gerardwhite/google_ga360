@@ -31,7 +31,7 @@ view: sap_budget {
       sql: ${TABLE}.Channel ;;
     }
 
-    dimension_group: month {
+    dimension_group: date {
       type: time
       timeframes: [
         raw,
@@ -75,14 +75,14 @@ view: sap_budget {
       value_format_name: gbp_0
       sql: ${budget_net_revenue};;
       filters: {
-        field: month_date
+        field: date_date
         value: "this month"
       }
     }
 
     dimension: days_in_the_month {
-      sql:  DATE_DIFF(DATE_TRUNC(DATE_ADD(${month_date}, INTERVAL 1 MONTH), MONTH),
-        DATE_TRUNC(${month_date}, MONTH), DAY) ;;
+      sql:  DATE_DIFF(DATE_TRUNC(DATE_ADD(${date_date}, INTERVAL 1 MONTH), MONTH),
+        DATE_TRUNC(${date_date}, MONTH), DAY) ;;
     }
 
   measure: number_of_days_in_month {
