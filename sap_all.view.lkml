@@ -13,21 +13,19 @@ view: sap_all {
         ,null as revenue6plus
         ,null as budgetNetRevenue
         ,'SAP Actual' as source
-      ,DATE_DIFF(DATE_TRUNC(DATE_ADD(date, INTERVAL 1 MONTH), MONTH), DATE_TRUNC(date, MONTH), DAY) as days_in_month
 FROM `dyson-ga.ao_looker_test.SAP`
 
 UNION ALL
 
- SELECT monthDate as date
+ SELECT date as date
       ,region
       ,channel
       ,null as sales
       ,null as orders
-      ,revenue6plus
+      ,revenue6plus -- this number is DAILY for each country and channel
       ,null as budgetNetRevenue
       ,'6plus6' as source
-      ,DATE_DIFF(DATE_TRUNC(DATE_ADD(monthDate, INTERVAL 1 MONTH), MONTH), DATE_TRUNC(monthDate, MONTH), DAY) as days_in_month
-FROM `dyson-ga.ao_looker_test.sap_6plus6`
+FROM  ${sap_6plus6_daily.SQL_TABLE_NAME} --the calculated daily values
 
 UNION ALL
 
@@ -39,7 +37,6 @@ SELECT dateMonth as date
       ,null as revenue6plus
       ,budgetNetRevenue
       ,'budget' as source
-      ,DATE_DIFF(DATE_TRUNC(DATE_ADD(dateMonth, INTERVAL 1 MONTH), MONTH), DATE_TRUNC(dateMonth, MONTH), DAY) as days_in_month
 FROM `dyson-ga.ao_looker_test.sap_budget`
  ;;
   }
@@ -422,7 +419,7 @@ FROM `dyson-ga.ao_looker_test.sap_budget`
   measure: revenue_forcast_LE{
     label: "LE 6+6 target"
     type: sum
-    value_format: "0.0,,\" M\""
+#     value_format: "0.0,,\" M\""
     sql: ${revenue6plus} ;;
     filters: {
       field: source
@@ -435,7 +432,7 @@ FROM `dyson-ga.ao_looker_test.sap_budget`
   measure: revneue_forcast_this_month {
     label: "LE 6+6 target this month"
     type: sum
-    value_format: "0.0,,\" M\""
+#     value_format: "0.0,,\" M\""
     sql: ${revenue6plus};;
     filters: {
       field: date_date
