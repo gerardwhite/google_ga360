@@ -3,7 +3,7 @@ connection: "bq2look"
 # include all the views
 include: "*.view"
 
-
+# sets start of week to Monday
 week_start_day: monday
 
 datagroup: bqml_datagroup {
@@ -11,13 +11,11 @@ datagroup: bqml_datagroup {
   sql_trigger: SELECT CURRENT_DATE() ;;
 }
 
-
 explore: rt_web_sessions {
   label: "Adobe"
   group_label: "E-Commerce"
 
 }
-
 
 explore: ga_sessions {
   label: "Google Analytics"
@@ -51,24 +49,16 @@ explore: weekly_global_stats {
 
 
 
-###### Ref date range to build an array. Not sure if we need this as have SAP data for every day date - ######
+################## ~ SAP ~~~~~~~~~~~~~~~~~~~~~~~~~~~ ############################
+################## ~ ALL SAP VIEWS JOINED TOGETHER ~~ ###########################
 
-# Old test on fill_in_dates
-
-# explore: fill_in_dates {
-#   group_label: "SAP"
-#   label: "SAP | Test join2"
-#   join: sap_6plus6 {
-#     type: left_outer
-#     relationship: one_to_one
-#     sql_on: ${fill_in_dates.day_date}=${sap_6plus6.month_date} ;;
-#   }
-# }
-
-
+# Joins sap and 6plus6 together using data array/scaffold
+# Data array/scaffold:
 explore: ref_date_range {
   group_label: "SAP"
-  label: "SAP | Test join2 - with more joins"
+  label: "SAP | SAP, budget & 6plus6"
+
+# Joins SAP 6plus6 targets to data array at monthly level
   join: sap_6plus6 {
     type: left_outer
     relationship: one_to_one
@@ -77,16 +67,28 @@ explore: ref_date_range {
             AND ${ref_date_range.channels} = ${sap_6plus6.channels}
             AND ${ref_date_range.country} = ${sap_6plus6.country};;
   }
+# Joins SAP budget figures to data array
+  join: sap_budget {
+    type: left_outer
+    relationship: one_to_one
+    sql_on: ${ref_date_range.date_month}=${sap_budget.date_month}
+            AND ${ref_date_range.date_year}=${sap_budget.date_year}
+            AND ${ref_date_range.channels} = ${sap_budget.channel}
+            AND ${ref_date_range.country} = ${sap_budget.country};;
+  }
+# Joins SAP actuals to data array at daily level
+  join: sap {
+    type: left_outer
+    relationship: one_to_one
+    sql_on: ${ref_date_range.date_date}=${sap.date_date}
+            AND ${ref_date_range.channels} = ${sap.channel}
+            AND ${ref_date_range.country} = ${sap.country};;
+  }
 }
 
+################## ~ SINGLE-LEVEL SAP EXPLORES ~~~~~~ ###########################
 
-
-
-
-
-################## SAP ########################
-
-# # SAP actuals view with % of daily target excluded to avoid join issues with the other explore.
+# # SAP actuals view:
 explore: sap {
   persist_for: "1 hour"
   group_label: "SAP"
@@ -97,10 +99,10 @@ explore: sap {
       value: "30 days ago for 30 days"
     }
   }
-  fields: [ALL_FIELDS*, -sap.percent_of_daily_target_achieved]
 }
+# code to exclude fields if required: [ALL_FIELDS*, -sap.percent_of_daily_target_achieved]
 
-# SAP 6+6 targets
+# SAP 6+6 targets view:
 explore: sap_6plus6 {
   persist_for: "1 hour"
   group_label: "SAP"
@@ -111,9 +113,7 @@ explore: sap_6plus6 {
       value: "30 days ago for 30 days"
     }
   }
-
 }
-
 # SAP budget for 2018. Use the 6+6 in prefernce to this.
 explore: sap_budget {
   persist_for: "1 hour"
@@ -121,11 +121,10 @@ explore: sap_budget {
   label: "SAP | Budget revenue"
   always_filter: {
     filters: {
-      field: sap_budget.month_date
+      field: sap_budget.date_date
       value: "30 days ago for 30 days"
     }
   }
-
 }
 
 explore: sap_all {
@@ -134,7 +133,9 @@ explore: sap_all {
 
 }
 
-# ###### - Test join on SAP | SAP 6+6 - needs help!! ######
+
+
+# ###### - Early SAP join testing work.  Delete this once the above is validated ######
 # explore: sap_prim {
 #   from: sap
 #   group_label: "SAP"
