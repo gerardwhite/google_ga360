@@ -50,50 +50,6 @@ explore: weekly_global_stats {
 
 
 ################## ~ SAP ~~~~~~~~~~~~~~~~~~~~~~~~~~~ ############################
-################## ~ SINGLE-LEVEL SAP EXPLORES ~~~~~~ ###########################
-
-
-# # SAP actuals view with % of daily target excluded to avoid join issues with the other explore.
-explore: sap {
-  persist_for: "1 hour"
-  group_label: "SAP"
-  label: "SAP | Actual revenue"
-  always_filter: {
-    filters: {
-      field: sap.date_date
-      value: "30 days ago for 30 days"
-    }
-  }
-}
-#
-# code to exclude fields if required: [ALL_FIELDS*, -sap.percent_of_daily_target_achieved]
-
-# SAP 6+6 targets
-explore: sap_6plus6 {
-  persist_for: "1 hour"
-  group_label: "SAP"
-  label: "SAP | Revenue (6+6 LE)"
-  always_filter: {
-    filters: {
-      field: sap_6plus6.date_date
-      value: "30 days ago for 30 days"
-    }
-  }
-}
-# SAP budget for 2018. Use the 6+6 in prefernce to this.
-explore: sap_budget {
-  persist_for: "1 hour"
-  group_label: "SAP"
-  label: "SAP | Budget revenue"
-  always_filter: {
-    filters: {
-      field: sap_budget.date_date
-      value: "30 days ago for 30 days"
-    }
-  }
-}
-
-
 ################## ~ ALL SAP VIEWS JOINED TOGETHER ~~ ###########################
 
 # Joins sap and 6plus6 together using data array/scaffold
@@ -129,6 +85,49 @@ explore: ref_date_range {
             AND ${ref_date_range.country} = ${sap.country};;
   }
 }
+
+################## ~ SINGLE-LEVEL SAP EXPLORES ~~~~~~ ###########################
+
+# # SAP actuals view:
+explore: sap {
+  persist_for: "1 hour"
+  group_label: "SAP"
+  label: "SAP | Actual revenue"
+  always_filter: {
+    filters: {
+      field: sap.date_date
+      value: "30 days ago for 30 days"
+    }
+  }
+}
+# code to exclude fields if required: [ALL_FIELDS*, -sap.percent_of_daily_target_achieved]
+
+# SAP 6+6 targets view:
+explore: sap_6plus6 {
+  persist_for: "1 hour"
+  group_label: "SAP"
+  label: "SAP | Revenue (6+6 LE)"
+  always_filter: {
+    filters: {
+      field: sap_6plus6.date_date
+      value: "30 days ago for 30 days"
+    }
+  }
+}
+# SAP budget for 2018. Use the 6+6 in prefernce to this.
+explore: sap_budget {
+  persist_for: "1 hour"
+  group_label: "SAP"
+  label: "SAP | Budget revenue"
+  always_filter: {
+    filters: {
+      field: sap_budget.date_date
+      value: "30 days ago for 30 days"
+    }
+  }
+}
+
+
 
 
 # ###### - Early SAP join testing work.  Delete this once the above is validated ######
