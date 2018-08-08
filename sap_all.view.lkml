@@ -206,6 +206,35 @@ FROM `dyson-ga.ao_looker_test.sap_budget`
   }
 
 
+  dimension: country_rank {
+    type: number
+    sql: case when ${country} = 'China' then 1
+              when ${country} = 'United States' then 2
+              when ${country} = 'United Kingdom' then 3
+              when ${country} = 'Japan' then 4
+              when ${country} = 'Germany' then 5
+              when ${country} = 'France' then 6
+              when ${country} = 'Canada' then 7
+              when ${country} = 'Australia' then 8
+              when ${country} = 'Italy' then 9
+              when ${country} = 'Spain' then 10
+              when ${country} = 'Switzerland' then 11
+              when ${country} = 'Netherlands' then 12
+              when ${country} = 'Austria' then 13
+              when ${country} = 'Ireland' then 14
+              when ${country} = 'India' then 15
+              when ${country} = 'Belguim' then 16
+              when ${country} = 'Denmark' then 17
+              when ${country} = 'Korea' then 18
+              when ${country} = 'Singapore' then 19
+              when ${country} = 'Sweden' then 20
+              when ${country} = 'Norway' then 21
+              when ${country} = 'Finland' then 22
+              when ${country} = 'Mexico' then 23
+
+ else 100
+          end;;
+  }
 
 
 
@@ -341,7 +370,7 @@ FROM `dyson-ga.ao_looker_test.sap_budget`
 
   measure: revenue_this_month {
     type: sum
-    value_format_name: gbp_0
+    value_format: "0.0,,\" M\""
     group_label: "Custom SAP measures"
     sql: ${sales} ;;
     filters: {
@@ -352,6 +381,7 @@ FROM `dyson-ga.ao_looker_test.sap_budget`
       field: source
       value: "SAP Actual"
     }
+    html: £{{rendered_value}} ;;
   }
 
 
@@ -574,19 +604,27 @@ FROM `dyson-ga.ao_looker_test.sap_budget`
 
 ###############  Comparison Measures #########################
 
-  measure: revenue_vs_target {
+  measure: percent_of_target {
     group_label: "Custom SAP measures"
     type: number
-    sql: 1.0 * ((${total_revenue}-${revenue_forcast_LE})/NULLIF(${revenue_forcast_LE},0))  ;;
-    value_format_name: percent_2
+    sql: 1.0 * ((${total_revenue})/NULLIF(${revenue_forcast_LE},0))  ;;
+    value_format_name: percent_1
   }
 
-  measure: revenue_vs_target_this_month {
+  measure: percent_of_target_this_month {
     group_label: "Custom SAP measures"
     type: number
-    sql: 1.0 * ((${revenue_this_month}-${revneue_forcast_this_month})/NULLIF(${revneue_forcast_this_month},0))  ;;
-    value_format_name: percent_2
+    sql: 1.0 * ((${revenue_this_month})/NULLIF(${revneue_forcast_this_month},0))  ;;
+    value_format_name: percent_1
   }
+
+  measure: yoy_growth_target {
+    group_label: "Custom SAP measures"
+    type: number
+    sql: 1.0 * ((${revenue_forcast_LE}-${revenue_last_year})/NULLIF(${revenue_last_year},0))  ;;
+    value_format_name: percent_1
+  }
+
 
 
 
