@@ -70,7 +70,7 @@ explore: weekly_global_stats {
 # Data array/scaffold:
 explore: ref_date_range {
   group_label: "SAP"
-  label: "SAP | Test join2 - with more joins"
+  label: "SAP | SAP, budget & 6plus6"
 
 # Joins 6plus6 to data array/scaffold at monthly level
   join: sap_6plus6 {
