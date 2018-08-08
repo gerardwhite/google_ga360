@@ -163,6 +163,52 @@ FROM `dyson-ga.ao_looker_test.sap_budget`
     }
 
 
+  dimension: country_icon {
+    type: string
+    sql: case when ${country} = 'United Kingdom' then 'gbr'
+              when ${country} = 'Germany' then 'deu'
+              when ${country} = 'France' then 'fra'
+              when ${country} = 'Japan' then 'jpn'
+              when ${country} = 'United States' then 'usa'
+              when ${country} = 'Canada' then 'can'
+              when ${country} = 'Spain' then 'esp'
+              when ${country} = 'Sweden' then 'swe'
+              when ${country} = 'Norway' then 'nor'
+              when ${country} = 'Denmark' then 'dnk'
+              when ${country} = 'Austria' then 'aut'
+              when ${country} = 'Australia' then 'aus'
+              when ${country} = 'Belguim' then 'bel'
+              when ${country} = 'Italy' then 'ita'
+              when ${country} = 'Korea' then 'kor'
+              when ${country} = 'China' then 'chn'
+              when ${country} = 'Switzerland' then 'che'
+              when ${country} = 'Russia' then 'rus'
+              when ${country} = 'Mexico' then 'mex'
+              when ${country} = 'Brazil' then 'bra'
+              when ${country} = 'Netherlands' then 'nld'
+              when ${country} = 'Poland' then 'pol'
+              when ${country} = 'India' then 'ind'
+              when ${country} = 'Hong Kong' then 'hkg'
+              when ${country} = 'Ireland' then 'irl'
+              when ${country} = 'Finland' then 'fin'
+              when ${country} = 'Singapore' then 'sgp'
+
+ else null
+          end;;
+    html: <img src="https://restcountries.eu/data/{{ value }}.svg" style="width:50px;height:30px;"/> ;;
+
+#     # Adds drill down links to country maps.  Label needs to change for link to work.
+#     link: {
+#       label: "{{sap.country._value}} SAP report"
+#       url: "/dashboards/55?Country={{ sap.country._value | encode_uri }}"
+#       icon_url: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/SAPfavicon.ico"
+#     }
+  }
+
+
+
+
+
 # Dimensions
 
   dimension: sales {
@@ -414,6 +460,7 @@ FROM `dyson-ga.ao_looker_test.sap_budget`
 
 
 
+
 #   6plus6
 
   measure: revenue_forcast_LE{
@@ -482,11 +529,6 @@ FROM `dyson-ga.ao_looker_test.sap_budget`
 
 
 
-
-
-
-
-
 #   Budget
 
 
@@ -521,6 +563,23 @@ FROM `dyson-ga.ao_looker_test.sap_budget`
       field: source
       value: "budget"
     }
+  }
+
+
+###############  Comparison Measures #########################
+
+  measure: revenue_vs_target {
+    group_label: "Custom SAP measures"
+    type: number
+    sql: 1.0 * ((${total_revenue}-${revenue_forcast_LE})/NULLIF(${revenue_forcast_LE},0))  ;;
+    value_format_name: percent_2
+  }
+
+  measure: revenue_vs_target_this_month {
+    group_label: "Custom SAP measures"
+    type: number
+    sql: 1.0 * ((${revenue_this_month}-${revneue_forcast_this_month})/NULLIF(${revneue_forcast_this_month},0))  ;;
+    value_format_name: percent_2
   }
 
 
