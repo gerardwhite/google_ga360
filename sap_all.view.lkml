@@ -209,6 +209,35 @@ FROM `dyson-ga.ao_looker_test.sap_budget`
   }
 
 
+  dimension: country_rank {
+    type: number
+    sql: case when ${country} = 'China' then 1
+              when ${country} = 'United States' then 2
+              when ${country} = 'United Kingdom' then 3
+              when ${country} = 'Japan' then 4
+              when ${country} = 'Germany' then 5
+              when ${country} = 'France' then 6
+              when ${country} = 'Canada' then 7
+              when ${country} = 'Australia' then 8
+              when ${country} = 'Italy' then 9
+              when ${country} = 'Spain' then 10
+              when ${country} = 'Switzerland' then 11
+              when ${country} = 'Netherlands' then 12
+              when ${country} = 'Austria' then 13
+              when ${country} = 'Ireland' then 14
+              when ${country} = 'India' then 15
+              when ${country} = 'Belguim' then 16
+              when ${country} = 'Denmark' then 17
+              when ${country} = 'Korea' then 18
+              when ${country} = 'Singapore' then 19
+              when ${country} = 'Sweden' then 20
+              when ${country} = 'Norway' then 21
+              when ${country} = 'Finland' then 22
+              when ${country} = 'Mexico' then 23
+
+ else 100
+          end;;
+  }
 
 
 
