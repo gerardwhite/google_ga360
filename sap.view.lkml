@@ -7,6 +7,8 @@ view: sap {
     type: string
     sql: ${TABLE}.Channel ;;
 
+# Country / reguion filtering breaking pivor reports.
+
 #     link: {
 #       label: "{{sap.channel._value}} report"
 #       url: "/dashboards/26?Region={{ sap.website._value | encode_uri }}"
