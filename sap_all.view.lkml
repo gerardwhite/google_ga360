@@ -463,6 +463,7 @@ FROM `dyson-ga.ao_looker_test.sap_budget`
 
 
 
+
 #   6plus6
 
   measure: revenue_forcast_LE{
@@ -531,11 +532,6 @@ FROM `dyson-ga.ao_looker_test.sap_budget`
 
 
 
-
-
-
-
-
 #   Budget
 
 
@@ -570,6 +566,23 @@ FROM `dyson-ga.ao_looker_test.sap_budget`
       field: source
       value: "budget"
     }
+  }
+
+
+###############  Comparison Measures #########################
+
+  measure: revenue_vs_target {
+    group_label: "Custom SAP measures"
+    type: number
+    sql: 1.0 * ((${total_revenue}-${revenue_forcast_LE})/NULLIF(${revenue_forcast_LE},0))  ;;
+    value_format_name: percent_2
+  }
+
+  measure: revenue_vs_target_this_month {
+    group_label: "Custom SAP measures"
+    type: number
+    sql: 1.0 * ((${revenue_this_month}-${revneue_forcast_this_month})/NULLIF(${revneue_forcast_this_month},0))  ;;
+    value_format_name: percent_2
   }
 
 
