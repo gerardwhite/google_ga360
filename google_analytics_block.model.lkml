@@ -72,7 +72,7 @@ explore: ref_date_range {
   group_label: "SAP"
   label: "SAP | SAP, budget & 6plus6"
 
-# Joins 6plus6 to data array/scaffold at monthly level
+# Joins SAP 6plus6 targets to data array at monthly level
   join: sap_6plus6 {
     type: left_outer
     relationship: one_to_one
@@ -81,7 +81,7 @@ explore: ref_date_range {
             AND ${ref_date_range.channels} = ${sap_6plus6.channels}
             AND ${ref_date_range.country} = ${sap_6plus6.country};;
   }
-
+# Joins SAP budget figures to data array
   join: sap_budget {
     type: left_outer
     relationship: one_to_one
@@ -90,8 +90,7 @@ explore: ref_date_range {
             AND ${ref_date_range.channels} = ${sap_budget.channel}
             AND ${ref_date_range.country} = ${sap_budget.country};;
   }
-
-# Joins sap to data array/scaffold at daily level
+# Joins SAP actuals to data array at daily level
   join: sap {
     type: left_outer
     relationship: one_to_one
