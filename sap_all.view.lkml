@@ -496,7 +496,7 @@ FROM `dyson-ga.ao_looker_test.sap_budget`
   measure: revenue_forcast_LE{
     label: "LE 6+6 target"
     type: sum
-#     value_format: "0.0,,\" M\""
+    value_format: "0.0,,\" M\""
     sql: ${revenue6plus} ;;
     filters: {
       field: source
@@ -509,7 +509,7 @@ FROM `dyson-ga.ao_looker_test.sap_budget`
   measure: revneue_forcast_this_month {
     label: "LE 6+6 target this month"
     type: sum
-#     value_format: "0.0,,\" M\""
+    value_format: "0.0,,\" M\""
     sql: ${revenue6plus};;
     filters: {
       field: date_date
@@ -619,7 +619,27 @@ FROM `dyson-ga.ao_looker_test.sap_budget`
     value_format_name: percent_1
   }
 
+###############  Comparison Formatting  #########################
 
+# Test conditional formating metric on % of monthly forcast achieved:
+
+  measure: percent_of_target_this_month_rg {
+    group_label: "Custom SAP measures"
+    type: number
+    sql: 1.0 * ((${revenue_this_month})/NULLIF(${revneue_forcast_this_month},0))  ;;
+    value_format_name: percent_1
+    html:
+    {% if value <= 0.1 %}
+    <div style="color: white; background-color: darkred; font-size: 100%; text-align:center">{{ rendered_value }}</div>
+    {% elsif value <= 0.2 %}
+    <div style="color: black; background-color: goldenrod; font-size: 100%; text-align:center">{{ rendered_value }}</div>
+    {% else %}
+    <div style="color: white; background-color: darkgreen; font-size: 100%; text-align:center">{{ rendered_value }}</div>
+    {% endif %} ;;
+
+
+
+  }
 
 
 
