@@ -66,7 +66,7 @@ view: sap_budget {
     measure: daily_budget_rate {
       type:  number
       value_format_name: gbp_0
-      sql:  ${budget_revenue_this_month}/31;;
+      sql:  ${budget_revenue_2018}/${number_of_days_in_month};;
     }
 
 
@@ -84,6 +84,11 @@ view: sap_budget {
       sql:  DATE_DIFF(DATE_TRUNC(DATE_ADD(${month_date}, INTERVAL 1 MONTH), MONTH),
         DATE_TRUNC(${month_date}, MONTH), DAY) ;;
     }
+
+  measure: number_of_days_in_month {
+    type: average
+    sql: ${days_in_the_month} ;;
+  }
 
 
     measure: count {

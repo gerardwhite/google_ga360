@@ -549,12 +549,12 @@ view: sap {
 
 
 
-
-measure: percent_of_daily_target_achieved {
-  type: number
-  sql: ${sap_prim.total_revenue}/${sap_6plus6.daily_target};;
-  value_format_name: percent_1
-}
+#
+# measure: percent_of_daily_target_achieved {
+#   type: number
+#   sql: ${sap_prim.total_revenue}/${sap_6plus6.daily_target};;
+#   value_format_name: percent_1
+# }
 
 
 

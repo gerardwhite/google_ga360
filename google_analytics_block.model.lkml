@@ -69,6 +69,8 @@ explore: weekly_global_stats {
 explore: ref_date_range {
   group_label: "SAP"
   label: "SAP | Test join2 - with more joins"
+
+
   join: sap_6plus6 {
     type: left_outer
     relationship: one_to_one
@@ -77,6 +79,25 @@ explore: ref_date_range {
             AND ${ref_date_range.channels} = ${sap_6plus6.channels}
             AND ${ref_date_range.country} = ${sap_6plus6.country};;
   }
+
+#   join: sap_budget {
+#     type: left_outer
+#     relationship: one_to_one
+#     sql_on: ${ref_date_range.date_month}=${sap_budget.month_month}
+#             AND ${ref_date_range.date_year}=${sap_budget.month_year}
+#             AND ${ref_date_range.channels} = ${sap_budget.channel}
+#             AND ${ref_date_range.country} = ${sap_budget.country};;
+#   }
+
+
+  join: sap {
+    type: left_outer
+    relationship: one_to_one
+    sql_on: ${ref_date_range.date_date}=${sap.date_date}
+            AND ${ref_date_range.channels} = ${sap.channel}
+            AND ${ref_date_range.country} = ${sap.country};;
+  }
+
 }
 
 
@@ -97,8 +118,10 @@ explore: sap {
       value: "30 days ago for 30 days"
     }
   }
-  fields: [ALL_FIELDS*, -sap.percent_of_daily_target_achieved]
+
 }
+#
+# fields: [ALL_FIELDS*, -sap.percent_of_daily_target_achieved]
 
 # SAP 6+6 targets
 explore: sap_6plus6 {
