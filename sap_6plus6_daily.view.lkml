@@ -10,7 +10,7 @@ view: sap_6plus6_daily {
             ,region
             ,channel
             ,revenue6plus
-            ,monthly_figure
+            ,monthly_revenue6plus
 
       FROM UNNEST(
         GENERATE_DATE_ARRAY(DATE('2017-01-01'), DATE('2018-12-31'), INTERVAL 1 DAY)
@@ -21,10 +21,8 @@ view: sap_6plus6_daily {
             ,region
             ,channel
             ,revenue6plus/DATE_DIFF(DATE_TRUNC(DATE_ADD(monthDate, INTERVAL 1 MONTH), MONTH), DATE_TRUNC(monthDate, MONTH), DAY) as revenue6plus
-            ,revenue6plus as monthly_figure
-            ,'6plus6' as source
-            ,DATE_DIFF(DATE_TRUNC(DATE_ADD(monthDate, INTERVAL 1 MONTH), MONTH), DATE_TRUNC(monthDate, MONTH), DAY) as days_in_month
-      FROM `dyson-ga.ao_looker_test.sap_6plus6` ) e on (FORMAT_TIMESTAMP('%Y-%m', CAST(day  AS TIMESTAMP))) = (FORMAT_TIMESTAMP('%Y-%m', CAST(e.date  AS TIMESTAMP)))
+            ,revenue6plus as monthly_revenue6plus
+           FROM `dyson-ga.ao_looker_test.sap_6plus6` ) e on (FORMAT_TIMESTAMP('%Y-%m', CAST(day  AS TIMESTAMP))) = (FORMAT_TIMESTAMP('%Y-%m', CAST(e.date  AS TIMESTAMP)))
        ;;
   }
 
@@ -53,12 +51,12 @@ view: sap_6plus6_daily {
     sql: ${TABLE}.revenue6plus ;;
   }
 
-  dimension: monthly_figure {
+  dimension: monthly_revenue6plus {
     type: number
-    sql: ${TABLE}.monthly_figure ;;
+    sql: ${TABLE}.revenue6plus ;;
   }
 
   set: detail {
-    fields: [date, region, channel, revenue6plus, monthly_figure]
+    fields: [date, region, channel, revenue6plus, monthly_revenue6plus]
   }
 }

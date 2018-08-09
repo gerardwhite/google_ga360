@@ -29,15 +29,15 @@ FROM  ${sap_6plus6_daily.SQL_TABLE_NAME} --the calculated daily values
 
 UNION ALL
 
-SELECT dateMonth as date
-      ,budgetRegion as region
+SELECT date as date
+      ,region as region
       ,channel
       ,null as sales
       ,null as orders
       ,null as revenue6plus
-      ,budgetNetRevenue
+      ,budgetNetRevenue -- this number is DAILY for each country and channel
       ,'budget' as source
-FROM `dyson-ga.ao_looker_test.sap_budget`
+FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
  ;;
   }
 
@@ -85,6 +85,7 @@ FROM `dyson-ga.ao_looker_test.sap_budget`
 #   Includes transforms for different data sets.
 #   This could probably be more modular but fine for now.
   dimension: country {
+    order_by_field: country_rank
     type: string
     sql: CASE
                 --Actual
@@ -280,9 +281,9 @@ FROM `dyson-ga.ao_looker_test.sap_budget`
     }
 
    html: {% if value <= {{revenue_forcast_LE._value}} %}
-        <div style="color: white; background-color: darkred; font-size: 100%; text-align:center;border-radius: 5px">{{ rendered_value }}</div>
+        <div style="color: white; background-color: #dd4157; font-size: 100%; text-align:center;border-radius: 5px">{{ rendered_value }}</div>
       {% elsif value >= {{revenue_forcast_LE._value}} %}
-        <div style="color: black; background-color: green; font-size: 100%; text-align:center;border-radius: 5px">{{ rendered_value }}</div>
+        <div style="color: black; background-color: #79b928; font-size: 100%; text-align:center;border-radius: 5px">{{ rendered_value }}</div>
       {% endif %}  ;;
   }
 
@@ -636,11 +637,11 @@ FROM `dyson-ga.ao_looker_test.sap_budget`
     value_format_name: percent_1
     html:
     {% if value <= 0.1 %}
-    <div style="color: white; background-color: darkred; font-size: 100%; text-align:center">{{ rendered_value }}</div>
+    <div style="color: white; background-color: #dd4157; font-size: 100%; text-align:center">{{ rendered_value }}</div>
     {% elsif value <= 0.2 %}
     <div style="color: black; background-color: goldenrod; font-size: 100%; text-align:center">{{ rendered_value }}</div>
     {% else %}
-    <div style="color: white; background-color: darkgreen; font-size: 100%; text-align:center">{{ rendered_value }}</div>
+    <div style="color: white; background-color: #79b928; font-size: 100%; text-align:center">{{ rendered_value }}</div>
     {% endif %} ;;
 
 
