@@ -90,7 +90,7 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
     sql: CASE
                 --Actual
                 WHEN ${region} = "Dyson FR" THEN "France"
-                WHEN ${region} = "Dyson BE" THEN "Belguim"
+                WHEN ${region} = "Dyson BE" THEN "Belgium"
                 WHEN ${region} = "Dyson AT" THEN "Austria"
                 WHEN ${region} = "Dyson AU" THEN "Australia"
                 WHEN ${region} = "Dyson CA" THEN "Canada"
@@ -129,7 +129,7 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
                 WHEN ${region} = "53 - France " THEN "France"
                 WHEN ${region} = "55 - Spain " THEN "Spain"
                 WHEN ${region} = "56 - Switzerland " THEN "Switzerland"
-                WHEN ${region} = "58 - Belgium " THEN "Belguim"
+                WHEN ${region} = "58 - Belgium " THEN "Belgium"
                 WHEN ${region} = "85 - India" THEN "India"
                 WHEN ${region} = "88 - China - Beijing" THEN "China"
                 WHEN ${region} = "57 - Netherlands" THEN "Netherlands"
@@ -224,7 +224,7 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
               when ${country} = 'Austria' then 13
               when ${country} = 'Ireland' then 14
               when ${country} = 'India' then 15
-              when ${country} = 'Belguim' then 16
+              when ${country} = 'Belgium' then 16
               when ${country} = 'Denmark' then 17
               when ${country} = 'Korea' then 18
               when ${country} = 'Singapore' then 19

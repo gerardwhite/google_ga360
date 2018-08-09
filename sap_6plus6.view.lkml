@@ -35,7 +35,7 @@ view: sap_6plus6 {
               when ${country} = 'Denmark' then 'dnk'
               when ${country} = 'Austria' then 'aut'
               when ${country} = 'Australia' then 'aus'
-              when ${country} = 'Belguim' then 'bel'
+              when ${country} = 'Belgium' then 'bel'
               when ${country} = 'Italy' then 'ita'
               when ${country} = 'Korea' then 'kor'
               when ${country} = 'China' then 'chn'
@@ -132,7 +132,7 @@ view: sap_6plus6 {
                 WHEN ${region} = "53 - France " THEN "France"
                 WHEN ${region} = "55 - Spain " THEN "Spain"
                 WHEN ${region} = "56 - Switzerland " THEN "Switzerland"
-                WHEN ${region} = "58 - Belgium " THEN "Belguim"
+                WHEN ${region} = "58 - Belgium " THEN "Belgium"
                 WHEN ${region} = "85 - India" THEN "India"
                 WHEN ${region} = "88 - China - Beijing" THEN "China"
                 WHEN ${region} = "57 - Netherlands" THEN "Netherlands"
