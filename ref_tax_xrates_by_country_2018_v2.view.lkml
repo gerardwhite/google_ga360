@@ -31,7 +31,7 @@ view: tax_xrates_by_country_2018_v2 {
               when ${country} = 'Norway' then 'nor'
               when ${country} = 'Denmark' then 'dnk'
               when ${country} = 'Austria' then 'aut'
-              when ${country} = 'Australia' then 'aut'
+              when ${country} = 'Australia' then 'aus'
               when ${country} = 'Belguim' then 'bel'
               when ${country} = 'Italy' then 'ita'
               when ${country} = 'Korea' then 'kor'
