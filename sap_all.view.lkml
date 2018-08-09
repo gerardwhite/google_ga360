@@ -47,7 +47,7 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
 # todo: divide this into days
   dimension_group: date {
     type: time
-    timeframes: [year, month, quarter, date, week, week_of_year]
+    timeframes: [year, month, quarter, date, week, week_of_year, day_of_week, day_of_month]
     sql: ${TABLE}.date ;;
     convert_tz: no
     datatype: date
@@ -605,6 +605,14 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
 
 ###############  Comparison Measures #########################
 
+  measure: actuals_diff_vs_target_this_month {
+    group_label: "Custom SAP measures"
+    value_format: "0.0,,\" M\""
+    type: number
+    sql: ((${revenue_this_month})-(${revneue_forcast_this_month}))  ;;
+    html: £{{rendered_value}} ;;
+  }
+
   measure: percent_of_target {
     group_label: "Custom SAP measures"
     type: number
@@ -618,7 +626,6 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
     sql: 1.0 * ((${revenue_this_year})/NULLIF(${revenue_forcast_LE},0))  ;;
     value_format_name: percent_1
   }
-
 
   measure: percent_of_target_this_month {
     group_label: "Custom SAP measures"
@@ -669,6 +676,44 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
     <div style="color: white; background-color: #79b928; font-size: 100%; text-align:center">{{ rendered_value }}</div>
     {% endif %} ;;
   }
+
+  measure: actuals_diff_vs_target_this_month_rg {
+    group_label: "Custom SAP measures"
+    value_format_name: gbp_0
+    type: number
+    sql: ((${revenue_this_month})-(${revneue_forcast_this_month}))  ;;
+    html:
+    {% if value <= -0.40 }
+    <div style="color: white; background-color: #dd4157; font-size: 100%; text-align:center">{{ rendered_value }}</div>
+    {% elsif value <= 55 }
+    <div style="color: black; background-color: goldenrod; font-size: 100%; text-align:center">{{ rendered_value }}</div>
+    {% else %}
+    <div style="color: white; background-color: #79b928; font-size: 100%; text-align:center">{{ rendered_value }}</div>
+    {% endif %} ;;
+  }
+
+
+
+
+
+
+############ - Custom date filters - ######################
+
+#Is before month to date
+  dimension: is_before_MTD {
+    type: yesno
+    group_label: "YTD|MTD fields"
+    sql: EXTRACT(DAY FROM ${date_date}) < EXTRACT(DAY FROM current_date() );;
+  }
+
+
+#Is before year to date.
+  dimension: is_before_YTD {
+    type: yesno
+    group_label: "YTD|MTD fields"
+    sql: EXTRACT(DAYOFYEAR FROM ${date_date}) < EXTRACT(DAYOFYEAR FROM (current_date() ));;
+  }
+
 
 
 
