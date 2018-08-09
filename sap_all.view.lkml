@@ -47,7 +47,7 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
 # todo: divide this into days
   dimension_group: date {
     type: time
-    timeframes: [year, month, quarter, date, week, week_of_year, day_of_week, day_of_month]
+    timeframes: [year, month, quarter, date, week, week_of_year, day_of_week, day_of_month, month_name]
     sql: ${TABLE}.date ;;
     convert_tz: no
     datatype: date
