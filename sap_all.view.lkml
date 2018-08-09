@@ -85,6 +85,7 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
 #   Includes transforms for different data sets.
 #   This could probably be more modular but fine for now.
   dimension: country {
+    order_by_field: country_rank
     type: string
     sql: CASE
                 --Actual
