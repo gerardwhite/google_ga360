@@ -612,6 +612,14 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
     value_format_name: percent_1
   }
 
+  measure: percent_of_target_this_year {
+    group_label: "Custom SAP measures"
+    type: number
+    sql: 1.0 * ((${revenue_this_year})/NULLIF(${revenue_forcast_LE},0))  ;;
+    value_format_name: percent_1
+  }
+
+
   measure: percent_of_target_this_month {
     group_label: "Custom SAP measures"
     type: number
@@ -644,8 +652,22 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
     <div style="color: white; background-color: #79b928; font-size: 100%; text-align:center">{{ rendered_value }}</div>
     {% endif %} ;;
 
+  }
 
 
+  measure: percent_of_target_this_year_rg {
+    group_label: "Custom SAP measures"
+    type: number
+    sql: 1.0 * ((${revenue_this_year})/NULLIF(${revenue_forcast_LE},0))  ;;
+    value_format_name: percent_1
+    html:
+    {% if value <= 0.40 %}
+    <div style="color: white; background-color: #dd4157; font-size: 100%; text-align:center">{{ rendered_value }}</div>
+    {% elsif value <= 0.55 %}
+    <div style="color: black; background-color: goldenrod; font-size: 100%; text-align:center">{{ rendered_value }}</div>
+    {% else %}
+    <div style="color: white; background-color: #79b928; font-size: 100%; text-align:center">{{ rendered_value }}</div>
+    {% endif %} ;;
   }
 
 
