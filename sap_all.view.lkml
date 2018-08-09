@@ -35,7 +35,7 @@ SELECT date as date
       ,null as sales
       ,null as orders
       ,null as revenue6plus
-      ,budgetNetRevenue
+      ,budgetNetRevenue -- this number is DAILY for each country and channel
       ,'budget' as source
 FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
  ;;
