@@ -530,7 +530,21 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
   }
 
 
-
+  measure: revenue_forcast_last_week {
+    label: "LE 6+6 target last week"
+    type: sum
+    value_format: "0.0,,\" M\""
+    sql: ${revenue6plus};;
+    filters: {
+      field: date_date
+      value: "last week"
+    }
+    filters: {
+      field: source
+      value: "6plus6"
+    }
+    html: £{{rendered_value}} ;;
+  }
 
 
   measure: le_revenue_this_year {
@@ -613,6 +627,16 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
     html: £{{rendered_value}} ;;
   }
 
+
+  measure: actuals_diff_vs_target_ytd {
+    group_label: "Custom SAP measures"
+    value_format: "0.0,,\" M\""
+    type: number
+    sql: ((${revenue_this_year})-(${le_revenue_this_year}))  ;;
+    html: £{{rendered_value}} ;;
+  }
+
+
   measure: percent_of_target {
     group_label: "Custom SAP measures"
     type: number
@@ -634,6 +658,21 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
     value_format_name: percent_1
   }
 
+  measure: percent_of_target_last_week {
+    group_label: "Custom SAP measures"
+    type: number
+    sql: 1.0 * ((${revenue_last_week})/NULLIF(${revenue_forcast_last_week},0))  ;;
+    value_format_name: percent_1
+  }
+
+  measure: last_week_vs_last_week_last_year {
+    group_label: "Custom SAP measures"
+    type: number
+    sql: 1.0 * ((${revenue_last_week})/NULLIF(${revenue_last_week_last_year},0))  ;;
+    value_format_name: percent_1
+  }
+
+
   measure: yoy_growth_target {
     group_label: "Custom SAP measures"
     type: number
@@ -644,6 +683,23 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
 ###############  Comparison Formatting  #########################
 
 # Test conditional formating metric on % of monthly forcast achieved:
+
+
+
+  measure: percent_of_target_last_week_rg {
+    group_label: "Custom SAP measures"
+    type: number
+    sql: 1.0 * ((${revenue_last_week})/NULLIF(${revenue_forcast_last_week},0))  ;;
+    value_format_name: percent_1
+    html:
+    {% if value <= 0.7 %}
+    <div style="color: white; background-color: #dd4157; font-size: 100%; text-align:center">{{ rendered_value }}</div>
+    {% elsif value <= 0.9 %}
+    <div style="color: black; background-color: goldenrod; font-size: 100%; text-align:center">{{ rendered_value }}</div>
+    {% else %}
+    <div style="color: white; background-color: #79b928; font-size: 100%; text-align:center">{{ rendered_value }}</div>
+    {% endif %} ;;
+  }
 
   measure: percent_of_target_this_month_rg {
     group_label: "Custom SAP measures"
@@ -676,6 +732,27 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
     <div style="color: white; background-color: #79b928; font-size: 100%; text-align:center">{{ rendered_value }}</div>
     {% endif %} ;;
   }
+
+
+
+  measure: last_week_vs_last_week_last_year_rg {
+    group_label: "Custom SAP measures"
+    type: number
+    sql: 1.0 * ((${revenue_last_week})/NULLIF(${revenue_last_week_last_year},0))  ;;
+    value_format_name: percent_1
+    html:
+    {% if value <= 0.7 %}
+    <div style="color: white; background-color: #dd4157; font-size: 100%; text-align:center">{{ rendered_value }}</div>
+    {% elsif value <= 0.9 %}
+    <div style="color: black; background-color: goldenrod; font-size: 100%; text-align:center">{{ rendered_value }}</div>
+    {% else %}
+    <div style="color: white; background-color: #79b928; font-size: 100%; text-align:center">{{ rendered_value }}</div>
+    {% endif %} ;;
+  }
+
+
+
+
 
   measure: actuals_diff_vs_target_this_month_rg {
     group_label: "Custom SAP measures"
