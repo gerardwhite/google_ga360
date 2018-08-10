@@ -825,6 +825,19 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
 
 
 
+# vs Rest of Population bits
+
+filter: channel_select {
+  suggest_dimension: channel
+}
+
+dimension: channel_comparison {
+  sql: CASE
+      WHEN {% condition channel_select %} ${channel} {% endcondition %}
+        THEN ${channel}
+      ELSE 'Other Channels'
+    END ;;
+}
 
 
 
