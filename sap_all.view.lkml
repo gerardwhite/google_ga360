@@ -495,6 +495,30 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
     html: £{{rendered_value}} ;;
   }
 
+
+  measure: revenue_this_year_excluding_current_month {
+    type: sum
+    value_format: "0.0,,\" M\""
+    group_label: "Custom SAP measures"
+    sql: ${sales} ;;
+    filters: {
+      field: date_month
+      value: "this year"
+    }
+    filters: {
+      field: is_the_current_month
+      value: "No"
+    }
+    filters: {
+      field: source
+      value: "SAP Actual"
+    }
+    html: £{{rendered_value}} ;;
+  }
+
+
+
+
   measure: revenue_last_year {
     type: sum
     value_format: "0.0,,\" M\""
@@ -518,6 +542,12 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
     value_format_name: percent_2
   }
 
+  measure: target_change_on_last_year{
+    group_label: "Custom SAP measures"
+    type: number
+    sql: 1.0 * ((${revenue_forcast_LE}-${revenue_last_year})/NULLIF(${revenue_last_year},0))  ;;
+    value_format_name: percent_2
+  }
 
 
 
