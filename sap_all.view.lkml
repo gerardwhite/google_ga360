@@ -311,11 +311,6 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
       value: "SAP Actual"
     }
 
-   html: {% if value <= {{revenue_forcast_LE._value}} %}
-        <div style="color: white; background-color: #dd4157; font-size: 100%; text-align:center;border-radius: 5px">{{ rendered_value }}</div>
-      {% elsif value >= {{revenue_forcast_LE._value}} %}
-        <div style="color: black; background-color: #79b928; font-size: 100%; text-align:center;border-radius: 5px">{{ rendered_value }}</div>
-      {% endif %}  ;;
   }
 
 
@@ -713,7 +708,25 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
 
 ###############  Comparison Formatting  #########################
 
-# Test conditional formating metric on % of monthly forcast achieved:
+# Formatting on todal revenue
+
+  measure: total_revenue_rg {
+    label: "Total Revenue"
+    type: sum
+    value_format_name: gbp_0
+    sql: ${sales} ;;
+    filters: {
+      field: source
+      value: "SAP Actual"
+    }
+
+    html: {% if value <= {{revenue_forcast_LE._value}} %}
+        <div style="color: white; background-color: #dd4157; font-size: 100%; text-align:center;border-radius: 5px">{{ rendered_value }}</div>
+      {% elsif value >= {{revenue_forcast_LE._value}} %}
+        <div style="color: black; background-color: #79b928; font-size: 100%; text-align:center;border-radius: 5px">{{ rendered_value }}</div>
+      {% endif %}  ;;
+  }
+
 
 
 
