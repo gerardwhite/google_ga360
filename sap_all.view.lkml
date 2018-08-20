@@ -856,6 +856,47 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
 
 
 
+# Gerard recommends with + 1
+# Days lapsed in current month
+  dimension: days_elapsed_current_month {
+    type:  number
+    label: "Days lapesed this month"
+    group_label: "YTD|MTD fields"
+    sql:  date_diff(current_date(), ${first_day_of_current_month}, day)  ;;
+  }
+
+# Finds the 1st day of current month
+  dimension: first_day_of_current_month {
+    group_label: "YTD|MTD fields"
+    sql:  DATE_TRUNC(current_date(), MONTH) ;;
+  }
+
+  # Percent through month needs to be re-written for hours (not days) so it'll also work on the 1st of the month
+
+
+  measure: percent_through_month {
+    type: average
+    label: "Percent through this month"
+    group_label: "Custom SAP measures"
+    sql:  ${days_elapsed_current_month}/${days_in_the_month}  ;;
+    value_format_name: percent_1
+  }
+
+
+# Finds the number of days in the current month
+  dimension: days_in_the_month {
+    sql:  DATE_DIFF(DATE_TRUNC(DATE_ADD(${date_date}, INTERVAL 1 MONTH), MONTH),
+      DATE_TRUNC(${date_date}, MONTH), DAY) ;;
+  }
+
+
+  measure: number_of_days_in_month {
+    type: average
+    sql: ${days_in_the_month} ;;
+  }
+
+
+
 
 
 # vs Rest of Population bits
