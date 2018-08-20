@@ -896,6 +896,25 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
   }
 
 
+# Days lapsed in 2018 and % through 2018
+  dimension: days_elapsed_2018 {
+    type: number
+    label: "Days lapsed in 2018"
+    group_label: "YTD|MTD fields"
+    sql:  date_diff(current_date(), date(2018,01,01), day)  ;;
+  }
+
+  measure: percent_through_2018 {
+    type: average
+    label: "Percent through 2018"
+    group_label: "Custom SAP measures"
+    sql:  ${days_elapsed_2018}/365  ;;
+    value_format_name: percent_2
+  }
+
+
+
+
 
 
 
