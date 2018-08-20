@@ -711,7 +711,8 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
 # Formatting on todal revenue
 
   measure: total_revenue_rg {
-    label: "Total Revenue"
+    group_label: "Custom SAP measures"
+    label: "Total Revenue rg"
     type: sum
     value_format_name: gbp_0
     sql: ${sales} ;;
@@ -834,6 +835,25 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
     group_label: "YTD|MTD fields"
     sql: EXTRACT(DAYOFYEAR FROM ${date_date}) < EXTRACT(DAYOFYEAR FROM (current_date() ));;
   }
+
+
+# Finds the current month
+  dimension: is_the_current_month {
+    type: yesno
+    group_label: "YTD|MTD fields"
+    sql: EXTRACT(MONTH FROM ${date_date}) = EXTRACT(MONTH FROM (current_date() ))
+            AND EXTRACT(YEAR FROM ${date_date}) = EXTRACT(YEAR FROM (current_date() ))
+            ;;
+  }
+
+# Finds the current month (for both years)
+  dimension: is_current_month_both_years {
+    type: yesno
+    group_label: "YTD|MTD fields"
+    sql: EXTRACT(MONTH FROM ${date_date}) = EXTRACT(MONTH FROM (current_date() ))
+      ;;
+  }
+
 
 
 
