@@ -555,6 +555,24 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
     html: £{{rendered_value}} ;;
   }
 
+  measure: revneue_target_last_month {
+    label: "LE 6+6 target last month"
+    type: sum
+    value_format: "0.0,,\" M\""
+    sql: ${revenue6plus};;
+    filters: {
+      field: date_date
+      value: "this month"
+    }
+    filters: {
+      field: source
+      value: "6plus6"
+    }
+    html: £{{rendered_value}} ;;
+  }
+
+
+
 
   measure: revenue_forcast_last_week {
     label: "LE 6+6 target last week"
@@ -813,7 +831,6 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
     <div style="color: white; background-color: #79b928; font-size: 100%; text-align:center">{{ rendered_value }}</div>
     {% endif %} ;;
   }
-
 
 
 
