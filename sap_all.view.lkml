@@ -747,6 +747,14 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
   }
 
 
+  measure: actual_growth {
+    group_label: "Custom SAP measures"
+    type: number
+    sql: 1.0 * ((${revenue_this_year}-${revenue_last_year})/NULLIF(${revenue_last_year},0))  ;;
+    value_format_name: percent_1
+  }
+
+
   measure: yoy_growth_target {
     group_label: "Custom SAP measures"
     type: number
