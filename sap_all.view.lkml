@@ -239,6 +239,45 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
   }
 
 
+  # Fixed average annual growth targets by country
+  measure: country_annual_growth_target {
+    type: average
+    sql: case when ${country} = 'China' then 0.956
+              when ${country} = 'United States' then 0.49
+              when ${country} = 'United Kingdom' then 0.445
+              when ${country} = 'Japan' then 0.653
+              when ${country} = 'Germany' then 0.751
+              when ${country} = 'France' then 0.331
+              when ${country} = 'Canada' then 0.537
+              when ${country} = 'Australia' then 0.339
+              when ${country} = 'Italy' then 1.613
+              when ${country} = 'Spain' then 0.910
+              when ${country} = 'Switzerland' then 1.290
+              when ${country} = 'Netherlands' then 0.409
+              when ${country} = 'Austria' then 1.44
+              when ${country} = 'Ireland' then 0.636
+              when ${country} = 'India' then 1
+              when ${country} = 'Belgium' then 0.724
+              when ${country} = 'Denmark' then 0.244
+              when ${country} = 'Korea' then 1
+              when ${country} = 'Singapore' then -0.197
+              when ${country} = 'Sweden' then 1.466
+              when ${country} = 'Norway' then 1.975
+              when ${country} = 'Finland' then 1.129
+              when ${country} = 'Mexico' then 1
+
+ else 1
+          end;;
+    value_format_name: percent_1
+
+  }
+
+
+
+
+
+
+
   # Assigns website to SAP country. We need this field to link to e-Comms reports but it is breaking a join on channel.
 #   dimension: website {
 #     type: string
