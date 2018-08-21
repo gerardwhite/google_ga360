@@ -945,19 +945,33 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
 
 
 
-
+# Hex codes set to match up/down comparison arrows.
 
   measure: actuals_diff_vs_target_this_month_rg {
     group_label: "Custom SAP measures"
-    value_format_name: gbp_0
+    value_format: "\£0.0,,\" M\""
     type: number
-    sql: ((${revenue_this_month})-(${revneue_forcast_this_month}))  ;;
-    html: {% if value >= {{revenue_forcast_LE._value}} %}
-        <div style="color: white; background-color: #dd4157; font-size: 100%; text-align:center;border-radius: 5px">{{ rendered_value }}</div>
-      {% elsif value <= {{revenue_forcast_LE._value}} %}
-        <div style="color: black; background-color: #79b928; font-size: 100%; text-align:center;border-radius: 5px">{{ rendered_value }}</div>
+    sql: ((${revenue_this_month})-(${revneue_forcast_this_month})) ;;
+    html: {% if value <=  0.0%}
+        <div style="color: #9b4e49; font-size: 100%; text-align:center;border-radius: 25px">{{ rendered_value }}</div>
+      {% elsif value >=  0.01%}
+        <div style="color: #5f9524; font-size: 100%; text-align:center;border-radius: 5px">{{ rendered_value }}</div>
       {% endif %}  ;;
   }
+
+
+  measure: actuals_diff_vs_target_this_year_rg {
+    group_label: "Custom SAP measures"
+    value_format: "\£0.0,,\" M\""
+    type: number
+    sql: ((${revenue_this_year})-(${le_revenue_this_year})) ;;
+    html: {% if value <=  0.0%}
+        <div style="color: #9b4e49; font-size: 100%; text-align:center;border-radius: 25px">{{ rendered_value }}</div>
+      {% elsif value >=  0.01%}
+        <div style="color: #5f9524; font-size: 100%; text-align:center;border-radius: 5px">{{ rendered_value }}</div>
+      {% endif %}  ;;
+  }
+
 
 
 
