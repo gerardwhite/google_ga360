@@ -480,7 +480,7 @@ view: totals_base {
   measure: transactionRevenue_total_gbp {
     description: "This is in GBP"
     label: "Transaction Revenue Total (£)"
-    value_format_name: gbp
+    value_format_name: gbp_0
     type: sum
     sql: (${TABLE}.transactionRevenue/1000000) / ${tax_xrates_by_country_2018_v2.xrate} ;;
     drill_fields: [transactions_count, transactionRevenue_total]
