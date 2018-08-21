@@ -968,6 +968,15 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
 
 ############ - Custom date filters - ######################
 
+#Is before week to date
+  dimension: is_before_WTD {
+    type: yesno
+    group_label: "YTD|MTD fields"
+    sql: EXTRACT(DAY FROM ${date_date}) < EXTRACT(DAY FROM current_date() );;
+  }
+
+
+
 #Is before month to date
   dimension: is_before_MTD {
     type: yesno
