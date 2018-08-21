@@ -952,14 +952,11 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
     value_format_name: gbp_0
     type: number
     sql: ((${revenue_this_month})-(${revneue_forcast_this_month}))  ;;
-    html:
-    {% if value <= -0.40 }
-    <div style="color: white; background-color: #dd4157; font-size: 100%; text-align:center">{{ rendered_value }}</div>
-    {% elsif value <= 55 }
-    <div style="color: black; background-color: goldenrod; font-size: 100%; text-align:center">{{ rendered_value }}</div>
-    {% else %}
-    <div style="color: white; background-color: #79b928; font-size: 100%; text-align:center">{{ rendered_value }}</div>
-    {% endif %} ;;
+    html: {% if value >= {{revenue_forcast_LE._value}} %}
+        <div style="color: white; background-color: #dd4157; font-size: 100%; text-align:center;border-radius: 5px">{{ rendered_value }}</div>
+      {% elsif value <= {{revenue_forcast_LE._value}} %}
+        <div style="color: black; background-color: #79b928; font-size: 100%; text-align:center;border-radius: 5px">{{ rendered_value }}</div>
+      {% endif %}  ;;
   }
 
 
