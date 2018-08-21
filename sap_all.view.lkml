@@ -451,6 +451,41 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
   }
 
 
+  measure: revenue_this_week {
+    type: sum
+    value_format: "0.0,,\" M\""
+    group_label: "Custom SAP measures"
+    sql: ${sales} ;;
+    filters: {
+      field: date_week
+      value: "this week"
+    }
+    filters: {
+      field: source
+      value: "SAP Actual"
+    }
+    html: £{{rendered_value}} ;;
+  }
+
+
+  measure: revenue_this_week_last_year {
+    type: sum
+    value_format_name: gbp_0
+    group_label: "Custom SAP measures"
+    sql: ${sales} ;;
+    filters: {
+      field: date_week
+      value: "52 weeks ago"
+    }
+    filters: {
+      field: source
+      value: "SAP Actual"
+    }
+  }
+
+
+
+
   measure: revenue_last_month {
     type: sum
     value_format: "0.0,,\" M\""
@@ -632,6 +667,24 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
     filters: {
       field: date_date
       value: "this month"
+    }
+    filters: {
+      field: source
+      value: "6plus6"
+    }
+    html: £{{rendered_value}} ;;
+  }
+
+
+
+  measure: revenue_forcast_this_week {
+    label: "LE 6+6 target this week"
+    type: sum
+    value_format: "0.0,,\" M\""
+    sql: ${revenue6plus};;
+    filters: {
+      field: date_date
+      value: "this week"
     }
     filters: {
       field: source
