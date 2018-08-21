@@ -160,7 +160,7 @@ view: sap_6plus6 {
 
         link: {
           label: "{{sap_6plus6.country._value}} SAP report"
-          url: "/dashboards/55?Country={{ sap_6plus6.country._value | encode_uri }}"
+          url: "/dashboards/69?Country={{ sap_6plus6.country._value | encode_uri }}"
           icon_url: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/SAPfavicon.ico"
         }
       }
