@@ -532,36 +532,12 @@ view: sap {
         value_format_name: percent_1
       }
 
-# Remove this after we get working calc for hours through the month working. NEEDS CHANGING
-      measure: percent_through_august {
-        type: number
-        label: "Percent through August"
-        group_label: "Custom SAP measures"
-        sql:  0.017  ;;
-        value_format_name: percent_1
-      }
-
 
 # Finds the number of days in the current month
       dimension: days_in_the_month {
         sql:  DATE_DIFF(DATE_TRUNC(DATE_ADD(${date_date}, INTERVAL 1 MONTH), MONTH),
           DATE_TRUNC(${date_date}, MONTH), DAY) ;;
       }
-
-
-
-
-#
-# measure: percent_of_daily_target_achieved {
-#   type: number
-#   sql: ${sap_prim.total_revenue}/${sap_6plus6.daily_target};;
-#   value_format_name: percent_1
-# }
-
-
-
-# Measures pulled in from from SAP 6+6
-# Use this for last week's performance vs target
 
 
   measure: number_of_days_in_month {

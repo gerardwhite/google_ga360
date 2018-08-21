@@ -6,6 +6,8 @@ include: "*.view"
 # sets start of week to Monday
 week_start_day: monday
 
+# Ask Gerard about sql_triggers.
+# Swiching CURRENT_DATE() to NOW() refreshed our union table but we might need a better solution here.
 datagroup: bqml_datagroup {
   max_cache_age: "1 hour"
   sql_trigger: SELECT CURRENT_DATE() ;;

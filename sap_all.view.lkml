@@ -239,6 +239,45 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
   }
 
 
+  # Fixed average annual growth targets by country
+  measure: country_annual_growth_target {
+    type: average
+    sql: case when ${country} = 'China' then 0.956
+              when ${country} = 'United States' then 0.49
+              when ${country} = 'United Kingdom' then 0.445
+              when ${country} = 'Japan' then 0.653
+              when ${country} = 'Germany' then 0.751
+              when ${country} = 'France' then 0.331
+              when ${country} = 'Canada' then 0.537
+              when ${country} = 'Australia' then 0.339
+              when ${country} = 'Italy' then 1.613
+              when ${country} = 'Spain' then 0.910
+              when ${country} = 'Switzerland' then 1.290
+              when ${country} = 'Netherlands' then 0.409
+              when ${country} = 'Austria' then 1.44
+              when ${country} = 'Ireland' then 0.636
+              when ${country} = 'India' then 1
+              when ${country} = 'Belgium' then 0.724
+              when ${country} = 'Denmark' then 0.244
+              when ${country} = 'Korea' then 1
+              when ${country} = 'Singapore' then -0.197
+              when ${country} = 'Sweden' then 1.466
+              when ${country} = 'Norway' then 1.975
+              when ${country} = 'Finland' then 1.129
+              when ${country} = 'Mexico' then 1
+
+ else 1
+          end;;
+    value_format_name: percent_1
+
+  }
+
+
+
+
+
+
+
   # Assigns website to SAP country. We need this field to link to e-Comms reports but it is breaking a join on channel.
 #   dimension: website {
 #     type: string
@@ -311,11 +350,6 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
       value: "SAP Actual"
     }
 
-   html: {% if value <= {{revenue_forcast_LE._value}} %}
-        <div style="color: white; background-color: #dd4157; font-size: 100%; text-align:center;border-radius: 5px">{{ rendered_value }}</div>
-      {% elsif value >= {{revenue_forcast_LE._value}} %}
-        <div style="color: black; background-color: #79b928; font-size: 100%; text-align:center;border-radius: 5px">{{ rendered_value }}</div>
-      {% endif %}  ;;
   }
 
 
@@ -500,6 +534,30 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
     html: £{{rendered_value}} ;;
   }
 
+
+  measure: revenue_this_year_excluding_current_month {
+    type: sum
+    value_format: "0.0,,\" M\""
+    group_label: "Custom SAP measures"
+    sql: ${sales} ;;
+    filters: {
+      field: date_month
+      value: "this year"
+    }
+    filters: {
+      field: is_the_current_month
+      value: "No"
+    }
+    filters: {
+      field: source
+      value: "SAP Actual"
+    }
+    html: £{{rendered_value}} ;;
+  }
+
+
+
+
   measure: revenue_last_year {
     type: sum
     value_format: "0.0,,\" M\""
@@ -523,6 +581,12 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
     value_format_name: percent_2
   }
 
+  measure: target_change_on_last_year{
+    group_label: "Custom SAP measures"
+    type: number
+    sql: 1.0 * ((${revenue_forcast_LE}-${revenue_last_year})/NULLIF(${revenue_last_year},0))  ;;
+    value_format_name: percent_2
+  }
 
 
 
@@ -559,6 +623,24 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
     }
     html: £{{rendered_value}} ;;
   }
+
+  measure: revneue_target_last_month {
+    label: "LE 6+6 target last month"
+    type: sum
+    value_format: "0.0,,\" M\""
+    sql: ${revenue6plus};;
+    filters: {
+      field: date_date
+      value: "this month"
+    }
+    filters: {
+      field: source
+      value: "6plus6"
+    }
+    html: £{{rendered_value}} ;;
+  }
+
+
 
 
   measure: revenue_forcast_last_week {
@@ -704,6 +786,14 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
   }
 
 
+  measure: actual_growth {
+    group_label: "Custom SAP measures"
+    type: number
+    sql: 1.0 * ((${revenue_this_year}-${revenue_last_year})/NULLIF(${revenue_last_year},0))  ;;
+    value_format_name: percent_1
+  }
+
+
   measure: yoy_growth_target {
     group_label: "Custom SAP measures"
     type: number
@@ -713,7 +803,26 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
 
 ###############  Comparison Formatting  #########################
 
-# Test conditional formating metric on % of monthly forcast achieved:
+# Formatting on todal revenue
+
+  measure: total_revenue_rg {
+    group_label: "Custom SAP measures"
+    label: "Total Revenue rg"
+    type: sum
+    value_format_name: gbp_0
+    sql: ${sales} ;;
+    filters: {
+      field: source
+      value: "SAP Actual"
+    }
+
+    html: {% if value <= {{revenue_forcast_LE._value}} %}
+        <div style="color: white; background-color: #dd4157; font-size: 100%; text-align:center;border-radius: 5px">{{ rendered_value }}</div>
+      {% elsif value >= {{revenue_forcast_LE._value}} %}
+        <div style="color: black; background-color: #79b928; font-size: 100%; text-align:center;border-radius: 5px">{{ rendered_value }}</div>
+      {% endif %}  ;;
+  }
+
 
 
 
@@ -804,7 +913,6 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
 
 
 
-
 ############ - Custom date filters - ######################
 
 #Is before month to date
@@ -821,6 +929,85 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
     group_label: "YTD|MTD fields"
     sql: EXTRACT(DAYOFYEAR FROM ${date_date}) < EXTRACT(DAYOFYEAR FROM (current_date() ));;
   }
+
+
+# Finds the current month
+  dimension: is_the_current_month {
+    type: yesno
+    group_label: "YTD|MTD fields"
+    sql: EXTRACT(MONTH FROM ${date_date}) = EXTRACT(MONTH FROM (current_date() ))
+            AND EXTRACT(YEAR FROM ${date_date}) = EXTRACT(YEAR FROM (current_date() ))
+            ;;
+  }
+
+# Finds the current month (for both years)
+  dimension: is_current_month_both_years {
+    type: yesno
+    group_label: "YTD|MTD fields"
+    sql: EXTRACT(MONTH FROM ${date_date}) = EXTRACT(MONTH FROM (current_date() ))
+      ;;
+  }
+
+
+
+# Gerard recommends with + 1
+# Days lapsed in current month
+  dimension: days_elapsed_current_month {
+    type:  number
+    label: "Days lapesed this month"
+    group_label: "YTD|MTD fields"
+    sql:  date_diff(current_date(), ${first_day_of_current_month}, day)  ;;
+  }
+
+# Finds the 1st day of current month
+  dimension: first_day_of_current_month {
+    group_label: "YTD|MTD fields"
+    sql:  DATE_TRUNC(current_date(), MONTH) ;;
+  }
+
+  # Percent through month needs to be re-written for hours (not days) so it'll also work on the 1st of the month
+
+
+  measure: percent_through_month {
+    type: average
+    label: "Percent through this month"
+    group_label: "Custom SAP measures"
+    sql:  ${days_elapsed_current_month}/${days_in_the_month}  ;;
+    value_format_name: percent_1
+  }
+
+
+# Finds the number of days in the current month
+  dimension: days_in_the_month {
+    sql:  DATE_DIFF(DATE_TRUNC(DATE_ADD(${date_date}, INTERVAL 1 MONTH), MONTH),
+      DATE_TRUNC(${date_date}, MONTH), DAY) ;;
+  }
+
+
+  measure: number_of_days_in_month {
+    type: average
+    sql: ${days_in_the_month} ;;
+  }
+
+
+# Days lapsed in 2018 and % through 2018
+  dimension: days_elapsed_2018 {
+    type: number
+    label: "Days lapsed in 2018"
+    group_label: "YTD|MTD fields"
+    sql:  date_diff(current_date(), date(2018,01,01), day)  ;;
+  }
+
+  measure: percent_through_2018 {
+    type: average
+    label: "Percent through 2018"
+    group_label: "Custom SAP measures"
+    sql:  ${days_elapsed_2018}/365  ;;
+    value_format_name: percent_2
+  }
+
+
+
 
 
 
