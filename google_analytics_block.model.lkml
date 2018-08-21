@@ -13,6 +13,17 @@ datagroup: bqml_datagroup {
   sql_trigger: SELECT CURRENT_DATE() ;;
 }
 
+datagroup: sap_datagroup {
+  max_cache_age: "1 hour"
+  # GW: Datagroup to define a change in any of the SAP Data sources
+  sql_trigger: SELECT
+              (select count(*)  FROM `dyson-ga.ao_looker_test.SAP` )
+              +
+              (select count(*) FROM `dyson-ga.ao_looker_test.sap_6plus6` )
+              +
+              (select count(*) FROM `dyson-ga.ao_looker_test.sap_budget` ) ;;
+}
+
 explore: rt_web_sessions {
   label: "Adobe"
   group_label: "E-Commerce"

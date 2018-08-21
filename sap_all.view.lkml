@@ -4,7 +4,7 @@
 
 view: sap_all {
   derived_table: {
-    datagroup_trigger: bqml_datagroup
+    datagroup_trigger: sap_datagroup
     sql: SELECT  date
         ,region
         ,channel
