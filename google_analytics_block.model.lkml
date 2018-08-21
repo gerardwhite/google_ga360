@@ -152,27 +152,6 @@ explore: sap_all {
 }
 
 
-
-# ###### - Early SAP join testing work.  Delete this once the above is validated ######
-# explore: sap_prim {
-#   from: sap
-#   group_label: "SAP"
-#   label: "SAP | Actual vs target"
-#   join: sap_6plus6 {
-#     type: left_outer
-#     relationship: one_to_one
-#     sql_on: ${sap_prim.country}=${sap_6plus6.country}
-#           AND ${sap_prim.channel}=${sap_6plus6.channels}
-#           AND ${sap_prim.date_month}=${sap_6plus6.date_month}
-#           AND ${sap_prim.date_year}=${sap_6plus6.date_year};;
-#   }
-# }
-
-# Fields to test for reducing connections
-# fields: [sap_prim.channel, sap_prim.country, sap_prim.sales, sap_prim.orders, sap_prim.date_month,
-#   sap_6plus6.revenue6plus, sap_6plus6.revenue_forcast_LE]
-
-
 ################## GFK ########################
 explore: gfk {
   persist_for: "1 hour"
