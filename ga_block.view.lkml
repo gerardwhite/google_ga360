@@ -295,6 +295,33 @@ view: ga_sessions_base {
     }
   }
 
+
+
+# Counts the number of basket or shop visits. This should work across different markets but needs testing.
+# "%basket%,%shop%" matches basket or shop pages. Check reference here: https://docs.looker.com/reference/filter-expressions
+  measure: number_of_shop_visitors {
+    type: count
+    drill_fields: [fullVisitorId, visitnumber, session_count, totals.hits, totals.page_views, totals.timeonsite]
+    group_label: "Total Visitor Types"
+    filters: {
+      field: hits_page.pagePath
+      value: "%basket%,%shop%"
+    }
+  }
+
+
+  measure: number_of_cart_visitors {
+    type: count
+    drill_fields: [fullVisitorId, visitnumber, session_count, totals.hits, totals.page_views, totals.timeonsite]
+    group_label: "Total Visitor Types"
+    filters: {
+      field: hits_page.pagePath
+      value: "%checkout%,%cart%"
+    }
+  }
+
+
+
   dimension: channelGrouping {label: "Channel Grouping"}
 
   # subrecords
