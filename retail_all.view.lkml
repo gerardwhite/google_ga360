@@ -173,8 +173,8 @@ FROM  `dyson-ga.ao_looker_test.Footfall` --This  is the footfall table
   measure: value_per_footfall {
     group_label: "Custom Retail measures"
     type: number
-    sql: (${total_revenue})/(${total_footfall})  ;;
-    value_format_name: percent_1
+    sql: ((${total_revenue})/NULLIF(${total_footfall},0))  ;;
+    value_format_name: gbp_0
   }
 
 
