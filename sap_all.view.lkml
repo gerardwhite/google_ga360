@@ -365,7 +365,7 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
 #Calculated ranges for last week
   measure: revenue_last_week {
     type: sum
-    value_format_name: gbp_0
+    value_format: "0.0,,\" M\""
     group_label: "Custom SAP measures"
     sql: ${sales} ;;
     filters: {
@@ -376,6 +376,7 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
       field: source
       value: "SAP Actual"
     }
+    html: £{{rendered_value}} ;;
   }
 
   measure: revenue_previous_week {
@@ -885,9 +886,9 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
     sql: 1.0 * ((${revenue_last_week})/NULLIF(${revenue_forcast_last_week},0))  ;;
     value_format_name: percent_1
     html:
-    {% if value < 0 %}
+    {% if value < 1 %}
     <div style="color: white; background-color: #dd4157; font-size: 100%; text-align:center">{{ rendered_value }}</div>
-    {% elsif value >= 0 %}
+    {% elsif value >= 1 %}
     <div style="color: black; background-color: #5f9524; font-size: 100%; text-align:center">{{ rendered_value }}</div>
     {% endif %} ;;
   }
