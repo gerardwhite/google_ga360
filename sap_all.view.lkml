@@ -878,22 +878,21 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
 
 
 
-
+  # Last week is passed, therefore not dynamic, so conditional formatting against target
   measure: percent_of_target_last_week_rg {
     group_label: "Custom SAP measures"
     type: number
     sql: 1.0 * ((${revenue_last_week})/NULLIF(${revenue_forcast_last_week},0))  ;;
     value_format_name: percent_1
     html:
-    {% if value <= 0.7 %}
+    {% if value < 0 %}
     <div style="color: white; background-color: #dd4157; font-size: 100%; text-align:center">{{ rendered_value }}</div>
-    {% elsif value <= 0.9 %}
-    <div style="color: black; background-color: goldenrod; font-size: 100%; text-align:center">{{ rendered_value }}</div>
-    {% else %}
-    <div style="color: white; background-color: #79b928; font-size: 100%; text-align:center">{{ rendered_value }}</div>
+    {% elsif value >= 0 %}
+    <div style="color: black; background-color: #5f9524; font-size: 100%; text-align:center">{{ rendered_value }}</div>
     {% endif %} ;;
   }
 
+  # MTD is dyanmic so conditional formatting set against % through month / percent of month lapsed.
   measure: percent_of_target_this_month_rg {
     group_label: "Custom SAP measures"
     type: number
@@ -908,6 +907,7 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
 
   }
 
+  # YTD is dyanmic so conditional formatting set against % through year / percent of year lapsed.
   measure: percent_of_target_this_year_rg {
     group_label: "Custom SAP measures"
     type: number
@@ -920,8 +920,6 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
     <div style="color: black; background-color: #5f9524; font-size: 100%; text-align:center">{{ rendered_value }}</div>
     {% endif %} ;;
   }
-
-
 
   measure: last_week_vs_last_week_last_year_rg {
     group_label: "Custom SAP measures"
