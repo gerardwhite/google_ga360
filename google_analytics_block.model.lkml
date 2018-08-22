@@ -6,8 +6,6 @@ include: "*.view"
 # sets start of week to Monday
 week_start_day: monday
 
-# Ask Gerard about sql_triggers.
-# Swiching CURRENT_DATE() to NOW() refreshed our union table but we might need a better solution here.
 datagroup: bqml_datagroup {
   max_cache_age: "1 hour"
   sql_trigger: SELECT CURRENT_DATE() ;;
@@ -23,6 +21,16 @@ datagroup: sap_datagroup {
               +
               (select count(*) FROM `dyson-ga.ao_looker_test.sap_budget` ) ;;
 }
+
+# AO: retail_datagroup logic copied from GW example above.
+datagroup: retail_datagroup {
+  max_cache_age: "1 hour"
+  sql_trigger: SELECT
+              (select count(*)  FROM `dyson-ga.ao_looker_test.Retail` )
+              +
+              (select count(*) FROM `dyson-ga.ao_looker_test.Footfall` ) ;;
+  }
+
 
 explore: rt_web_sessions {
   label: "Adobe"
@@ -177,7 +185,7 @@ explore: gfk {
 explore: retail  {
   persist_for: "1 hour"
   group_label: "Retail"
-  label: "Retail sales"
+  label: "Retail | Sales"
   always_filter: {
     filters: {
       field: retail.date_date
@@ -193,7 +201,7 @@ explore: retail  {
 explore: footfall  {
   persist_for: "1 hour"
   group_label: "Retail"
-  label: "Retail footfall"
+  label: "Retail | Footfall"
   always_filter: {
     filters: {
       field: footfall.date_date
@@ -206,7 +214,14 @@ explore: footfall  {
   }
 }
 
+# Unions all retail datasets using GW's data logic from SAP example:
 
+explore: retail_all {
+  group_label: "Retail"
+  label: "Retail | All"
+  hidden: no
+
+}
 
 
 
