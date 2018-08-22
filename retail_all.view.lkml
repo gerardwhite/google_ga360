@@ -64,10 +64,15 @@ FROM  `dyson-ga.ao_looker_test.Footfall` --This  is the footfall table
     sql: ${TABLE}.Category ;;
   }
 
+  # Retail data sometimes uses short codes. Fixed to be consistent with rest of Looker DBs.
   dimension: country {
     type: string
     map_layer_name: countries
-    sql: ${TABLE}.Country ;;
+    sql: CASE
+    WHEN ${TABLE}.Country = "US" THEN "United States"
+    WHEN ${TABLE}.Country = "UK" THEN "United Kingdom"
+    ELSE ${TABLE}.Country
+    END ;;
   }
 
   dimension: currency_code {
@@ -147,7 +152,7 @@ FROM  `dyson-ga.ao_looker_test.Footfall` --This  is the footfall table
 
   # AO: We don't have footfall recording for all stores
   measure: total_revenue {
-    label: "Retail Sales"
+    label: "Total Revenue"
     type: sum
     value_format_name: gbp_0
     sql: ${net_rev} ;;
