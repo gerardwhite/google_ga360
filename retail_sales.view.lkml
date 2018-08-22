@@ -104,7 +104,6 @@ view: retail {
     sql: ${gross_gbp} ;;
   }
 
-
   measure: count {
     type: count
     drill_fields: [device_name]
