@@ -879,19 +879,26 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
 
 
 
-  # Last week is passed, therefore not dynamic, so conditional formatting against target
+  # Last week is passed, therefore not dynamic, so conditional formatting against target.
+  # As weekly performance is volatile, conidional formatting only set against the text property.
   measure: percent_of_target_last_week_rg {
     group_label: "Custom SAP measures"
     type: number
     sql: 1.0 * ((${revenue_last_week})/NULLIF(${revenue_forcast_last_week},0))  ;;
     value_format_name: percent_1
     html:
-    {% if value < 1 %}
-    <div style="color: white; background-color: #dd4157; font-size: 100%; text-align:center">{{ rendered_value }}</div>
-    {% elsif value >= 1 %}
-    <div style="color: black; background-color: #5f9524; font-size: 100%; text-align:center">{{ rendered_value }}</div>
+    {% if value < 0.4 %}
+    <div style="color: black; background-color: #dd4157;font-weight: bold; font-size: 100%; text-align:center">{{ rendered_value }}</div>
+    {% elsif value <= 1 %}
+    <div style="color: #dd4157; font-weight: bold; font-size: 100%; text-align:center">{{ rendered_value }}</div>
+    {% else %}
+    <div style="color: #5f9524; font-weight: bold; font-size: 100%; text-align:center">{{ rendered_value }}</div>
+
     {% endif %} ;;
   }
+
+
+
 
   # MTD is dyanmic so conditional formatting set against % through month / percent of month lapsed.
   measure: percent_of_target_this_month_rg {
