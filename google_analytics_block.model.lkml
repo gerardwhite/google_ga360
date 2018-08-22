@@ -170,6 +170,47 @@ explore: gfk {
 }
 
 
+################# Retail and footfall #############################
+################# Pre- filtered for Oxford Street 14 days ago #####
+# will join after testing in explores #############################
+
+explore: retail  {
+  persist_for: "1 hour"
+  group_label: "Retail"
+  label: "Retail sales"
+  always_filter: {
+    filters: {
+      field: retail.date_date
+      value: "14 days ago for 14 days"
+    }
+    filters: {
+      field: retail.store
+      value: "Oxford Street"
+    }
+  }
+}
+
+explore: footfall  {
+  persist_for: "1 hour"
+  group_label: "Retail"
+  label: "Retail footfall"
+  always_filter: {
+    filters: {
+      field: footfall.date_date
+      value: "14 days ago for 14 days"
+    }
+    filters: {
+      field: footfall.store
+      value: "Oxford Street"
+    }
+  }
+}
+
+
+
+
+
+
 
 # Joins pages on lookup to URL
 explore: view_pages_last30days_allmarkets {
