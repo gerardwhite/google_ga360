@@ -818,6 +818,14 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
     value_format_name: percent_1
   }
 
+
+# TEST on liquid fill viz
+measure: percent_target_liquid {
+  type: number
+  sql: ${percent_of_target_this_year_rg}*100 ;;
+}
+# TEST on liquid fill viz
+
   measure: percent_of_target_this_month {
     group_label: "Custom SAP measures"
     type: number

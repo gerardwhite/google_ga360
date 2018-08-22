@@ -85,6 +85,11 @@ FROM  `dyson-ga.ao_looker_test.Footfall` --This  is the footfall table
     sql: ${TABLE}.DeviceName ;;
   }
 
+  dimension: devices {
+    type: string
+    sql: ${TABLE}.DeviceName ;;
+  }
+
   dimension: gross {
     type: number
     sql: ${TABLE}.Gross ;;
