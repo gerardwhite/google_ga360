@@ -199,12 +199,12 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
           end;;
     html: <img src="https://restcountries.eu/data/{{ value }}.svg" style="width:50px;height:30px;"/> ;;
 
-#     # Adds drill down links to country maps.  Label needs to change for link to work.
-#     link: {
-#       label: "{{sap.country._value}} SAP report"
-#       url: "/dashboards/55?Country={{ sap.country._value | encode_uri }}"
-#       icon_url: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/SAPfavicon.ico"
-#     }
+    # Adds drill down links to country maps.  Label needs to change for link to work.
+    link: {
+      label: "{{sap_all.country._value}} SAP report"
+      url: "/dashboards/69?Country={{ sap_all.country._value | encode_uri }}"
+      icon_url: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/SAPfavicon.ico"
+    }
   }
 
 

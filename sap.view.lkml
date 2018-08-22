@@ -240,7 +240,7 @@ view: sap {
           end;;
         html: <img src="https://restcountries.eu/data/{{ value }}.svg" style="width:50px;height:30px;"/> ;;
 
-        # Adds drill down links to country maps
+        # Adds drill down links to country
         link: {
           label: "{{sap.country._value}} SAP report"
           url: "/dashboards/55?Country={{ sap.country._value | encode_uri }}"
