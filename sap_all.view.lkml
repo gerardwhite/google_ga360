@@ -900,16 +900,13 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
     sql: 1.0 * ((${revenue_this_month})/NULLIF(${revneue_forcast_this_month},0))  ;;
     value_format_name: percent_1
     html:
-    {% if value <= 0.1 %}
+    {% if value <= {{percent_through_month._value}} %}
     <div style="color: white; background-color: #dd4157; font-size: 100%; text-align:center">{{ rendered_value }}</div>
-    {% elsif value <= 0.2 %}
-    <div style="color: black; background-color: goldenrod; font-size: 100%; text-align:center">{{ rendered_value }}</div>
-    {% else %}
-    <div style="color: white; background-color: #79b928; font-size: 100%; text-align:center">{{ rendered_value }}</div>
+    {% elsif value > {{percent_through_month._value}} %}
+    <div style="color: black; background-color: #5f9524; font-size: 100%; text-align:center">{{ rendered_value }}</div>
     {% endif %} ;;
 
   }
-
 
   measure: percent_of_target_this_year_rg {
     group_label: "Custom SAP measures"
@@ -917,12 +914,10 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
     sql: 1.0 * ((${revenue_this_year})/NULLIF(${revenue_forcast_LE},0))  ;;
     value_format_name: percent_1
     html:
-    {% if value <= 0.40 %}
+    {% if value <= {{percent_through_2018._value}} %}
     <div style="color: white; background-color: #dd4157; font-size: 100%; text-align:center">{{ rendered_value }}</div>
-    {% elsif value <= 0.55 %}
-    <div style="color: black; background-color: goldenrod; font-size: 100%; text-align:center">{{ rendered_value }}</div>
-    {% else %}
-    <div style="color: white; background-color: #79b928; font-size: 100%; text-align:center">{{ rendered_value }}</div>
+    {% elsif value > {{percent_through_2018._value}} %}
+    <div style="color: black; background-color: #5f9524; font-size: 100%; text-align:center">{{ rendered_value }}</div>
     {% endif %} ;;
   }
 
