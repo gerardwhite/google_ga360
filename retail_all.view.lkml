@@ -158,15 +158,26 @@ FROM  `dyson-ga.ao_looker_test.Footfall` --This  is the footfall table
     sql: ${footfall} ;;
   }
 
-measure: transactions {
-  type: sum
-  sql: ${quantity} ;;
+  measure: transactions {
+    type: sum
+    sql: ${quantity} ;;
   }
 
-# measure: footfall_conversion_rate {
-#   type: average
-#   sql: ${transactions}/${footfall} ;;
-# }
+  measure: footfall_conversion_rate {
+    group_label: "Custom Retail measures"
+    type: number
+    sql: 1.0 * ((${transactions})/NULLIF(${total_footfall},0))  ;;
+    value_format_name: percent_1
+  }
+
+  measure: value_per_footfall {
+    group_label: "Custom Retail measures"
+    type: number
+    sql: (${total_revenue})/(${total_footfall})  ;;
+    value_format_name: percent_1
+  }
+
+
 
 
   measure: count {
