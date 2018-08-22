@@ -42,6 +42,12 @@ view: footfall {
     sql: ${TABLE}.Store_Type ;;
   }
 
+measure: total_footfall  {
+  type: sum
+  sql: ${footfall} ;;
+}
+
+
   measure: count {
     type: count
     drill_fields: []

@@ -97,6 +97,14 @@ view: retail {
     sql: ${TABLE}.Year ;;
   }
 
+  measure: total_revenue {
+    label: "Retail Sales"
+    type: sum
+    value_format_name: gbp_0
+    sql: ${gross_gbp} ;;
+  }
+
+
   measure: count {
     type: count
     drill_fields: [device_name]
