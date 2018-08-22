@@ -219,16 +219,6 @@ explore: footfall  {
 explore: retail_all {
   group_label: "Retail"
   label: "Retail | All"
-  always_filter: {
-    filters: {
-      field: retail_all.date_date
-      value: "14 days ago for 14 days"
-    }
-    filters: {
-      field: retail_all.store
-      value: "Oxford Street"
-    }
-  }
 
 }
 
