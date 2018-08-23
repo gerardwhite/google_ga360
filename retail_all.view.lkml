@@ -150,6 +150,7 @@ FROM  `dyson-ga.ao_looker_test.Footfall` --This  is the footfall table
     sql: ${TABLE}.Year ;;
   }
 
+# Decs on footfall
   dimension: footfall {
     type: number
     sql: ${TABLE}.Footfall ;;
