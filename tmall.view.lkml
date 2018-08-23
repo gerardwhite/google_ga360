@@ -22,6 +22,8 @@ view: tmall {
     timeframes: [
       raw,
       date,
+      day_of_month,
+      day_of_week,
       week,
       month,
       quarter,
