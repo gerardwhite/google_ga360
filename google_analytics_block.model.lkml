@@ -280,7 +280,7 @@ explore: products_historical_allmarkets {
 }
 
 
-################## OTHER/BESPOKE ########################
+################## OTHER/BESPOKE/CUSTOM stuff ########################
 
 # Age and gender metrics not available in BigQuery. This is a workaround using a sheets extract schedule.
 explore: age_gender {
