@@ -6,7 +6,7 @@ view: tmall {
     sql: ${TABLE}.Category_1 ;;
   }
 
-  dimension: category_2 {
+  dimension: sub_category {
     type: string
     sql: ${TABLE}.Category_2 ;;
   }
@@ -67,10 +67,72 @@ view: tmall {
     sql: ${TABLE}.Year ;;
   }
 
-  measure: quantity {
+  measure: total_orders {
     type: sum
     sql: ${qty} ;;
   }
+
+  ##### Custom measures examples ####
+  measure: orders_last_week {
+    group_label: "Calculated Tmall measures"
+    type: sum
+    sql: ${qty};;
+    filters: {
+    field: date_date
+    value: "last week"
+  }
+  }
+
+  measure: orders_previous_week {
+    group_label: "Calculated Tmall measures"
+    type: sum
+    sql: ${qty};;
+    filters: {
+      field: date_date
+      value: "2 weeks ago"
+    }
+  }
+
+  measure: orders_last_month {
+    group_label: "Calculated Tmall measures"
+    type: sum
+    sql: ${qty};;
+    filters: {
+      field: date_date
+      value: "last month"
+    }
+  }
+
+  measure: orders_previous_month {
+    group_label: "Calculated Tmall measures"
+    type: sum
+    sql: ${qty};;
+    filters: {
+      field: date_date
+      value: "2 months ago"
+    }
+  }
+
+  ##### Comparison measures ####
+
+  measure: last_month_on_previous_month_diff {
+    group_label: "Calculated Tmall measures"
+    type: number
+    sql: ${orders_last_month}-${orders_previous_month} ;;
+  }
+
+
+  measure: last_month_on_previous_month_percent {
+    group_label: "Calculated Tmall measures"
+    type: number
+    sql: 1.0 * ((${orders_last_month}-${orders_previous_month})/NULLIF(${orders_previous_month},0))  ;;
+    value_format_name: percent_1
+  }
+
+
+
+
+
 
   measure: count {
     type: count
