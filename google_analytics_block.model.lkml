@@ -280,7 +280,14 @@ explore: products_historical_allmarkets {
 }
 
 
-################## OTHER ########################
+################## OTHER/BESPOKE ########################
+
+# Age and gender metrics not available in BigQuery. This is a workaround using a sheets extract schedule.
+explore: age_gender {
+  group_label: "E-Commerce"
+  label: "Age & Gender"
+}
+
 
 # Adhoc analysis for Japanese trade-in campaign
 explore: adhoc_jp_trade_in_campaign {
