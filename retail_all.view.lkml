@@ -181,6 +181,7 @@ FROM  `dyson-ga.ao_looker_test.Footfall` --This  is the footfall table
     value_format_name: percent_1
   }
 
+# Euqal to revenue over the footfall by store. Note not all stores have footfall counters.
   measure: value_per_footfall {
     group_label: "Custom Retail measures"
     type: number
