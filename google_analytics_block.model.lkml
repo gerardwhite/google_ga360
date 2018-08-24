@@ -279,6 +279,10 @@ explore: products_historical_allmarkets {
 ################## OTHER/BESPOKE/CUSTOM stuff ########################
 
 # Age and gender metrics not available in BigQuery. This is a workaround using a sheets extract schedule.
+# Note to get sheets data into BigQuery you need to enable the Google Drive API AND add the looker access key to the Google Sheet
+# The Google Sheet also needs to be set up to have column headers in the top row and with no blank rows.
+# Service account email required is as follows: looker@dyson-ga.iam.gserviceaccount.com
+
 explore: age_gender {
   group_label: "E-Commerce"
   label: "Age & Gender"
