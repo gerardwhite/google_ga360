@@ -272,10 +272,6 @@ explore: products_historical_allmarkets {
       field: products_historical_allmarkets.partition_date
       value: "14 days ago for 14 days"
     }
-    filters: {
-      field: products_historical_allmarkets.country
-      value: "France"
-    }
   }
 }
 
