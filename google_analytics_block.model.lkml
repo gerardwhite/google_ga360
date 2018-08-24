@@ -284,10 +284,6 @@ explore: age_gender {
   label: "Age & Gender"
 }
 
-explore: age_gender_country {
-  group_label: "E-Commerce"
-  label: "Age & Gender & Country"
-}
 
 
 # Adhoc analysis for Japanese trade-in campaign

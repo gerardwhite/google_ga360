@@ -1,7 +1,7 @@
 
 # Replaced with static table whilst we wait for Google Drive access
 view: age_gender {
-  sql_table_name: ao_looker_test.Age_Gender_Static ;;
+  sql_table_name: ao_looker_test.Age_Gender_Country ;;
 
   dimension: age {
     type: string
