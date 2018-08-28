@@ -18,6 +18,9 @@ view: tax_xrates_by_country_2018_v2 {
     }
   }
 
+
+# Change to Sean's bevelled example when I can.
+
   dimension: country_icon {
     type: string
     sql: case when ${country} = 'United Kingdom' then 'gbr'
@@ -54,6 +57,12 @@ view: tax_xrates_by_country_2018_v2 {
     type: string
     sql: concat(${country_icon},' ', ${country}) ;;
   }
+
+
+
+
+
+
 
   dimension: countrycode {
     primary_key: yes

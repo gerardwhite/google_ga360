@@ -349,6 +349,23 @@ view: geoNetwork_base {
     map_layer_name: countries
     drill_fields: [region,metro,city,approximate_networkLocation,networkLocation]
   }
+
+  # Adds conditional formatting to non-US countries.
+  dimension: country_rg {
+    sql: ${country} ;;
+    html:
+    {% if value == 'United States' %}
+      <p style="color: black; font-size:100%; text-align:center">{{ rendered_value }}</p>
+    {% elsif value == 'Canada' %}
+      <p style="color: black; background-color: lightgreen; font-size:100%; text-align:center">{{ rendered_value }}</p>
+    {% else %}
+      <p style="color: black; background-color: orange; font-size:100%; text-align:center">{{ rendered_value }}</p>
+    {% endif %}
+;;
+  }
+
+
+
   dimension: region {
     drill_fields: [metro,city,approximate_networkLocation,networkLocation]
   }
@@ -358,6 +375,25 @@ view: geoNetwork_base {
   dimension: city {drill_fields: [metro,approximate_networkLocation,networkLocation]}
   dimension: cityid { label: "City ID"}
   dimension: networkDomain {label: "Network Domain"}
+
+
+  # Adds conditional formatting to cities with Dyson stores:
+  dimension: city_rg {
+    sql: ${city} ;;
+    html:
+    {% if value == 'San Francisco' %}
+      <p style="color: white; background-color: black; font-size:100%; text-align:center">{{ rendered_value }}</p>
+    {% elsif value == 'New York' %}
+      <p style="color: white; background-color: black; font-size:100%; text-align:center">{{ rendered_value }}</p>
+    {% else %}
+      <p style="color: black; font-size:100%; text-align:center">{{ rendered_value }}</p>
+    {% endif %}
+;;
+  }
+
+
+
+
   dimension: latitude {
     type: number
     hidden: yes
@@ -381,6 +417,8 @@ view: geoNetwork_base {
     drill_fields: [networkLocation]
   }
 }
+
+
 
 
 view: totals_base {
@@ -486,16 +524,6 @@ view: totals_base {
   }
 
 
-  dimension: country_rg {
-    sql: ${TABLE}.country ;;
-    html:
-    {% if value == 'United States' %}
-      <p style="color: black; background-color: lightblue; font-size:100%; text-align:center">{{ rendered_value }}</p>
-    {% else %}
-      <p style="color: black; background-color: orange; font-size:100%; text-align:center">{{ rendered_value }}</p>
-    {% endif %}
-;;
-  }
 
 
 
