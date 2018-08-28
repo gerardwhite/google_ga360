@@ -39,8 +39,19 @@ view: age_gender {
     }
   }
 
-  # Multiplied by -1 to flip against axis
+
   measure: female_visits  {
+    type: sum
+    sql: ${sessions} ;;
+    filters: {
+      field: gender
+      value: "female"
+    }
+  }
+
+
+  # Multiplied by -1 to flip against axis
+  measure: female_visits_flip  {
     type: sum
     sql: ${sessions}*-1 ;;
     filters: {
