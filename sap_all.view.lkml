@@ -118,6 +118,8 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
                 WHEN ${region} = "Dyson GCP Hangzhou" THEN "China"
                 WHEN ${region} = "Dyson DE" THEN "Germany"
                 WHEN ${region} = "Dyson SG" THEN "Singapore"
+                WHEN ${region} = "Dyson PL" THEN "Poland"
+                WHEN ${region} = "ZZ - Tradies" THEN "United States"
 
                 --6plus6
                 WHEN ${region} = "10 - Great Britain" THEN "United Kingdom"
@@ -180,6 +182,7 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
               when ${country} = 'Austria' then 'aut'
               when ${country} = 'Australia' then 'aus'
               when ${country} = 'Belguim' then 'bel'
+              when ${country} = 'Belgium' then 'bel'
               when ${country} = 'Italy' then 'ita'
               when ${country} = 'Korea' then 'kor'
               when ${country} = 'China' then 'chn'
@@ -194,6 +197,7 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
               when ${country} = 'Ireland' then 'irl'
               when ${country} = 'Finland' then 'fin'
               when ${country} = 'Singapore' then 'sgp'
+              when ${country} = 'New Zealand' then 'nzl'
 
  else null
           end;;
