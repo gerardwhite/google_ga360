@@ -474,12 +474,29 @@ view: totals_base {
     {% endif %} ;;
   }
 
+
+
+
+
   measure: bounce_rate {
     type:  number
     sql: 1.0 * ${bounces_total} / NULLIF(${ga_sessions.session_count},0) ;;
     value_format_name: percent_2
 
   }
+
+
+  dimension: country_rg {
+    sql: ${TABLE}.country ;;
+    html:
+    {% if value == 'United States' %}
+      <p style="color: black; background-color: lightblue; font-size:100%; text-align:center">{{ rendered_value }}</p>
+    {% else %}
+      <p style="color: black; background-color: orange; font-size:100%; text-align:center">{{ rendered_value }}</p>
+    {% endif %}
+;;
+  }
+
 
 
 #   measure: bounce_rate_plus {
