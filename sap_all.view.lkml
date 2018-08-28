@@ -76,7 +76,7 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
             END ;;
     link: {
       label: "{{sap_all.channel._value}} report"
-      url: "https://dysonuk.eu.looker.com/dashboards/26?Region=www.dyson.fr"
+      url: "https://dysonuk.eu.looker.com/dashboards/26?Region=www.dyson.com"
       icon_url: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/GA2.png"
     }
 
@@ -895,8 +895,8 @@ measure: percent_target_liquid {
     sql: 1.0 * ((${revenue_last_week})/NULLIF(${revenue_forcast_last_week},0))  ;;
     value_format_name: percent_1
     html:
-    {% if value < 0.4 %}
-    <div style="color: black; background-color: #dd4157;font-weight: bold; font-size: 100%; text-align:center">{{ rendered_value }}</div>
+    {% if value < 0.5 %}
+    <div style="color: white; background-color: #dd4157; font-size: 100%; text-align:center">{{ rendered_value }}</div>
     {% elsif value <= 1 %}
     <div style="color: #dd4157; font-weight: bold; font-size: 100%; text-align:center">{{ rendered_value }}</div>
     {% else %}

@@ -13,6 +13,7 @@ view: products_historical_allmarkets {
     sql: ${TABLE}.channel ;;
   }
 
+
   dimension: country {
     type: string
     map_layer_name: countries
@@ -118,6 +119,7 @@ view: products_historical_allmarkets {
     type: sum
     sql: ${product_quantity} ;;
   }
+
 
   measure: total_product_revenue_local {
     type: sum
