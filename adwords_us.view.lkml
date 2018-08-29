@@ -21,6 +21,17 @@ view: adwords_us {
     sql: ${TABLE}.Impressions ;;
   }
 
+  dimension: Adgroup {
+    type: string
+    sql: ${TABLE}.Adgroup ;;
+  }
+
+  dimension: CampaignID {
+    type: string
+    sql: ${TABLE}.CampaignID ;;
+  }
+
+
   dimension: keyword {
     type: string
     sql: ${TABLE}.Keyword ;;
@@ -45,7 +56,7 @@ measure: total_clicks {
 
   measure: cost_per_click {
     type: average
-    value_format_name: usd_0
+    value_format_name: usd
     sql: ${cpc} ;;
   }
 
