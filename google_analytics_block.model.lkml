@@ -309,6 +309,13 @@ explore: adhoc_jp_trade_in_campaign {
   }
 }
 
+################## Adwords cost and clicks ###################
+
+explore: adwords_us {
+  group_label: "E-Commerce"
+  label: "Adwords | US"
+}
+
 
 ################## DATA SCIENCE/BQML ########################
 
