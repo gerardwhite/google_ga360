@@ -38,6 +38,15 @@ explore: rt_web_sessions {
 
 }
 
+
+explore: adobe_product_performance {
+  label: "Adobe | Product Performance"
+  group_label: "E-Commerce"
+
+}
+
+
+
 explore: ga_sessions {
   label: "Google Analytics"
   group_label: "E-Commerce"
