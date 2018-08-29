@@ -194,11 +194,26 @@ measure: total_pageviews {
     sql: ${dyson_price} ;;
   }
 
+# Copy of Dyson price but with $ sign added
+  measure: dyson_price_average_usd {
+    type: average
+    value_format_name: usd_0
+    sql: ${dyson_price} ;;
+  }
+
+
+
   measure: dyson_price_min {
     type: min
     sql: ${dyson_price} ;;
   }
 
+
+  measure: dyson_price_min_usd {
+    type: min
+    value_format_name: usd_0
+    sql: ${dyson_price} ;;
+  }
 
   measure: conversion_rate {
     value_format_name: percent_2
