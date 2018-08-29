@@ -228,6 +228,12 @@ measure: total_pageviews {
     sql: ${total_quantity}/${total_sessions}  ;;
   }
 
+# Calculates cost of being out of stock.Might need to check on multiplier used.
+measure: out_of_stock_loss_factor {
+  type: number
+  value_format_name: usd_0
+  sql: ${dyson_price_average_usd}*${total_pageviews}*0.002 ;;
+}
 
 
   measure: count {
