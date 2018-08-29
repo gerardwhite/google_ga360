@@ -79,6 +79,11 @@ view: adobe_product_performance {
   dimension: url {
     type: string
     sql: ${TABLE}.url ;;
+    link: {
+      label: "View Dyson page"
+      url: "{{ value }}"
+      icon_url: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/dyson-fav.ico"
+    }
   }
 
 
