@@ -899,12 +899,10 @@ measure: percent_target_liquid {
     sql: 1.0 * ((${revenue_last_week})/NULLIF(${revenue_forcast_last_week},0))  ;;
     value_format_name: percent_1
     html:
-    {% if value < 0.5 %}
+    {% if value < 1 %}
     <div style="color: white; background-color: #dd4157; font-size: 100%; text-align:center">{{ rendered_value }}</div>
-    {% elsif value <= 1 %}
-    <div style="color: #dd4157; font-weight: bold; font-size: 100%; text-align:center">{{ rendered_value }}</div>
-    {% else %}
-    <div style="color: #5f9524; font-weight: bold; font-size: 100%; text-align:center">{{ rendered_value }}</div>
+    {% elsif value >= 1 %}
+    <div style="color: black; background-color: #5f9524; font-size: 100%; text-align:center">{{ rendered_value }}</div>
 
     {% endif %} ;;
   }
