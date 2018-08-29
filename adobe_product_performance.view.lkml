@@ -200,6 +200,14 @@ measure: total_pageviews {
   }
 
 
+  measure: conversion_rate {
+    value_format_name: percent_2
+    type: number
+    description: "Transactions / Sessions"
+    sql: ${total_quantity}/${total_sessions}  ;;
+  }
+
+
 
   measure: count {
     type: count
