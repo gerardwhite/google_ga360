@@ -46,7 +46,11 @@ view: adwords_us {
     type: string
     sql: case when ${keyword} = '(content targeting)' then 'Display'
     when ${keyword} = '(User vertical targeting)' then 'Display'
-    when ${keyword} LIKE '%Home &' then 'Display'
+    when ${keyword} LIKE '%Home &%' then 'Display'
+    when ${keyword} LIKE '%Pets &%' then 'Display'
+    when ${keyword} LIKE '%custom%' then 'Display'
+    when ${keyword} LIKE '%Hobbies &%' then 'Display'
+    when ${keyword} LIKE '%Beauty &%' then 'Display'
     else "Search"
     END ;;
     }
