@@ -189,6 +189,12 @@ measure: total_pageviews {
     sql: ${productrevenue} ;;
   }
 
+  measure: product_revenue_usd {
+    type: sum
+    value_format_name: usd_0
+    sql: ${productrevenue} ;;
+  }
+
   measure: dyson_price_average {
     type: average
     sql: ${dyson_price} ;;
