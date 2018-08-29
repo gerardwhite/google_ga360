@@ -1,4 +1,5 @@
 view: adwords_us {
+  label: "Adwords"
   sql_table_name: ao_looker_test.AdwordsUS ;;
 
   dimension: clicks {
