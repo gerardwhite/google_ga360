@@ -110,12 +110,91 @@ view: adobe_product_performance {
   }
 
 
+  dimension: sessions_oos {
+    hidden: yes
+    type: number
+    sql: ${TABLE}.sessions_oos ;;
+  }
+
+
+  dimension: sessions_atb {
+    hidden: yes
+    type: number
+    sql: ${TABLE}.sessions_atb ;;
+  }
+
+  dimension: quantity {
+    hidden: yes
+    type: number
+    sql: ${TABLE}.quantity ;;
+  }
+
+  dimension: productrevenue {
+    hidden: yes
+    type: number
+    sql: ${TABLE}.productrevenue ;;
+  }
+
+  dimension: dyson_price {
+    hidden: yes
+    type: number
+    sql: ${TABLE}.dyson_price ;;
+  }
+
+
 # Need to build out metrics here.
 
 measure: total_pageviews {
   type: sum
   sql: ${pageviews} ;;
 }
+
+  measure: total_sessions {
+    type: sum
+    sql: ${sessions} ;;
+  }
+
+  measure: total_landings {
+    type: sum
+    sql: ${landings} ;;
+  }
+
+  measure: total_bounces {
+    type: sum
+    sql: ${bounces} ;;
+  }
+
+  measure: out_of_stock_events {
+    type: sum
+    sql: ${sessions_oos} ;;
+  }
+
+  measure: add_to_basket_events {
+    type: sum
+    sql: ${sessions_atb} ;;
+  }
+
+  measure: total_quantity {
+    type: sum
+    sql: ${quantity} ;;
+  }
+
+  measure: product_revenue_local {
+    type: sum
+    sql: ${productrevenue} ;;
+  }
+
+  measure: dyson_price_average {
+    type: average
+    sql: ${dyson_price} ;;
+  }
+
+  measure: dyson_price_min {
+    type: min
+    sql: ${dyson_price} ;;
+  }
+
+
 
   measure: count {
     type: count
