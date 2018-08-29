@@ -945,12 +945,10 @@ measure: percent_target_liquid {
     sql: 1.0 * ((${revenue_last_week})/NULLIF(${revenue_last_week_last_year},0))  ;;
     value_format_name: percent_1
     html:
-    {% if value <= 0.7 %}
+    {% if value < 1 %}
     <div style="color: white; background-color: #dd4157; font-size: 100%; text-align:center">{{ rendered_value }}</div>
-    {% elsif value <= 0.9 %}
-    <div style="color: black; background-color: goldenrod; font-size: 100%; text-align:center">{{ rendered_value }}</div>
     {% else %}
-    <div style="color: white; background-color: #79b928; font-size: 100%; text-align:center">{{ rendered_value }}</div>
+    <div style="color: black; background-color: #5f9524; font-size: 100%; text-align:center">{{ rendered_value }}</div>
     {% endif %} ;;
   }
 
