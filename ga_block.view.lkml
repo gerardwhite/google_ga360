@@ -684,6 +684,9 @@ measure: conv_rate_last_week {
     }
   }
 
+
+
+
   measure: revenue_diff_lw_vs_lwly {
     type: number
     sql: 1.0 * ${transactionRevenue_total_gbp_last_week} / NULLIF(${transactionRevenue_total_gbp_last_week_last_year},0) ;;
@@ -693,6 +696,50 @@ measure: conv_rate_last_week {
 
 
 #################### Time on site metrics ##########################
+
+
+  measure: timeonsite_total_last_week {
+    label: "Time On Site Last Week"
+    type: sum
+    sql: ${TABLE}.timeonsite ;;
+    filters: {
+      field: ga_sessions.visitStart_week
+      value: "last week"
+    }
+  }
+
+
+  measure: timeonsite_total_last_week_last_year {
+    label: "Time On Site Last Week Last Year"
+    type: sum
+    sql: ${TABLE}.timeonsite ;;
+    filters: {
+      field: ga_sessions.visitStart_week
+      value: "last week"
+    }
+  }
+
+  measure: timeonsite_average_per_session_last_week {
+    label: "Time On Site Average Per Session Last Week"
+    type: number
+    sql: 1.0 * ${timeonsite_total_last_week} / NULLIF(${ga_sessions.number_of_visitors_last_week},0) ;;
+    value_format_name: decimal_2
+  }
+
+  measure: timeonsite_average_per_session_last_week_last_year {
+    label: "Time On Site Average Per Session Last Week Last Year"
+    type: number
+    sql: 1.0 * ${timeonsite_total_last_week} / NULLIF(${ga_sessions.number_of_visitors_last_week},0) ;;
+    value_format_name: decimal_2
+  }
+
+
+
+  measure: average_time_on_site_diff_lw_vs_lwly {
+    type: number
+    sql: 1.0 * ${timeonsite_average_per_session_last_week} / NULLIF(${timeonsite_average_per_session_last_week_last_year},0) ;;
+    value_format_name: percent_0
+  }
 
 
 
