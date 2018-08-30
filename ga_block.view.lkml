@@ -528,15 +528,15 @@ view: totals_base {
   }
 
 
-
-# measure: bounces_last_week {
-#   type: sum
-#   sql: ${bounces_total} ;;
-#   filters: {
-#       field: visitStart_week
-#       value: "last week"
-# }
-# }
+# GW: We can refer to other (joined) Views in filters using viewname.fieldname
+measure: bounces_last_week {
+  type: sum
+  sql: ${TABLE}.bounces ;;
+  filters: {
+      field: ga_sessions.visitStart_week
+      value: "last week"
+}
+}
 
 
 
