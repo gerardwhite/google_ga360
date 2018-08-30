@@ -311,10 +311,26 @@ explore: adhoc_jp_trade_in_campaign {
 
 ################## Adwords cost and clicks ###################
 
+# This will be replaced with the new connection block to DoubelClick once we have access.
+
 explore: adwords_us {
   group_label: "E-Commerce"
   label: "Adwords | US"
 }
+
+
+
+explore: usadwords_merge  {
+  group_label: "E-Commerce"
+  label: "Adwords | Merge"
+}
+
+
+
+
+
+
+
 
 
 ################## DATA SCIENCE/BQML ########################
