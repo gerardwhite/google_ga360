@@ -517,7 +517,16 @@ view: totals_base {
   }
 
 
-
+# # Attempt to get bounces last week???
+#   measure: bounces_total_lw {
+#     type: sum
+#     sql: ${TABLE}.bounces ;;
+#     filters: {
+#       field: visitStart_week
+#       value: "last week"
+#     }
+#   }
+#
 
 
   measure: bounce_rate {
@@ -526,6 +535,9 @@ view: totals_base {
     value_format_name: percent_2
 
   }
+
+
+
 
 
 
