@@ -729,7 +729,7 @@ measure: conv_rate_last_week {
   measure: timeonsite_average_per_session_last_week_last_year {
     label: "Time On Site Average Per Session Last Week Last Year"
     type: number
-    sql: 1.0 * ${timeonsite_total_last_week} / NULLIF(${ga_sessions.number_of_visitors_last_week},0) ;;
+    sql: 1.0 * ${timeonsite_total_last_week_last_year} / NULLIF(${ga_sessions.number_of_visitors_last_week_last_year},0) ;;
     value_format_name: decimal_2
   }
 
