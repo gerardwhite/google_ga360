@@ -1,6 +1,4 @@
 view: adobe_product_performance {
-#   Fairly sure this is not being used.
-#   Delete if this is the case
 
   sql_table_name: `dyson-digitalanalytics-sandbox.dyson_adobe_us.product_performance` ;;
 
