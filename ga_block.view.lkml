@@ -577,10 +577,66 @@ measure: bounce_rate_diff_last_week_vs_last_week_last_year {
 #     value_format_name: percent_2
 #   }
 
+
+################## TRANSACTIONS METRICS #####################
+
+
   measure: transactions_count {
     type: sum
     sql: ${TABLE}.transactions ;;
   }
+
+  measure: transactions_last_week {
+    type: sum
+    sql: ${TABLE}.transactions ;;
+    filters: {
+      field: ga_sessions.visitStart_week
+      value: "last week"
+    }
+  }
+
+  measure: transactions_last_week_last_year {
+    type: sum
+    sql: ${TABLE}.transactions ;;
+    filters: {
+      field: ga_sessions.visitStart_week
+      value: "53 weeks ago"
+    }
+  }
+
+
+  measure: transactions_diff_lw_vs_lwly {
+    type: number
+    sql: 1.0 * ${transactions_last_week} / NULLIF(${transactions_last_week_last_year},0) ;;
+    value_format_name: percent_0
+  }
+
+################## CONVERSIONS METRICS #####################
+
+
+measure: conv_rate_last_week {
+  type: number
+  sql: 1.0 * ${transactions_last_week} / NULLIF(${ga_sessions.number_of_visitors_last_week},0) ;;
+  value_format_name: percent_2
+}
+
+
+  measure: conv_rate_last_week_last_year {
+    type: number
+    sql: 1.0 * ${transactions_last_week_last_year} / NULLIF(${ga_sessions.number_of_visitors_last_week_last_year},0) ;;
+    value_format_name: percent_2
+  }
+
+
+  measure: conv_rate_diff_lw_vs_lwly {
+    type: number
+    sql: ${conv_rate_last_week}-${conv_rate_last_week_last_year} ;;
+    value_format_name: percent_2
+  }
+
+
+#################### Revenue metrics ##########################
+
 
   measure: transactionRevenue_total {
     description: "This is in the local currency"
@@ -599,6 +655,45 @@ measure: bounce_rate_diff_last_week_vs_last_week_last_year {
     sql: (${TABLE}.transactionRevenue/1000000) / ${tax_xrates_by_country_2018_v2.xrate} ;;
     drill_fields: [transactions_count, transactionRevenue_total]
   }
+
+
+  measure: transactionRevenue_total_gbp_last_week {
+    description: "This is in GBP"
+    label: "Transaction Revenue Total (£) Last Week"
+    value_format_name: gbp_0
+    type: sum
+    sql: (${TABLE}.transactionRevenue/1000000) / ${tax_xrates_by_country_2018_v2.xrate} ;;
+    drill_fields: [transactions_count, transactionRevenue_total]
+    filters: {
+      field: ga_sessions.visitStart_week
+      value: "last week"
+    }
+  }
+
+
+  measure: transactionRevenue_total_gbp_last_week_last_year {
+    description: "This is in GBP"
+    label: "Transaction Revenue Total (£) Last Week Last Year"
+    value_format_name: gbp_0
+    type: sum
+    sql: (${TABLE}.transactionRevenue/1000000) / ${tax_xrates_by_country_2018_v2.xrate} ;;
+    drill_fields: [transactions_count, transactionRevenue_total]
+    filters: {
+      field: ga_sessions.visitStart_week
+      value: "53 weeks ago"
+    }
+  }
+
+  measure: revenue_diff_lw_vs_lwly {
+    type: number
+    sql: 1.0 * ${transactionRevenue_total_gbp_last_week} / NULLIF(${transactionRevenue_total_gbp_last_week_last_year},0) ;;
+    value_format_name: percent_0
+  }
+
+
+
+#################### Time on site metrics ##########################
+
 
 
 
