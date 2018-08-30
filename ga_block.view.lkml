@@ -539,58 +539,26 @@ view: totals_base {
 
 
 
-
-
-# measure: bounces_last_week {
-#   type: sum
-#   sql: ${bounces_total} ;;
-#   filters: {
-#       field: visitStart_week
-#       value: "last week"
-# }
-# }
-
-
-
-#   measure: bounces_total_last_week {
-#     type: sum
-#     sql: ${TABLE}.bounces ;;
-#     filters: {
-#     field: visitStart_week
-#     value: "last week"
-#     }
-#   }
+# GW: We can refer to other (joined) Views in filters using viewname.fieldname
+measure: bounces_last_week {
+  type: sum
+  sql: ${TABLE}.bounces ;;
+  filters: {
+      field: ga_sessions.visitStart_week
+      value: "last week"
+  }
+}
 
 
 
-
-
-# Filters not supported for non-aggregate type number.
-
-#   measure: bounce_rate_last_week {
-#     type:  number
-#     sql: 1.0 * ${bounces_total} / NULLIF(${ga_sessions.session_count},0) ;;
-#     value_format_name: percent_2
-#     filters: {
-#       field: visitStart_week
-#       value: "last week"
-#     }
-#   }
-#
-#     measure: bounce_rate_last_week_last_year {
-#     type:  number
-#     sql: 1.0 * ${bounces_total} / NULLIF(${ga_sessions.session_count},0) ;;
-#     value_format_name: percent_2
-#     filters: {
-#       field: visitStart_week
-#       value: "53 weeks ago"
-#     }
-#   }
-
-# measure: bounce_rate_diff_lw_vs_lwly {
-#   type: number
-#   sql: ${bounce_rate_last_week}-${bounce_rate_last_week_last_year} ;;
-# }
+  measure: bounces_last_week_last_year {
+    type: sum
+    sql: ${TABLE}.bounces ;;
+    filters: {
+      field: ga_sessions.visitStart_week
+      value: "53 weeks ago"
+    }
+  }
 
 
 
