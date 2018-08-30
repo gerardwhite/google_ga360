@@ -517,17 +517,8 @@ view: totals_base {
   }
 
 
-# # Attempt to get bounces last week???
-#   measure: bounces_total_lw {
-#     type: sum
-#     sql: ${TABLE}.bounces ;;
-#     filters: {
-#       field: visitStart_week
-#       value: "last week"
-#     }
-#   }
-#
 
+########### BOUNCE RATE CALCS #######################
 
   measure: bounce_rate {
     type:  number
@@ -535,8 +526,6 @@ view: totals_base {
     value_format_name: percent_2
 
   }
-
-
 
 
 # GW: We can refer to other (joined) Views in filters using viewname.fieldname
@@ -549,6 +538,11 @@ measure: bounces_last_week {
   }
 }
 
+measure: bounce_rate_last_week {
+  type: number
+  sql: 1.0 * ${bounces_last_week} / NULLIF(${ga_sessions.number_of_visitors_last_week},0) ;;
+  value_format_name: percent_2
+}
 
 
   measure: bounces_last_week_last_year {
@@ -560,7 +554,18 @@ measure: bounces_last_week {
     }
   }
 
+  measure: bounce_rate_last_week_last_year {
+    type: number
+    sql: 1.0 * ${bounces_last_week_last_year} / NULLIF(${ga_sessions.number_of_visitors_last_week_last_year},0) ;;
+    value_format_name: percent_2
+  }
 
+
+measure: bounce_rate_diff_last_week_vs_last_week_last_year {
+  type: number
+  sql: ${bounce_rate_last_week}-${bounce_rate_last_week_last_year} ;;
+  value_format_name: percent_2
+}
 
 
 
