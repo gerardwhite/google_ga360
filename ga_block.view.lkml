@@ -529,12 +529,6 @@ view: totals_base {
 
 
 
-
-
-
-
-
-
 # measure: bounces_last_week {
 #   type: sum
 #   sql: ${bounces_total} ;;
