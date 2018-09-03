@@ -167,6 +167,7 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
     }
 
 
+# When time allows change these to Sean's new country icons....
   dimension: country_icon {
     type: string
     sql: case when ${country} = 'United Kingdom' then 'gbr'
