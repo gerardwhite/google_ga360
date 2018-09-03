@@ -76,7 +76,7 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
             END ;;
     link: {
       label: "{{sap_all.channel._value}} report"
-      url: "https://dysonuk.eu.looker.com/dashboards/26?Region=www.dyson.com"
+      url: "https://dysonuk.eu.looker.com/dashboards/79?Region=www.dyson.com"
       icon_url: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/GA2.png"
     }
 
