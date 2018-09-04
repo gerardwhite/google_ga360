@@ -249,9 +249,9 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
   dimension: channel_rank {
     type: number
     sql: case when ${channel} = 'Dyson Online Store' then 1
-              when ${country} = 'Dyson Marketplaces' then 2
-              when ${country} = 'Dyson Retail Stores' then 3
-              when ${country} = 'Dyson Sales & Service' then 4
+              when ${channel} = 'Dyson Marketplaces' then 2
+              when ${channel} = 'Dyson Retail Stores' then 3
+              when ${channel} = 'Dyson Sales & Service' then 4
 
  else 100
           end;;
