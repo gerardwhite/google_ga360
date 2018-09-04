@@ -193,6 +193,10 @@ view: ga_sessions_base {
 
 
 
+
+
+
+
   measure: total_visitors {
     type: count
     drill_fields: [fullVisitorId, visitnumber, session_count, totals.hits, totals.page_views, totals.timeonsite]
@@ -336,6 +340,11 @@ view: ga_sessions_base {
 }
 
 
+
+
+
+
+
 view: geoNetwork_base {
   extension: required
   dimension: continent {
@@ -363,6 +372,9 @@ view: geoNetwork_base {
     {% endif %}
 ;;
   }
+
+
+
 
 
 
@@ -950,6 +962,18 @@ view: hits_base {
   }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
 view: hits_page_base {
   extension: required
   dimension: pagePath {
@@ -1010,8 +1034,6 @@ view: hits_page_base {
         }
         # required_fields: [name, first_name]
       }
-
-
 
 
 

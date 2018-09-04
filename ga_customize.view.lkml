@@ -65,6 +65,31 @@ view: ga_sessions {
       sql: {% parameter website_picker %} ;;
     }
 
+
+
+
+ # Shows what 'expected' country our website traffic should be coming from to identify difference on actual country traffic.
+ # Not a full set - needs cleaning up for all countries.
+  dimension: expected_country {
+    type: string
+    sql: case when ${ga_sessions.website_selector} = "www.dyson.co.jp" then "Japan"
+              when ${ga_sessions.website_selector} = "www.dyson.com" then "United States"
+              when ${ga_sessions.website_selector} = "www.dyson.co.uk" then "United Kingdom"
+              when ${ga_sessions.website_selector} = "www.dyson.cn" then "China"
+              when ${ga_sessions.website_selector} = "www.dyson.de" then "Germany"
+              when ${ga_sessions.website_selector} = "www.dyson.fr" then "France"
+              when ${ga_sessions.website_selector} = "www.dyson.es" then "Spain"
+
+
+ else null
+          end;;
+  }
+
+
+
+
+
+
 #     dimension: market {
 #       type: string
 #       sql: CASE WHEN ${website_picker} = "Dyson Canada" THEN "Canada"
