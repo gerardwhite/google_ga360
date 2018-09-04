@@ -56,6 +56,20 @@ view: age_gender {
 
 
 
+# Value per visit
+measure: value_per_visit {
+  type: number
+  sql: ${local_revenue}/${total_visits} ;;
+}
+
+
+
+# AOV?
+
+
+
+# Gender stuff
+
   measure: male_visits  {
     type: sum
     sql: ${sessions} ;;
@@ -138,9 +152,31 @@ view: age_gender {
             WHEN ${TABLE}.country = "Canada" THEN "www.dysoncanada.ca"
             WHEN ${TABLE}.country = "Italy" THEN "www.dyson.it"
             WHEN ${TABLE}.country = "India" THEN "www.dyson.in"
+             WHEN ${TABLE}.country = "Sweden" THEN "www.dyson.se"
+
             END ;;
 
   }
+
+
+
+  dimension: gender_icon {
+    type: string
+    sql: case when ${gender} = 'male' then 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/male.png'
+              when ${gender} = 'female' then 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/female.png'
+
+ else null
+          end;;
+    html: <img src="{{ value }}" style="height:30px;"/> ;;
+
+  }
+
+
+  dimension: age_and_gender {
+    type: string
+    sql: concat(${gender},'s | ', ${age}, ' years old')  ;;
+  }
+
 
 
 
