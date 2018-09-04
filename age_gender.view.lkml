@@ -85,10 +85,6 @@ view: age_gender {
   }
 
 
-
-
-
-
   measure: female_visits  {
     type: sum
     sql: ${sessions} ;;
@@ -98,13 +94,12 @@ view: age_gender {
     }
   }
 
-
   measure: female_transactions  {
     type: sum
     sql: ${transactions} ;;
     filters: {
       field: gender
-      value: "male"
+      value: "female"
     }
   }
 
@@ -113,12 +108,9 @@ view: age_gender {
     sql: ${revenue} ;;
     filters: {
       field: gender
-      value: "male"
+      value: "female"
     }
   }
-
-
-
 
 
 
