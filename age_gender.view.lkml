@@ -24,11 +24,37 @@ view: age_gender {
     sql: ${TABLE}.Sessions ;;
   }
 
+  dimension: transactions {
+    type: number
+    sql: ${TABLE}.Transactions ;;
+  }
+
+  dimension: revenue {
+    type: number
+    sql: ${TABLE}.Revenue ;;
+  }
+
+
   # Sums the sessions
   measure: total_visits  {
     type: sum
     sql: ${sessions} ;;
   }
+
+
+  # Sums the transactions
+  measure: total_transactions  {
+    type: sum
+    sql: ${transactions} ;;
+  }
+
+  # Sums the revenue
+  measure: local_revenue  {
+    type: sum
+    sql: ${revenue} ;;
+  }
+
+
 
   measure: male_visits  {
     type: sum
@@ -40,6 +66,29 @@ view: age_gender {
   }
 
 
+  measure: male_transactions  {
+    type: sum
+    sql: ${transactions} ;;
+    filters: {
+      field: gender
+      value: "male"
+    }
+  }
+
+  measure: male_revenue  {
+    type: sum
+    sql: ${revenue} ;;
+    filters: {
+      field: gender
+      value: "male"
+    }
+  }
+
+
+
+
+
+
   measure: female_visits  {
     type: sum
     sql: ${sessions} ;;
@@ -48,6 +97,29 @@ view: age_gender {
       value: "female"
     }
   }
+
+
+  measure: female_transactions  {
+    type: sum
+    sql: ${transactions} ;;
+    filters: {
+      field: gender
+      value: "male"
+    }
+  }
+
+  measure: female_revenue  {
+    type: sum
+    sql: ${revenue} ;;
+    filters: {
+      field: gender
+      value: "male"
+    }
+  }
+
+
+
+
 
 
   # Multiplied by -1 to flip against axis
