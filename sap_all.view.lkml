@@ -66,6 +66,7 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
 
 
   dimension: channel {
+    order_by_field: channel_rank
       type: string
 #     Transforming as 6plus6 data requires a clean
       sql: CASE WHEN ${TABLE}.channel = "Direct_OnlineStores - Dyson Online Stores" THEN "Dyson Online Store"
@@ -242,6 +243,21 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
  else 100
           end;;
   }
+
+
+
+  dimension: channel_rank {
+    type: number
+    sql: case when ${channel} = 'Dyson Online Store' then 1
+              when ${country} = 'Dyson Marketplaces' then 2
+              when ${country} = 'Dyson Retail Stores' then 3
+              when ${country} = 'Dyson Sales & Service' then 4
+
+ else 100
+          end;;
+  }
+
+
 
 
   # Fixed average annual growth targets by country
