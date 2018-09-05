@@ -34,11 +34,14 @@ view: adwords_jp2 {
   dimension: keyword {
     type: string
     sql: ${TABLE}.Keyword ;;
+
   }
 
   dimension: revenue {
     type: number
     sql: ${TABLE}.Revenue ;;
+    value_format: "0.0,\" K\""
+    html: ¥{{rendered_value}} ;;
   }
 
   dimension: transactions {
