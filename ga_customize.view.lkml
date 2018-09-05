@@ -28,7 +28,7 @@ view: ga_sessions {
 
   # SCENARIO 2: Multiple properties. The property will dynamically look at the selected dataset using a filter.
   sql_table_name: {% assign prop = ga_sessions.website_selector._sql %}
-  {% if prop contains 'www.dyson.ca' %} `dyson-ga.19209080.ga_sessions_*`
+  {% if prop contains 'www.dysoncanada.ca' %} `dyson-ga.19209080.ga_sessions_*`
   {% elsif prop contains 'www.dyson.nl' %} `dyson-ga.15754036.ga_sessions_*`
   {% elsif prop contains 'www.dyson.co.uk' %} `dyson-ga.15753450.ga_sessions_*`
   {% elsif prop contains 'www.dyson.com' %} `dyson-ga.15753478.ga_sessions_*`
@@ -56,7 +56,7 @@ view: ga_sessions {
                   {% endif %}
                   ;;
     filter: website_picker {
-      suggestions: ["www.dyson.ca", "www.dyson.com", "www.dyson.nl", "www.dyson.co.uk", "www.dyson.dk", "www.dyson.ie","www.dyson.at" ,"www.dyson.com.au" ,"www.dyson.cn" ,"www.dyson.fr" ,"www.dyson.it" ,"www.dyson.co.jp" ,"www.dyson.nl" ,"www.dyson.ch" ,"www.dyson.es" ,"fi.dyson.com" ,"www.dyson.com.ru" ,"www.dyson.se" ,"www.dysoncanada.ca" ,"www.dyson.be" ,"www.dyson.de" ,"www.dyson.no"]
+      suggestions: ["www.dysoncanada.ca", "www.dyson.com", "www.dyson.nl", "www.dyson.co.uk", "www.dyson.dk", "www.dyson.ie","www.dyson.at" ,"www.dyson.com.au" ,"www.dyson.cn" ,"www.dyson.fr" ,"www.dyson.it" ,"www.dyson.co.jp" ,"www.dyson.nl" ,"www.dyson.ch" ,"www.dyson.es" ,"fi.dyson.com" ,"www.dyson.com.ru" ,"www.dyson.se" ,"www.dysoncanada.ca" ,"www.dyson.be" ,"www.dyson.de" ,"www.dyson.no"]
       }
 
     dimension: website_selector {
