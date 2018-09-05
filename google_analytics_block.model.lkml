@@ -322,7 +322,12 @@ explore: adwords_us {
 
 explore: usadwords_merge  {
   group_label: "E-Commerce"
-  label: "Adwords | Merge"
+  label: "Adwords | US Merge"
+}
+
+explore: jpadwords_merge  {
+  group_label: "E-Commerce"
+  label: "Adwords | JP Merge"
 }
 
 
