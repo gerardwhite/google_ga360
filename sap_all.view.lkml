@@ -294,12 +294,7 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
   }
 
 
-
-
-
-
-
-#  Assigns website to SAP country. We need this field to link to e-Comms reports but it is breaking a join on channel.
+#  Assigns website to SAP country. We need this field to link to e-Comms reports but it might be breaking a join on channel.
   dimension: website {
     type: string
     sql: CASE WHEN ${country} = "France" THEN "www.dyson.fr"
@@ -336,36 +331,39 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
 # Need to change button png for white background
   dimension: ecomms_buttons {
     type: string
-    sql: CASE WHEN ${country} = "France" THEN "www.dyson.fr"
-                WHEN ${country} = "Belgium" THEN "www.dyson.be"
-                WHEN ${country} = "Austria" THEN "www.dyson.at"
-                WHEN ${country} = "Australia" THEN "www.dyson.com.au"
-                WHEN ${country} = "Canada" THEN "www.dysoncanada.ca"
-                WHEN ${country} = "China" THEN "www.dyson.cn"
-                WHEN ${country} = "United States" THEN "www.dyson.com"
-                WHEN ${country} = "Denmark" THEN "www.dyson.dk"
-                WHEN ${country} = "Spain" THEN "www.dyson.es"
-                WHEN ${country} = "Finland" THEN "www.dyson.fi"
-                WHEN ${country} = "Ireland" THEN "www.dyson.ie"
-                WHEN ${country} = "India" THEN "www.dyson.in"
-                WHEN ${country} = "Itlay" THEN "www.dyson.it"
-                WHEN ${country} = "Japan" THEN "www.dyson.co.jp"
-                WHEN ${country} = "Korea" THEN "www.dyson.kr"
-                WHEN ${country} = "Mexico" THEN "www.dyson.mx"
-                WHEN ${country} = "Netherlands" THEN "www.dyson.nl"
-                WHEN ${country} = "United Kingdom" THEN "www.dyson.co.uk"
-                WHEN ${country} = "Norway" THEN "www.dyson.no"
-                WHEN ${country} = "Sweden" THEN "www.dyson.se"
-                WHEN ${country} = "Germany" THEN "www.dyson.de"
-                WHEN ${country} = "Austria" THEN "www.dyson.at"
-                WHEN ${country} = "Russia" THEN "www.dyson.ru"
+    sql: CASE WHEN ${country} = "France" THEN "/dashboards/79?Website=www.dyson.fr"
+                WHEN ${country} = "Belgium" THEN "/dashboards/79?Website=www.dyson.be"
+                WHEN ${country} = "Austria" THEN "/dashboards/79?Website=www.dyson.at"
+                WHEN ${country} = "Australia" THEN "/dashboards/79?Website=www.dyson.com.au"
+                WHEN ${country} = "Canada" THEN "/dashboards/79?Website=www.dysoncanada.ca"
+                WHEN ${country} = "Denmark" THEN "/dashboards/79?Website=www.dyson.dk"
+                WHEN ${country} = "Spain" THEN "/dashboards/79?Website=www.dyson.es"
+                WHEN ${country} = "Finland" THEN "/dashboards/79?Website=www.dyson.fi"
+                WHEN ${country} = "India" THEN "/dashboards/79?Website=www.dyson.in"
+                WHEN ${country} = "Itlay" THEN "/dashboards/79?Website=www.dyson.it"
+                WHEN ${country} = "Korea" THEN "/dashboards/79?Website=www.dyson.kr"
+                WHEN ${country} = "Mexico" THEN "/dashboards/79?Website=www.dyson.mx"
+                WHEN ${country} = "Netherlands" THEN "/dashboards/79?Website=www.dyson.nl"
+                WHEN ${country} = "Norway" THEN "/dashboards/79?Website=www.dyson.no"
+                WHEN ${country} = "Sweden" THEN "/dashboards/79?Website=www.dyson.se"
+                WHEN ${country} = "Germany" THEN "/dashboards/79?Website=www.dyson.de"
+                WHEN ${country} = "Austria" THEN "/dashboards/79?Website=www.dyson.at"
+                WHEN ${country} = "Russia" THEN "/dashboards/79?Website=www.dyson.ru"
+
+                WHEN ${country} = "United States" THEN "/dashboards/79?Website=www.dyson.com"
+                WHEN ${country} = "United Kingdom" THEN "/dashboards/79?Website=www.dyson.co.uk"
+                WHEN ${country} = "Ireland" THEN "/dashboards/79?Website=www.dyson.ie"
+
+
+                WHEN ${country} = "Japan" THEN "/dashboards/95?Region=www.dyson.co.jp"
+                WHEN ${country} = "China" THEN "/dashboards/79?Website=www.dyson.cn"
                 ELSE NULL
             END ;;
 
 # Change first line for dashboard location
 # Change second line for button image
 
-    html: <a href="/dashboards/79?Website={{ sap_all.ecomms_buttons._value | encode_uri }}">
+    html: <a href="{{ sap_all.ecomms_buttons._value | encode_url }}">
     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/Ecommerce_Button.png" style="width:480px;"/> </a> ;;
 
   }
@@ -403,7 +401,7 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
 # Change first line for dashboard location
 # Change second line for button image
 
-      html: <a href="/dashboards/79?Website={{ sap_all.ecomms_buttons._value | encode_uri }}">
+      html: <a href="/dashboards/79?Website={{ sap_all.retail_buttons._value | encode_url }}">
         <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/Retail_Button.png" style="width:480px;"/> </a> ;;
 
     }
@@ -441,27 +439,12 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
 # Change first line for dashboard location
 # Change second line for button image
 
-      html: <a href="/dashboards/79?Website={{ sap_all.ecomms_buttons._value | encode_uri }}">
+      html: <a href="/dashboards/79?Website={{ sap_all.marketplace_buttons._value | encode_url }}">
         <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/Marketplaces_Button.png" style="width:480px;"/> </a> ;;
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#### End of button code ###
+################ End of buttons code #############################
 
 
 
