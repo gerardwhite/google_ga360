@@ -63,6 +63,16 @@ measure: value_per_visit {
 }
 
 
+# Value per visit
+  measure: value_per_visit_JPY {
+    value_format: "0.00"
+    type: number
+    sql: ${local_revenue}/${total_visits} ;;
+    html: ¥{{rendered_value}} ;;
+  }
+
+
+
 
 # AOV?
 
