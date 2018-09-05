@@ -168,8 +168,8 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
     }
 
 
-# When time allows change these to Sean's new country icons....
-  dimension: country_icon_old {
+# Looks like SVGs might be faster loading for the data-tables here...
+  dimension: country_icon {
     type: string
     sql: case when ${country} = 'United Kingdom' then 'gbr'
               when ${country} = 'Germany' then 'deu'
@@ -214,7 +214,7 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
   }
 
 
-  dimension: country_icon {
+  dimension: country_icon_new {
     type: string
     sql: case when ${country} = 'United Kingdom' then 'United-Kingdom'
               when ${country} = 'United States' then 'United-States'
