@@ -399,6 +399,31 @@ dimension: is_expected_country {
       <p style="color: white; background-color: black; font-size:100%; text-align:center">{{ rendered_value }}</p>
     {% elsif value == 'New York' %}
       <p style="color: white; background-color: black; font-size:100%; text-align:center">{{ rendered_value }}</p>
+               {% elsif value == 'Shanghai' %}
+      <p style="color: white; background-color: black; font-size:100%; text-align:center">{{ rendered_value }}</p>
+                {% elsif value == 'Beijing' %}
+      <p style="color: white; background-color: black; font-size:100%; text-align:center">{{ rendered_value }}</p>
+                {% elsif value == 'Hangzhou' %}
+      <p style="color: white; background-color: black; font-size:100%; text-align:center">{{ rendered_value }}</p>
+      {% elsif value == 'Gotemba' %}
+      <p style="color: white; background-color: black; font-size:100%; text-align:center">{{ rendered_value }}</p>
+      {% elsif value == 'Hiroshima' %}
+      <p style="color: white; background-color: black; font-size:100%; text-align:center">{{ rendered_value }}</p>
+      {% elsif value == 'Karuizawa' %}
+      <p style="color: white; background-color: black; font-size:100%; text-align:center">{{ rendered_value }}</p>
+      {% elsif value == 'Kobe Sanda' %}
+      <p style="color: white; background-color: black; font-size:100%; text-align:center">{{ rendered_value }}</p>
+      {% elsif value == 'Marui Yurakucho' %}
+      <p style="color: white; background-color: black; font-size:100%; text-align:center">{{ rendered_value }}</p>
+      {% elsif value == 'Omotesando' %}
+      <p style="color: white; background-color: black; font-size:100%; text-align:center">{{ rendered_value }}</p>
+            {% elsif value == 'Toki' %}
+      <p style="color: white; background-color: black; font-size:100%; text-align:center">{{ rendered_value }}</p>
+            {% elsif value == 'Toyosu' %}
+      <p style="color: white; background-color: black; font-size:100%; text-align:center">{{ rendered_value }}</p>
+            {% elsif value == 'Yokohama' %}
+      <p style="color: white; background-color: black; font-size:100%; text-align:center">{{ rendered_value }}</p>
+
     {% else %}
       <p style="color: black; font-size:100%; text-align:center">{{ rendered_value }}</p>
     {% endif %}
