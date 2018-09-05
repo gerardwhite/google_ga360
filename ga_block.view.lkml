@@ -359,11 +359,11 @@ view: geoNetwork_base {
     drill_fields: [region,metro,city,approximate_networkLocation,networkLocation]
   }
 
-  # Adds conditional formatting to non-US countries.
+  # Adds conditional formatting to alien countries.
   dimension: country_rg {
     sql: ${country} ;;
     html:
-    {% if value == 'United States' %}
+    {% if value == {{ga_sessions.expected_country_value}} %}
       <p style="color: black; font-size:100%; text-align:center">{{ rendered_value }}</p>
     {% elsif value == 'Canada' %}
       <p style="color: black; background-color: lightgreen; font-size:100%; text-align:center">{{ rendered_value }}</p>
@@ -378,9 +378,6 @@ dimension: is_expected_country {
   type: yesno
   sql: ${country}= ${ga_sessions.expected_country};;
 }
-
-
-
 
 
   dimension: region {
@@ -407,6 +404,14 @@ dimension: is_expected_country {
     {% endif %}
 ;;
   }
+
+
+ # Concatonates city with country
+ dimension: city_and_country {
+   sql: CONCAT(${city},' - ',${country}) ;;
+ }
+
+
 
 
 
@@ -912,6 +917,38 @@ view: device_base {
   dimension: mobileDeviceMarketingName {label: "Mobile Device Marketing Name"}
   dimension: mobileDeviceModel {label: "Mobile Device Model"}
   dimension: mobileDeviceInputSelector {label: "Mobile Device Input Selector"}
+
+
+  # Converts language codes to human-readable language name
+  dimension: speaking {
+    sql: CASE
+        WHEN  ${language} = "pt-pt" THEN "Portugese"
+        WHEN  ${language} = "pt-br" THEN "Brazilian-Portugese"
+        WHEN ${language} = "es-es" THEN "Spanish"
+        WHEN ${language} = "es-xl" THEN "Mexican-Spanish"
+        WHEN ${language} = "en-us" THEN "American-English"
+        WHEN ${language} = "en-ca" THEN "Canadian-English"
+        WHEN ${language} = "en-ie" THEN "Irish-English"
+        WHEN ${language} = "en-gb" THEN "English"
+        WHEN ${language} = "en-au" THEN "Australian-English"
+         WHEN ${language} = "en-sg" THEN "English"
+        WHEN  ${language} = "ja-jp" THEN "Japanese"
+        WHEN  ${language} = "fr-fr" THEN "French"
+        WHEN  ${language} = "fr-ch" THEN "Swiss-French"
+        WHEN  ${language} = "fr-be" THEN "Belgium-French"
+        WHEN  ${language} = "de-de" THEN "German"
+        WHEN  ${language} = "de-de" THEN "Austrian-German"
+        WHEN ${language} = "ko-kr" THEN "Korean"
+        WHEN ${language} = "ch-tw" THEN "Taiwanese"
+        WHEN ${language} = "zh-tw" THEN "Taiwanese"
+        WHEN ${language} = "zh-ch" THEN "Chinese"
+        WHEN ${language} = "zh-hk" THEN "Chinese"
+        ELSE ${language}
+        END
+        ;;
+  }
+
+
 }
 
 view: hits_base {
