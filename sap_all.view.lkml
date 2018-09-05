@@ -329,8 +329,7 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
     }
 
 
-
-
+# Button that will dynamically take user from roll-up dashboard to ecomms WEBSITE view based on COUNTRY filter:
   dimension: ecomms_buttons {
     type: string
     sql: CASE WHEN ${country} = "France" THEN "www.dyson.fr"
@@ -358,23 +357,13 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
                 ELSE NULL
             END ;;
 
-#     html: <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/ECOMMERCE.png"/> ;;
-    html: <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/ECOMMERCE.png" style="height:117px;"/> ;;
+# Change first line for dashboard location
+# Change second line for button image
 
-#
-#     # Adds drill down links to country maps.  Label needs to change for link to work.
-    link: {
-      label: " Ecommerce Report for {{sap_all.ecomms_buttons._value}}"
-      url: "/dashboards/79?Website={{ sap_all.ecomms_buttons._value | encode_uri }}"
-      icon_url: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/SAPfavicon.ico"
-    }
+    html: <a href="/dashboards/79?Website={{ sap_all.ecomms_buttons._value | encode_uri }}">
+    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/ECOMMERCE.png" style="height:117px;"/> </a> ;;
+
   }
-
-
-
-
-
-
 
 
 
