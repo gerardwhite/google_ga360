@@ -169,7 +169,7 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
 
 
 # When time allows change these to Sean's new country icons....
-  dimension: country_icon {
+  dimension: country_icon_old {
     type: string
     sql: case when ${country} = 'United Kingdom' then 'gbr'
               when ${country} = 'Germany' then 'deu'
@@ -205,13 +205,55 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
           end;;
     html: <img src="https://restcountries.eu/data/{{ value }}.svg" style="width:50px;height:30px;"/> ;;
 
-    # Adds drill down links to country maps.  Label needs to change for link to work.
+    # Adds drill down links to SAP
     link: {
       label: "{{sap_all.country._value}} SAP report"
       url: "/dashboards/69?Country={{ sap_all.country._value | encode_uri }}"
       icon_url: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/SAPfavicon.ico"
     }
   }
+
+
+  dimension: country_icon {
+    type: string
+    sql: case when ${country} = 'United Kingdom' then 'United-Kingdom'
+              when ${country} = 'United States' then 'United-States'
+              when ${country} = 'New Zealand' then 'New Zealand'
+              else ${country}
+          end;;
+    html: <img src="http://icons.iconarchive.com/icons/gosquared/flag/64/{{ value }}-icon.png" style="height:30px;"/> ;;
+
+
+
+    # Adds drill down links to country SAP report.
+    link: {
+      label: "{{sap_all.country._value}} SAP report"
+      url: "/dashboards/69?Country={{ sap_all.country._value | encode_uri }}"
+      icon_url: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/SAPfavicon.ico"
+    }
+  }
+
+
+  dimension: country_icon_large {
+    type: string
+    sql: case when ${country} = 'United Kingdom' then 'United-Kingdom'
+              when ${country} = 'United States' then 'United-States'
+              when ${country} = 'New Zealand' then 'New Zealand'
+              else ${country}
+          end;;
+    html: <img src="http://icons.iconarchive.com/icons/gosquared/flag/64/{{ value }}-icon.png" /> ;;
+
+
+
+    # Adds drill down links to country SAP report.
+    link: {
+      label: "{{sap_all.country._value}} SAP report"
+      url: "/dashboards/69?Country={{ sap_all.country._value | encode_uri }}"
+      icon_url: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/SAPfavicon.ico"
+    }
+  }
+
+
 
 
   dimension: country_rank {

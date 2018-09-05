@@ -53,6 +53,17 @@ view: tax_xrates_by_country_2018_v2 {
     html: <img src="https://restcountries.eu/data/{{ value }}.svg" style="width:50px;height:30px;"/> ;;
   }
 
+
+  dimension: country_icon_large {
+    type: string
+    sql: case when ${country} = 'United Kingdom' then 'United-Kingdom'
+              when ${country} = 'United States' then 'United-States'
+              when ${country} = 'New Zealand' then 'New Zealand'
+              else ${country}
+          end;;
+    html: <img src="http://icons.iconarchive.com/icons/gosquared/flag/64/{{ value }}-icon.png" /> ;;
+  }
+
   dimension: country_and_icon {
     type: string
     sql: concat(${country_icon},' ', ${country}) ;;
