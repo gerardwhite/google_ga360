@@ -79,6 +79,16 @@ view: ga_sessions {
               when ${ga_sessions.website_selector} = "www.dyson.de" then "Germany"
               when ${ga_sessions.website_selector} = "www.dyson.fr" then "France"
               when ${ga_sessions.website_selector} = "www.dyson.es" then "Spain"
+              when ${ga_sessions.website_selector} = "www.dysoncanada.ca" then "Canada"
+              when ${ga_sessions.website_selector} = "www.dyson.in" then "India"
+              when ${ga_sessions.website_selector} = "www.dyson.se" then "Sweden"
+              when ${ga_sessions.website_selector} = "www.dyson.kr" then "Korea"
+              when ${ga_sessions.website_selector} = "www.dyson.ch" then "Switzerland"
+              when ${ga_sessions.website_selector} = "www.dyson.dk" then "Denmark"
+              when ${ga_sessions.website_selector} = "www.dyson.nl" then "Netherlands"
+              when ${ga_sessions.website_selector} = "www.dyson.com.au" then "Australia"
+              when ${ga_sessions.website_selector} = "www.dyson.it" then "Italy"
+
 
 
  else null

@@ -374,6 +374,11 @@ view: geoNetwork_base {
   }
 
 
+dimension: is_expected_country {
+  type: yesno
+  sql: ${country}= ${ga_sessions.expected_country};;
+}
+
 
 
 
