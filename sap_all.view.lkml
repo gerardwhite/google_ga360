@@ -330,6 +330,8 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
 
 
 # Button that will dynamically take user from roll-up dashboard to ecomms WEBSITE view based on COUNTRY filter:
+# Needs to change for Leap / Non-Leap
+# Need to change button png for white background
   dimension: ecomms_buttons {
     type: string
     sql: CASE WHEN ${country} = "France" THEN "www.dyson.fr"
@@ -364,6 +366,8 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/ECOMMERCE.png" style="height:117px;"/> </a> ;;
 
   }
+#### End of button code ###
+
 
 
 
