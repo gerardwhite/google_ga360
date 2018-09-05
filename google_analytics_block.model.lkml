@@ -325,7 +325,7 @@ explore: usadwords_merge  {
   label: "Adwords | US Merge"
 }
 
-explore: jpadwords_merge  {
+explore: adwords_jp2 {
   group_label: "E-Commerce"
   label: "Adwords | JP Merge"
 }
