@@ -317,31 +317,32 @@ explore: adhoc_jp_trade_in_campaign {
 # This will be replaced with the new connection block to DoubelClick once we have access.
 
 explore: adwords_us {
+  persist_for: "4 hours"
   group_label: "E-Commerce"
   label: "Adwords | US"
 }
 
 explore: usadwords_merge  {
+  persist_for: "4 hours"
   group_label: "E-Commerce"
   label: "Adwords | US Merge"
 }
 
 explore: adwords_jp2 {
+  persist_for: "4 hours"
   group_label: "E-Commerce"
   label: "Adwords | JP Merge"
 }
 
-
-
 explore: tmall_products {
+  persist_for: "4 hours"
   group_label: "Marketplaces"
   label: "Tmall | Product Performance"
 }
 
-
-
-
 ################## DATA SCIENCE/BQML ########################
+
+
 
 #
 # explore: fan_interest_regression_evaluation {
