@@ -11,9 +11,10 @@ view: tmall_products {
     sql: ${TABLE}.PageViews ;;
   }
 
-  dimension: product_covnersion {
+  dimension: product_conversion {
     type: number
     sql: ${TABLE}.ProductCovnersion ;;
+    value_format_name: percent_2
   }
 
   dimension: product_name {
@@ -29,6 +30,7 @@ view: tmall_products {
   dimension: stock_rate {
     type: number
     sql: ${TABLE}.stockRate ;;
+    value_format_name: percent_0
   }
 
   dimension: transactions {
