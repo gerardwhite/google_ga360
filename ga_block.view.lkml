@@ -328,6 +328,26 @@ view: ga_sessions_base {
 
   dimension: channelGrouping {label: "Channel Grouping"}
 
+  # Delete Tmall equivalents after POC #
+  dimension: tmall_channel {
+    type: string
+    sql:
+    case
+    WHEN ${channelGrouping} = "Organic Search" THEN "淘内免费其他 /Amoy Free other"
+    WHEN ${channelGrouping} = "Direct" THEN "手淘搜索 / Hand scouring"
+    WHEN ${channelGrouping} = "Referral" THEN "手淘其他店铺 / Hand scouring other stores"
+    WHEN ${channelGrouping} = "Paid Search" THEN "手淘扫一扫 / Hand sweeping"
+    WHEN ${channelGrouping} = "(Other)" THEN "手淘首页 / Hand Amoy Home"
+    WHEN ${channelGrouping} = "Social" THEN "手淘问大家 / Hand to ask everyone"
+    WHEN ${channelGrouping} = "Affiliates" THEN "手淘旺信 / Hand taowang letter"
+    WHEN ${channelGrouping} = "Display" THEN "猫客搜索 / Cat search"
+    WHEN ${channelGrouping} = "Offline" THEN "手淘消息中心 / Hand Amoy News CenterHand Amoy News Center"
+
+    ;;
+  }
+
+
+
   # subrecords
   dimension: geoNetwork {hidden: yes}
   dimension: totals {hidden:yes}
