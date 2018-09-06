@@ -333,7 +333,7 @@ view: ga_sessions_base {
     type: string
     sql:
     case
-    WHEN ${channelGrouping} = "Organic Search" THEN "淘内免费其他 /Amoy Free other"
+    WHEN ${channelGrouping} = "Organic Search" THEN "淘内免费其他 / Amoy Free other"
     WHEN ${channelGrouping} = "Direct" THEN "手淘搜索 / Hand scouring"
     WHEN ${channelGrouping} = "Referral" THEN "手淘其他店铺 / Hand scouring other stores"
     WHEN ${channelGrouping} = "Paid Search" THEN "手淘扫一扫 / Hand sweeping"
