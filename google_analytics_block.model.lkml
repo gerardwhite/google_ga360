@@ -234,7 +234,7 @@ explore: retail_all {
 ########### Marketplaces ###################
 
 explore: tmall {
-  group_label: "Markplaces"
+  group_label: "Marketplaces"
   label: "Marketplaces | Tmall"
 
 }
