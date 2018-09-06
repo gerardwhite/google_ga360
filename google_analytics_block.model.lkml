@@ -293,6 +293,7 @@ explore: products_historical_allmarkets {
 # Service account email required is as follows: looker@dyson-ga.iam.gserviceaccount.com
 
 explore: age_gender {
+  persist_for: "4 hours"
   group_label: "E-Commerce"
   label: "Age & Gender"
 }
