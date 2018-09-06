@@ -341,7 +341,7 @@ view: ga_sessions_base {
     WHEN ${channelGrouping} = "Social" THEN "手淘问大家 / Hand to ask everyone"
     WHEN ${channelGrouping} = "Affiliates" THEN "手淘旺信 / Hand taowang letter"
     WHEN ${channelGrouping} = "Display" THEN "猫客搜索 / Cat search"
-    WHEN ${channelGrouping} = "Offline" THEN "手淘消息中心 / Hand Amoy News CenterHand Amoy News Center"
+    WHEN ${channelGrouping} = "Offline" THEN "手淘消息中心 / Hand Amoy News Center"
     ELSE null
     END
     ;;
