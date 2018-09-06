@@ -7,3 +7,6 @@ As we've rushed to complete presentations and the POC we have accrued technical 
 * Demographics - not available in BigQuery/Looker - running off Google Sheets
 - blue/fushia for male/female has been manually set, we need to assign conditional formatting here in the LookML
 * China/Tmall - running off manual extracts
+* Some tables in BigQuery redundant. Worth removing.
+* Table/view naming need cleaning up.
+* Worth rolling up some views, as has been done in the ga_block to reduce junk and/or add folders when these are available.
