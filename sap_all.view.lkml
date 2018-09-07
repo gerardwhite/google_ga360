@@ -1299,6 +1299,21 @@ dimension: channel_comparison {
 }
 
 
+# Underscore used to send '_other countries' alphabetically to the back.
+  filter: country_select {
+    suggest_dimension: country
+  }
+
+  dimension: country_comparison {
+    sql: CASE
+      WHEN {% condition country_select %} ${country} {% endcondition %}
+        THEN ${country}
+      ELSE '_Other Countries'
+    END ;;
+  }
+
+
+
 
 # Other
   set: detail {
