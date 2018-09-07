@@ -80,9 +80,33 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
       url: "https://dysonuk.eu.looker.com/dashboards/79?Region=www.dyson.com"
       icon_url: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/GA2.png"
     }
-
-
   }
+
+
+
+  # Seperate 'channel link built as this was breaking pivot reports...
+  dimension: channel_link {
+    order_by_field: channel_rank
+    type: string
+#     Transforming as 6plus6 data requires a clean
+    sql: CASE WHEN ${TABLE}.channel = "Direct_OnlineStores - Dyson Online Stores" THEN "Dyson Online Store"
+            WHEN ${TABLE}.channel = "Direct_Marketplaces - Dyson MarketPlaces" THEN "Dyson Marketplaces"
+            WHEN ${TABLE}.channel = "Direct_SalesService - Dyson Sales & Service" THEN "Dyson Sales & Service"
+            WHEN ${TABLE}.channel = "Direct_RetailStores - Dyson Retail Stores" THEN "Dyson Retail Stores"
+            ELSE ${TABLE}.channel
+            END ;;
+    link: {
+      label: "{{sap_all.website._value}} report"
+
+      # - URL only relevant to Online Store / Ecomms report ATM.
+      url: "/dashboards/79?Website={{ sap_all.website._value | encode_uri }}"
+
+      icon_url: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/GA2.png"
+    }
+  }
+
+
+
 
 #   Includes transforms for different data sets.
 #   This could probably be more modular but fine for now.
