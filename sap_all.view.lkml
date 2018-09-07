@@ -234,6 +234,7 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
   }
 
 
+
   dimension: country_icon_large {
     type: string
     sql: case when ${country} = 'United Kingdom' then 'United-Kingdom'
@@ -371,9 +372,10 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
 # Button that will dynamically take user from roll-up dashboard to ecomms WEBSITE view based on COUNTRY filter:
 # Needs to change for Leap / Non-Leap
 # Need to change button png for white background
+####### ECOMMS BUTTON #########################################
   dimension: ecomms_buttons {
     type: string
-    sql: CASE WHEN ${country} = "France" THEN "/dashboards/79?Website=www.dyson.fr"
+    sql: CASE WHEN ${country} = "France" THEN "/dashboards/79?Website=www.dyson.fr" -- These need to follow what we set for Japan's dashboard
                 WHEN ${country} = "Belgium" THEN "/dashboards/79?Website=www.dyson.be"
                 WHEN ${country} = "Austria" THEN "/dashboards/79?Website=www.dyson.at"
                 WHEN ${country} = "Australia" THEN "/dashboards/79?Website=www.dyson.com.au"
@@ -392,23 +394,69 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
                 WHEN ${country} = "Austria" THEN "/dashboards/79?Website=www.dyson.at"
                 WHEN ${country} = "Russia" THEN "/dashboards/79?Website=www.dyson.ru"
 
-                WHEN ${country} = "United States" THEN "/dashboards/79?Website=www.dyson.com"
+
+                WHEN ${country} = "United States" THEN "/dashboards/79?Website=www.dyson.com"  -- Leap countries
                 WHEN ${country} = "United Kingdom" THEN "/dashboards/79?Website=www.dyson.co.uk"
                 WHEN ${country} = "Ireland" THEN "/dashboards/79?Website=www.dyson.ie"
 
 
-                WHEN ${country} = "Japan" THEN "/dashboards/95?Region=www.dyson.co.jp"
-                WHEN ${country} = "China" THEN "/dashboards/79?Website=www.dyson.cn"
+                WHEN ${country} = "Japan" THEN "/dashboards/95?Region=www.dyson.co.jp" -- First non-leap dashboard
+
+                WHEN ${country} = "China" THEN "/dashboards/79?Website=www.dyson.cn" -- Something entirely different for China (Tmall dashboard)
                 ELSE NULL
             END ;;
 
-# Change first line for dashboard location
+# Change above code for dashboard's location
 # Change second line for button image
 
     html: <a href="{{ sap_all.ecomms_buttons._value | encode_url }}">
     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/Ecommerce_Button.png" style="width:480px;"/> </a> ;;
 
   }
+
+
+
+####### Visitors BUTTON #########################################
+  dimension: vistiors_buttons {
+    type: string
+    sql: CASE WHEN ${website} = "www.dyson.fr" THEN "/dashboards/80?Website=www.dyson.fr" -- These need to follow what we set for Japan's dashboard
+                WHEN ${website} = "www.dyson.be" THEN "/dashboards/80?Website=www.dyson.be"
+                WHEN ${website} = "www.dyson.at" THEN "/dashboards/80?Website=www.dyson.at"
+                WHEN ${website} = "www.dyson.com.au" THEN "/dashboards/80?Website=www.dyson.com.au"
+                WHEN ${website} = "www.dysoncanada.ca" THEN "/dashboards/80?Website=www.dysoncanada.ca"
+                WHEN ${website} = "www.dyson.dk" THEN "/dashboards/80?Website=www.dyson.dk"
+                WHEN ${website} = "www.dyson.es" THEN "/dashboards/80?Website=www.dyson.es"
+                WHEN ${website} = "www.dyson.fi" THEN "/dashboards/80?Website=www.dyson.fi"
+                WHEN ${website} = "www.dyson.in" THEN "/dashboards/80?Website=www.dyson.in"
+                WHEN ${website} = "www.dyson.it" THEN "/dashboards/80?Website=www.dyson.it"
+                WHEN ${website} = "www.dyson.kr" THEN "/dashboards/80?Website=www.dyson.kr"
+                WHEN ${website} = "www.dyson.mx" THEN "/dashboards/80?Website=www.dyson.mx"
+                WHEN ${website} = "www.dyson.nl" THEN "/dashboards/80?Website=www.dyson.nl"
+                WHEN ${website} = "www.dyson.no" THEN "/dashboards/80?Website=www.dyson.no"
+                WHEN ${website} = "www.dyson.se" THEN "/dashboards/80?Website=www.dyson.se"
+                WHEN ${website} = "www.dyson.de" THEN "/dashboards/80?Website=www.dyson.de"
+                WHEN ${website} = "www.dyson.ru" THEN "/dashboards/80?Website=www.dyson.ru"
+
+
+                WHEN ${website} = "www.dyson.com" THEN "/dashboards/80?Website=www.dyson.com"  -- Leap countries
+                WHEN ${website} = "www.dyson.co.uk" THEN "/dashboards/80?Website=www.dyson.co.uk"
+                WHEN ${website} = "www.dyson.ie" THEN "/dashboards/80?Website=www.dyson.ie"
+
+
+                WHEN ${website} = "www.dyson.co.jp" THEN "/dashboards/86?Region=www.dyson.co.jp" -- First non-leap dashboard
+
+                WHEN ${website} = "www.dyson.cn" THEN "/dashboards/96?Website=www.dyson.cn" -- Something entirely different for China (Tmall dashboard)
+                ELSE NULL
+            END ;;
+
+# Change above code for dashboard's location
+# Change second line for button image
+
+      html: <a href="{{ sap_all.vistiors_buttons._value | encode_url }}">
+        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/Visitors_Button.png" style="width:480px;"/> </a> ;;
+
+    }
+
 
 
 
@@ -1311,6 +1359,10 @@ dimension: channel_comparison {
       ELSE '_Other Countries'
     END ;;
   }
+
+
+
+
 
 
 
