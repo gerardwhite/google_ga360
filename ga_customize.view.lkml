@@ -128,7 +128,7 @@ view: ga_sessions {
                 WHEN ${ga_sessions.website_selector} = "www.dyson.ie" THEN "/dashboards/80?Website=www.dyson.ie"
 
 
-                WHEN ${ga_sessions.website_selector} = "www.dyson.co.jp" THEN "/dashboards/86?Region=www.dyson.co.jp" -- First non-leap dashboard
+                WHEN ${ga_sessions.website_selector} = "www.dyson.co.jp" THEN "/dashboards/86?Website=www.dyson.co.jp" -- First non-leap dashboard
 
                 WHEN ${ga_sessions.website_selector} = "www.dyson.cn" THEN "/dashboards/96?Website=www.dyson.cn" -- Something entirely different for China (Tmall dashboard)
                 ELSE NULL
@@ -147,32 +147,32 @@ view: ga_sessions {
   dimension: conversion_buttons {
     type: string
     sql: CASE   WHEN ${ga_sessions.website_selector} = "www.dyson.fr" THEN "/dashboards/13?Region=www.dyson.fr" -- These need to follow what we set for Japan's dashboard
-                WHEN ${ga_sessions.website_selector} = "www.dyson.be" THEN "/dashboards/80?Website=www.dyson.be"
-                WHEN ${ga_sessions.website_selector} = "www.dyson.at" THEN "/dashboards/80?Website=www.dyson.at"
-                WHEN ${ga_sessions.website_selector} = "www.dyson.com.au" THEN "/dashboards/80?Website=www.dyson.com.au"
-                WHEN ${ga_sessions.website_selector} = "www.dysoncanada.ca" THEN "/dashboards/80?Website=www.dysoncanada.ca"
-                WHEN ${ga_sessions.website_selector} = "www.dyson.dk" THEN "/dashboards/80?Website=www.dyson.dk"
-                WHEN ${ga_sessions.website_selector} = "www.dyson.es" THEN "/dashboards/80?Website=www.dyson.es"
-                WHEN ${ga_sessions.website_selector} = "www.dyson.fi" THEN "/dashboards/80?Website=www.dyson.fi"
-                WHEN ${ga_sessions.website_selector} = "www.dyson.in" THEN "/dashboards/80?Website=www.dyson.in"
-                WHEN ${ga_sessions.website_selector} = "www.dyson.it" THEN "/dashboards/80?Website=www.dyson.it"
-                WHEN ${ga_sessions.website_selector} = "www.dyson.kr" THEN "/dashboards/80?Website=www.dyson.kr"
-                WHEN ${ga_sessions.website_selector} = "www.dyson.mx" THEN "/dashboards/80?Website=www.dyson.mx"
-                WHEN ${ga_sessions.website_selector} = "www.dyson.nl" THEN "/dashboards/80?Website=www.dyson.nl"
-                WHEN ${ga_sessions.website_selector} = "www.dyson.no" THEN "/dashboards/80?Website=www.dyson.no"
-                WHEN ${ga_sessions.website_selector} = "www.dyson.se" THEN "/dashboards/80?Website=www.dyson.se"
-                WHEN ${ga_sessions.website_selector} = "www.dyson.de" THEN "/dashboards/80?Website=www.dyson.de"
-                WHEN ${ga_sessions.website_selector} = "www.dyson.ru" THEN "/dashboards/80?Website=www.dyson.ru"
+                WHEN ${ga_sessions.website_selector} = "www.dyson.be" THEN "/dashboards/81?Website=www.dyson.be"
+                WHEN ${ga_sessions.website_selector} = "www.dyson.at" THEN "/dashboards/81?Website=www.dyson.at"
+                WHEN ${ga_sessions.website_selector} = "www.dyson.com.au" THEN "/dashboards/81?Website=www.dyson.com.au"
+                WHEN ${ga_sessions.website_selector} = "www.dysoncanada.ca" THEN "/dashboards/81?Website=www.dysoncanada.ca"
+                WHEN ${ga_sessions.website_selector} = "www.dyson.dk" THEN "/dashboards/81?Website=www.dyson.dk"
+                WHEN ${ga_sessions.website_selector} = "www.dyson.es" THEN "/dashboards/81?Website=www.dyson.es"
+                WHEN ${ga_sessions.website_selector} = "www.dyson.fi" THEN "/dashboards/81?Website=www.dyson.fi"
+                WHEN ${ga_sessions.website_selector} = "www.dyson.in" THEN "/dashboards/81?Website=www.dyson.in"
+                WHEN ${ga_sessions.website_selector} = "www.dyson.it" THEN "/dashboards/81?Website=www.dyson.it"
+                WHEN ${ga_sessions.website_selector} = "www.dyson.kr" THEN "/dashboards/81?Website=www.dyson.kr"
+                WHEN ${ga_sessions.website_selector} = "www.dyson.mx" THEN "/dashboards/81?Website=www.dyson.mx"
+                WHEN ${ga_sessions.website_selector} = "www.dyson.nl" THEN "/dashboards/81?Website=www.dyson.nl"
+                WHEN ${ga_sessions.website_selector} = "www.dyson.no" THEN "/dashboards/81?Website=www.dyson.no"
+                WHEN ${ga_sessions.website_selector} = "www.dyson.se" THEN "/dashboards/81?Website=www.dyson.se"
+                WHEN ${ga_sessions.website_selector} = "www.dyson.de" THEN "/dashboards/81?Website=www.dyson.de"
+                WHEN ${ga_sessions.website_selector} = "www.dyson.ru" THEN "/dashboards/81?Website=www.dyson.ru"
 
 
                 WHEN ${ga_sessions.website_selector} = "www.dyson.com" THEN "/dashboards/81?Website=www.dyson.com"  -- Leap countries
-                WHEN ${ga_sessions.website_selector} = "www.dyson.co.uk" THEN "/dashboards/80?Website=www.dyson.co.uk"
-                WHEN ${ga_sessions.website_selector} = "www.dyson.ie" THEN "/dashboards/80?Website=www.dyson.ie"
+                WHEN ${ga_sessions.website_selector} = "www.dyson.co.uk" THEN "/dashboards/81?Website=www.dyson.co.uk"
+                WHEN ${ga_sessions.website_selector} = "www.dyson.ie" THEN "/dashboards/81?Website=www.dyson.ie"
 
 
-                WHEN ${ga_sessions.website_selector} = "www.dyson.co.jp" THEN "/dashboards/85?Region=www.dyson.co.jp" -- First non-leap dashboard
+                WHEN ${ga_sessions.website_selector} = "www.dyson.co.jp" THEN "/dashboards/85?Website=www.dyson.co.jp" -- First non-leap dashboard
 
-                WHEN ${ga_sessions.website_selector} = "www.dyson.cn" THEN "/dashboards/94?Region=www.dyson.cn" -- Something entirely different for China (Tmall dashboard)
+                WHEN ${ga_sessions.website_selector} = "www.dyson.cn" THEN "/dashboards/94?Website=www.dyson.cn" -- Something entirely different for China (Tmall dashboard)
                 ELSE NULL
             END ;;
 
@@ -183,6 +183,55 @@ view: ga_sessions {
         <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/Conversion_Button.png" style="width:480px;"/> </a> ;;
 
     }
+
+
+
+####### AOV  BUTTON #########################################
+
+  dimension: aov_buttons {
+    type: string
+    sql: CASE   WHEN ${ga_sessions.website_selector} = "www.dyson.fr" THEN "/dashboards/42?Region=www.dyson.fr" -- These need to follow what we set for Japan's dashboard
+                WHEN ${ga_sessions.website_selector} = "www.dyson.be" THEN "/dashboards/42?Website=www.dyson.be"
+                WHEN ${ga_sessions.website_selector} = "www.dyson.at" THEN "/dashboards/42?Website=www.dyson.at"
+                WHEN ${ga_sessions.website_selector} = "www.dyson.com.au" THEN "/dashboards/42?Website=www.dyson.com.au"
+                WHEN ${ga_sessions.website_selector} = "www.dysoncanada.ca" THEN "/dashboards/81?Website=www.dysoncanada.ca"
+                WHEN ${ga_sessions.website_selector} = "www.dyson.dk" THEN "/dashboards/42?Website=www.dyson.dk"
+                WHEN ${ga_sessions.website_selector} = "www.dyson.es" THEN "/dashboards/42?Website=www.dyson.es"
+                WHEN ${ga_sessions.website_selector} = "www.dyson.fi" THEN "/dashboards/42?Website=www.dyson.fi"
+                WHEN ${ga_sessions.website_selector} = "www.dyson.in" THEN "/dashboards/42?Website=www.dyson.in"
+                WHEN ${ga_sessions.website_selector} = "www.dyson.it" THEN "/dashboards/42?Website=www.dyson.it"
+                WHEN ${ga_sessions.website_selector} = "www.dyson.kr" THEN "/dashboards/42?Website=www.dyson.kr"
+                WHEN ${ga_sessions.website_selector} = "www.dyson.mx" THEN "/dashboards/42?Website=www.dyson.mx"
+                WHEN ${ga_sessions.website_selector} = "www.dyson.nl" THEN "/dashboards/42?Website=www.dyson.nl"
+                WHEN ${ga_sessions.website_selector} = "www.dyson.no" THEN "/dashboards/42?Website=www.dyson.no"
+                WHEN ${ga_sessions.website_selector} = "www.dyson.se" THEN "/dashboards/42?Website=www.dyson.se"
+                WHEN ${ga_sessions.website_selector} = "www.dyson.de" THEN "/dashboards/42?Website=www.dyson.de"
+                WHEN ${ga_sessions.website_selector} = "www.dyson.ru" THEN "/dashboards/42?Website=www.dyson.ru"
+
+
+                WHEN ${ga_sessions.website_selector} = "www.dyson.com" THEN "/dashboards/42?Website=www.dyson.com"  -- Leap countries
+                WHEN ${ga_sessions.website_selector} = "www.dyson.co.uk" THEN "/dashboards/42?Website=www.dyson.co.uk"
+                WHEN ${ga_sessions.website_selector} = "www.dyson.ie" THEN "/dashboards/42?Website=www.dyson.ie"
+
+
+                WHEN ${ga_sessions.website_selector} = "www.dyson.co.jp" THEN "/dashboards/42?Region=www.dyson.co.jp" -- First non-leap dashboard
+
+                WHEN ${ga_sessions.website_selector} = "www.dyson.cn" THEN "/dashboards/42?Region=www.dyson.cn" -- Something entirely different for China (Tmall dashboard)
+                ELSE NULL
+            END ;;
+
+# Change above code for dashboard's location
+# Change second line for button image
+
+      html: <a href="{{ ga_sessions.aov_buttons._value | encode_url }}">
+        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/AOV_Button.png" style="width:480px;"/> </a> ;;
+
+    }
+
+
+
+
+
 
 
 
