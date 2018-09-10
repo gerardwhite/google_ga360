@@ -313,13 +313,13 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
 
 
   dimension: country_rankage {
-    type: number
-    sql: case when ${country_rank} = 1 then "1st"
-              when ${country_rank} = 2 then "2nd"
-              when ${country_rank} = 3 then "3rd"
-              when ${country_rank} = 22 then "22nd"
+    type: string
+    sql: case when ${country} = 'China' then "1st"
+              when ${country} = 'United States' then "2nd"
+              when ${country} = 'United Kingdom' then "3rd"
+              when ${country} = 'Finland' then "22nd" -- 22nd breaks 'th' rule.
 
- else concat(${country_rank},"th") -- adds "th" to all other conditions (e.g. 4th, 5th, 6th, 7th etc...
+ else  CONCAT(CAST(${country_rank} AS STRING), "th") -- adds country rankage + "th" to everything else
           end;;
   }
 
