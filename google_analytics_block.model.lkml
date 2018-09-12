@@ -32,6 +32,17 @@ datagroup: retail_datagroup {
   }
 
 
+datagroup: realtime_datagroup {
+  max_cache_age: "1 hour"
+  sql_trigger: SELECT
+              (select count(*)  FROM `dyson-ga:15753450.ga_realtime_sessions_20180912` )
+              +
+              (select count(*) FROM `dyson-ga:15753478.ga_realtime_sessions_20180912` ) ;;
+}
+
+
+
+
 explore: rt_web_sessions {
   label: "Adobe"
   group_label: "E-Commerce"
@@ -240,7 +251,13 @@ explore: tmall {
 }
 
 
+########## GA Realtime ####################
 
+explore: ga_realtime_all {
+  group_label: "E-Commerce"
+  label: "Google Analytics | Realtime"
+
+}
 
 
 # Joins pages on lookup to URL
