@@ -66,6 +66,12 @@ view: ga_realtime_today {
     sql: ${TABLE}.visitStartTime ;;
   }
 
+# Converts the BigQuery POSIX date format back to hours minutes and seconds.
+  dimension: start_test {
+    type: date_time
+    sql: TIMESTAMP_SECONDS(${TABLE}.visitStartTime) ;;
+  }
+
   dimension: visits {
     type: number
     sql: ${TABLE}.visits ;;
@@ -81,6 +87,9 @@ view: ga_realtime_today {
     type: string
     sql: ${TABLE}.website ;;
   }
+
+
+
 
 
 
