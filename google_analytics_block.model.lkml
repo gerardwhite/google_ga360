@@ -31,14 +31,14 @@ datagroup: retail_datagroup {
               (select count(*) FROM `dyson-ga.ao_looker_test.Footfall` ) ;;
   }
 
-datagroup: realtime_datagroup {
-  max_cache_age: "1 hour"
-  sql_trigger: SELECT
-              (select count(*)  FROM `dyson-ga:15753450.ga_realtime_sessions_20180912` )
-              +
-              (select count(*) FROM `dyson-ga:15753478.ga_realtime_sessions_20180912` ) ;;
-}
-
+# We'll use this trigger when we join realtime today to last year
+# datagroup: realtime_datagroup {
+#   max_cache_age: "1 hour"
+#   sql_trigger: SELECT
+#               (select count(*)  FROM `dyson-ga.ao_looker_test.ga_realtime_today` )
+#               +
+#               (select count(*) FROM `dyson-ga.ao_looker_test.ga_realtime_today` ) -- update this for realtime last year ;;
+# }
 
 
 

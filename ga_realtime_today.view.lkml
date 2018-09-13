@@ -1,5 +1,7 @@
 view: ga_realtime_today {
+
   sql_table_name: ao_looker_test.ga_realtime_today ;;
+
 
   dimension: bounces {
     type: number
@@ -61,16 +63,21 @@ view: ga_realtime_today {
     sql: ${TABLE}.uploadTime ;;
   }
 
-  dimension: start {
-    type: number
-    sql: ${TABLE}.visitStartTime ;;
-  }
 
-# Converts the BigQuery POSIX date format back to hours minutes and seconds.
-  dimension: start_test {
+# Converts the BigQuery POSIX date format back to hours minutes and seconds in UTC format.
+  dimension: start_time {
     type: date_time
     sql: TIMESTAMP_SECONDS(${TABLE}.visitStartTime) ;;
   }
+
+  dimension_group: date {
+    type: time
+    datatype: date
+    timeframes: [date, week,month, month_name, year, day_of_week, hour_of_day, time_of_day, time]
+    sql: ${start_time} ;;
+  }
+
+
 
   dimension: visits {
     type: number
