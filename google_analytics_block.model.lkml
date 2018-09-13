@@ -13,7 +13,7 @@ datagroup: bqml_datagroup {
 
 datagroup: sap_datagroup {
   max_cache_age: "1 hour"
-  # GW: Datagroup to define a change in any of the SAP Data sources
+  # Counts the size of the data group tables and looks for a change here.
   sql_trigger: SELECT
               (select count(*)  FROM `dyson-ga.ao_looker_test.SAP` )
               +
@@ -22,7 +22,7 @@ datagroup: sap_datagroup {
               (select count(*) FROM `dyson-ga.ao_looker_test.sap_budget` ) ;;
 }
 
-# AO: retail_datagroup logic copied from GW example above.
+
 datagroup: retail_datagroup {
   max_cache_age: "1 hour"
   sql_trigger: SELECT
@@ -30,7 +30,6 @@ datagroup: retail_datagroup {
               +
               (select count(*) FROM `dyson-ga.ao_looker_test.Footfall` ) ;;
   }
-
 
 datagroup: realtime_datagroup {
   max_cache_age: "1 hour"
@@ -202,37 +201,37 @@ explore: gfk {
 ################# Pre- filtered for Oxford Street 14 days ago #####
 # will join after testing in explores #############################
 
-explore: retail  {
-  persist_for: "1 hour"
-  group_label: "Retail"
-  label: "Retail | Sales"
-  always_filter: {
-    filters: {
-      field: retail.date_date
-      value: "14 days ago for 14 days"
-    }
-    filters: {
-      field: retail.store
-      value: "Oxford Street"
-    }
-  }
-}
-
-explore: footfall  {
-  persist_for: "1 hour"
-  group_label: "Retail"
-  label: "Retail | Footfall"
-  always_filter: {
-    filters: {
-      field: footfall.date_date
-      value: "14 days ago for 14 days"
-    }
-    filters: {
-      field: footfall.store
-      value: "Oxford Street"
-    }
-  }
-}
+# explore: retail  {
+#   persist_for: "1 hour"
+#   group_label: "Retail"
+#   label: "Retail | Sales"
+#   always_filter: {
+#     filters: {
+#       field: retail.date_date
+#       value: "14 days ago for 14 days"
+#     }
+#     filters: {
+#       field: retail.store
+#       value: "Oxford Street"
+#     }
+#   }
+# }
+#
+# explore: footfall  {
+#   persist_for: "1 hour"
+#   group_label: "Retail"
+#   label: "Retail | Footfall"
+#   always_filter: {
+#     filters: {
+#       field: footfall.date_date
+#       value: "14 days ago for 14 days"
+#     }
+#     filters: {
+#       field: footfall.store
+#       value: "Oxford Street"
+#     }
+#   }
+# }
 
 # Unions all retail datasets using GW's data logic from SAP example:
 
@@ -253,7 +252,7 @@ explore: tmall {
 
 ########## GA Realtime ####################
 
-explore: ga_realtime_all {
+explore: ga_realtime_today {
   group_label: "E-Commerce"
   label: "Google Analytics | Realtime"
 
