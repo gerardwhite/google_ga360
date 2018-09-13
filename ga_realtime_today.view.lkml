@@ -61,7 +61,7 @@ view: ga_realtime_today {
     sql: ${TABLE}.uploadTime ;;
   }
 
-  dimension: visit_start_time {
+  dimension: start {
     type: number
     sql: ${TABLE}.visitStartTime ;;
   }
@@ -81,6 +81,8 @@ view: ga_realtime_today {
     type: string
     sql: ${TABLE}.website ;;
   }
+
+
 
   measure: count {
     type: count
