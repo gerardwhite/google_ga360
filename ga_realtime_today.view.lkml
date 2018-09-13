@@ -31,9 +31,19 @@ view: ga_realtime_today {
     sql: ${TABLE}.pageviews ;;
   }
 
+  measure: total_pageviews {
+    type: sum
+    sql: ${pageviews} ;;
+  }
+
   dimension: revenue {
     type: number
     sql: ${TABLE}.revenue ;;
+  }
+
+  measure: local_revenue {
+    type: sum
+    sql: ${revenue} ;;
   }
 
   dimension: source {
@@ -60,6 +70,12 @@ view: ga_realtime_today {
     type: number
     sql: ${TABLE}.visits ;;
   }
+
+  measure: total_visits {
+    type: sum
+    sql: ${visits} ;;
+  }
+
 
   dimension: website {
     type: string
