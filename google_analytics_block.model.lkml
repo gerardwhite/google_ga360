@@ -206,9 +206,16 @@ explore: gfk {
 explore: retail_next {
   persist_for: "30 minutes"
   group_label: "Retail"
-  label: "Retail | Footfall"
-
+  description: "Data collected by retail next for certain Dyson retail stores (not all). Collects entry and exit signals for people passing through our stores.
+  Joins this to weather feed for associated store location."
+  label: "Retail | Footfall & Weather"
+  join: weather_by_store {
+    relationship: many_to_one
+    sql_on: ${retail_next.store} = ${weather_by_store.store} ;;
+  }
 }
+
+
 
 
 
