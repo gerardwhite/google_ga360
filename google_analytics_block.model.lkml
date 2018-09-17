@@ -202,6 +202,16 @@ explore: gfk {
 ################# Pre- filtered for Oxford Street 14 days ago #####
 # will join after testing in explores #############################
 
+
+explore: retail_next {
+  persist_for: "30 minutes"
+  group_label: "Retail"
+  label: "Retail | Footfall"
+
+}
+
+
+
 # explore: retail  {
 #   persist_for: "1 hour"
 #   group_label: "Retail"

@@ -36,6 +36,19 @@ view: retail_next {
     ;;
   }
 
+
+  dimension: city {
+    type: string
+    sql: CASE
+          WHEN ${location} = "Yorkdale Mall" then "Toronto"
+          WHEN ${location} = "Tyson's Corner" then "Arlington"
+          ELSE ${location}
+          END
+          ;;
+  }
+
+
+
   dimension: metric {
     type: string
     sql: ${TABLE}.metric ;;
