@@ -42,6 +42,7 @@ dimension_group: date_and_times {
     day_of_week,
     week,
     month,
+    month_name,
     quarter,
     year
   ]
