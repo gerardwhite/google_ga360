@@ -1357,9 +1357,18 @@ dimension: channel_comparison {
   }
 
 
+  # Gets the current timestamp.  For latency testing purposes:
+  dimension: time_now {
+    type: date_time
+    sql: CURRENT_TIMESTAMP() ;;
+  }
 
-
-
+  dimension_group: date_now {
+    type: time
+    datatype: date
+    timeframes: [hour_of_day, time_of_day, hour]
+    sql: ${time_now} ;;
+  }
 
 
 
