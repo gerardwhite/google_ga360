@@ -6,6 +6,7 @@ view: retail_next {
     timeframes: [
       raw,
       date,
+      day_of_week,
       week,
       month,
       quarter,
@@ -16,10 +17,12 @@ view: retail_next {
     sql: ${TABLE}.date ;;
   }
 
-  dimension: hour {
+  dimension: time {
     type: string
     sql: ${TABLE}.hour ;;
   }
+
+
 
   dimension: location {
     type: string
