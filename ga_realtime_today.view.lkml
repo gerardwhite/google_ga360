@@ -78,6 +78,19 @@ view: ga_realtime_today {
   }
 
 
+  # Gets the current timestamp
+  dimension: time_now {
+    type: date_time
+    sql: CURRENT_TIMESTAMP() ;;
+  }
+
+  dimension_group: time_of_now {
+    type: time
+    datatype: date
+    timeframes: [hour_of_day, time_of_day, hour]
+    sql: ${time_now} ;;
+  }
+
 
   dimension: visits {
     type: number
