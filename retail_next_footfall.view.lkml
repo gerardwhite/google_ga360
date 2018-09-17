@@ -26,6 +26,16 @@ view: retail_next {
     sql: ${TABLE}.location ;;
   }
 
+  dimension: store {
+    type: string
+    sql: CASE
+    WHEN ${location} = "London" then "Oxford Street"
+    WHEN ${location} = "Tyson's Corner" then "Tysons Corner"
+    ELSE ${location}
+    END
+    ;;
+  }
+
   dimension: metric {
     type: string
     sql: ${TABLE}.metric ;;
