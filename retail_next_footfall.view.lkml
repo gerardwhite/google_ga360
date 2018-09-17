@@ -23,6 +23,34 @@ view: retail_next {
   }
 
 
+# date and time wanted here!
+
+ dimension: date_and_time {
+   sql: timestamp(concat(cast(${date_date} as string), " ", ${time}, ":00")) ;;
+ }
+
+
+dimension_group: date_and_times {
+
+  type: time
+  timeframes: [
+    raw,
+    date,
+    hour,
+    hour_of_day,
+    day_of_week,
+    week,
+    month,
+    quarter,
+    year
+  ]
+  convert_tz: no
+  datatype: date
+  sql: ${date_and_time} ;;
+
+
+}
+
 
   dimension: location {
     type: string
