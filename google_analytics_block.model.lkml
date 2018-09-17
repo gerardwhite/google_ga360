@@ -171,6 +171,7 @@ explore: ref_date_range {
 #   }
 # }
 
+# SAP all unions in both target and budget data to the actuals.  Check the view sap_all to see how this works.
 explore: sap_all {
   group_label: "SAP"
   label: "SAP | All"
