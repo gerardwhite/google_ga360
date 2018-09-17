@@ -2,6 +2,7 @@ view: retail_next {
   sql_table_name: ao_looker_test.retail_next ;;
 
   dimension_group: date {
+    hidden: yes
     type: time
     timeframes: [
       raw,
@@ -23,7 +24,7 @@ view: retail_next {
   }
 
 
-# date and time wanted here!
+# convert back to string so we can concat.
 
  dimension: date_and_time {
    sql: timestamp(concat(cast(${date_date} as string), " ", ${time}, ":00")) ;;
