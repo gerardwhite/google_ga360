@@ -92,39 +92,39 @@ explore: weekly_global_stats {
 ################## ~ SAP ~~~~~~~~~~~~~~~~~~~~~~~~~~~ ############################
 ################## ~ ALL SAP VIEWS JOINED TOGETHER ~~ ###########################
 
-# Joins sap and 6plus6 together using data array/scaffold
-# Data array/scaffold:
-explore: ref_date_range {
-  group_label: "SAP"
-  label: "SAP | SAP, budget & 6plus6"
-
-# Joins SAP 6plus6 targets to data array at monthly level
-  join: sap_6plus6 {
-    type: left_outer
-    relationship: one_to_one
-    sql_on: ${ref_date_range.date_month}=${sap_6plus6.date_month}
-            AND ${ref_date_range.date_year}=${sap_6plus6.date_year}
-            AND ${ref_date_range.channels} = ${sap_6plus6.channels}
-            AND ${ref_date_range.country} = ${sap_6plus6.country};;
-  }
-# Joins SAP budget figures to data array
-  join: sap_budget {
-    type: left_outer
-    relationship: one_to_one
-    sql_on: ${ref_date_range.date_month}=${sap_budget.date_month}
-            AND ${ref_date_range.date_year}=${sap_budget.date_year}
-            AND ${ref_date_range.channels} = ${sap_budget.channel}
-            AND ${ref_date_range.country} = ${sap_budget.country};;
-  }
-# Joins SAP actuals to data array at daily level
-  join: sap {
-    type: left_outer
-    relationship: one_to_one
-    sql_on: ${ref_date_range.date_date}=${sap.date_date}
-            AND ${ref_date_range.channels} = ${sap.channel}
-            AND ${ref_date_range.country} = ${sap.country};;
-  }
-}
+# # Joins sap and 6plus6 together using data array/scaffold
+# # Data array/scaffold:
+# explore: ref_date_range {
+#   group_label: "SAP"
+#   label: "SAP | SAP, budget & 6plus6"
+#
+# # Joins SAP 6plus6 targets to data array at monthly level
+#   join: sap_6plus6 {
+#     type: left_outer
+#     relationship: one_to_one
+#     sql_on: ${ref_date_range.date_month}=${sap_6plus6.date_month}
+#             AND ${ref_date_range.date_year}=${sap_6plus6.date_year}
+#             AND ${ref_date_range.channels} = ${sap_6plus6.channels}
+#             AND ${ref_date_range.country} = ${sap_6plus6.country};;
+#   }
+# # Joins SAP budget figures to data array
+#   join: sap_budget {
+#     type: left_outer
+#     relationship: one_to_one
+#     sql_on: ${ref_date_range.date_month}=${sap_budget.date_month}
+#             AND ${ref_date_range.date_year}=${sap_budget.date_year}
+#             AND ${ref_date_range.channels} = ${sap_budget.channel}
+#             AND ${ref_date_range.country} = ${sap_budget.country};;
+#   }
+# # Joins SAP actuals to data array at daily level
+#   join: sap {
+#     type: left_outer
+#     relationship: one_to_one
+#     sql_on: ${ref_date_range.date_date}=${sap.date_date}
+#             AND ${ref_date_range.channels} = ${sap.channel}
+#             AND ${ref_date_range.country} = ${sap.country};;
+#   }
+# }
 
 
 
@@ -133,43 +133,43 @@ explore: ref_date_range {
 ################## ~ SINGLE-LEVEL SAP EXPLORES ~~~~~~ ###########################
 
 # # SAP actuals view:
-explore: sap {
-  persist_for: "1 hour"
-  group_label: "SAP"
-  label: "SAP | Actual revenue"
-  always_filter: {
-    filters: {
-      field: sap.date_date
-      value: "30 days ago for 30 days"
-    }
-  }
-}
-# code to exclude fields if required: [ALL_FIELDS*, -sap.percent_of_daily_target_achieved]
-
-# SAP 6+6 targets view:
-explore: sap_6plus6 {
-  persist_for: "1 hour"
-  group_label: "SAP"
-  label: "SAP | Revenue (6+6 LE)"
-  always_filter: {
-    filters: {
-      field: sap_6plus6.date_date
-      value: "30 days ago for 30 days"
-    }
-  }
-}
-# SAP budget for 2018. Use the 6+6 in prefernce to this.
-explore: sap_budget {
-  persist_for: "1 hour"
-  group_label: "SAP"
-  label: "SAP | Budget revenue"
-  always_filter: {
-    filters: {
-      field: sap_budget.date_date
-      value: "30 days ago for 30 days"
-    }
-  }
-}
+# explore: sap {
+#   persist_for: "1 hour"
+#   group_label: "SAP"
+#   label: "SAP | Actual revenue"
+#   always_filter: {
+#     filters: {
+#       field: sap.date_date
+#       value: "30 days ago for 30 days"
+#     }
+#   }
+# }
+# # code to exclude fields if required: [ALL_FIELDS*, -sap.percent_of_daily_target_achieved]
+#
+# # SAP 6+6 targets view:
+# explore: sap_6plus6 {
+#   persist_for: "1 hour"
+#   group_label: "SAP"
+#   label: "SAP | Revenue (6+6 LE)"
+#   always_filter: {
+#     filters: {
+#       field: sap_6plus6.date_date
+#       value: "30 days ago for 30 days"
+#     }
+#   }
+# }
+# # SAP budget for 2018. Use the 6+6 in prefernce to this.
+# explore: sap_budget {
+#   persist_for: "1 hour"
+#   group_label: "SAP"
+#   label: "SAP | Budget revenue"
+#   always_filter: {
+#     filters: {
+#       field: sap_budget.date_date
+#       value: "30 days ago for 30 days"
+#     }
+#   }
+# }
 
 explore: sap_all {
   group_label: "SAP"
