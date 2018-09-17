@@ -36,7 +36,6 @@ view: retail_next {
     ;;
   }
 
-
   dimension: city {
     type: string
     sql: CASE
@@ -47,8 +46,6 @@ view: retail_next {
           ;;
   }
 
-
-
   dimension: metric {
     type: string
     sql: ${TABLE}.metric ;;
@@ -58,6 +55,34 @@ view: retail_next {
     type: number
     sql: ${TABLE}.value ;;
   }
+
+
+measure: total_values {
+  type: sum
+  sql: ${value} ;;
+}
+
+
+  measure: footfall_in {
+    type: sum
+    sql: ${value} ;;
+    filters: {
+      field: metric
+      value: "traffic_in"
+    }
+  }
+
+  measure: footfall_out {
+    type: sum
+    sql: ${value} ;;
+    filters: {
+      field: metric
+      value: "traffic_out"
+    }
+  }
+
+
+
 
   measure: count {
     type: count
