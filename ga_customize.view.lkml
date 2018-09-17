@@ -229,7 +229,11 @@ view: ga_sessions {
     }
 
 
-
+  # Gets the current timestamp.  For latency testing purposes:
+  dimension: time_now {
+    type: date_time
+    sql: CURRENT_TIMESTAMP() ;;
+  }
 
 
 
