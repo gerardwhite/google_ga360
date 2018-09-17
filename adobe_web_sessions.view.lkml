@@ -1,6 +1,5 @@
 view: rt_web_sessions {
-#   Fairly sure this is not being used.
-#   Delete if this is the case
+
 
   sql_table_name: `dyson-digitalanalytics-sandbox.dyson_adobe.web_sessions_*` ;;
 
