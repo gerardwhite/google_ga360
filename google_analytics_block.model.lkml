@@ -234,13 +234,9 @@ explore: gfk {
 #   }
 # }
 
-# Unions all retail datasets using GW's data logic from SAP example:
+# Unions all retail datasets using GW's data logic from SAP example.  Masked out as we have a live footfall data.
 
-explore: retail_all {
-  group_label: "Retail"
-  label: "Retail | All"
 
-}
 
 ########### Marketplaces ###################
 
