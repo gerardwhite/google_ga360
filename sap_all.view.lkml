@@ -1366,7 +1366,7 @@ dimension: channel_comparison {
   dimension_group: date_now {
     type: time
     datatype: date
-    timeframes: [hour_of_day, time_of_day, hour]
+    timeframes: [date, hour_of_day, time_of_day, hour]
     sql: ${time_now} ;;
   }
 
