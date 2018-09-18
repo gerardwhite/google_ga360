@@ -223,7 +223,7 @@ view: ga_sessions_base {
 
 
 
-## Added measures for last year week comparison. This is prob the easiest way to do it.
+## Added measures for last year week comparison.
   measure: number_of_visitors_last_week_last_year {
     type: count
     drill_fields: [fullVisitorId, visitnumber, session_count, totals.hits, totals.page_views, totals.timeonsite]
@@ -251,6 +251,9 @@ view: ga_sessions_base {
     value_format_name: percent_2
     drill_fields: [fullVisitorId, visitnumber, session_count, totals.hits, totals.page_views, totals.timeonsite]
   }
+
+
+
 
 
 
@@ -752,15 +755,33 @@ measure: conv_rate_last_week {
     }
   }
 
-
-
-
   measure: revenue_diff_lw_vs_lwly {
     type: number
     sql: 1.0 * ${transactionRevenue_total_gbp_last_week} / NULLIF(${transactionRevenue_total_gbp_last_week_last_year},0) ;;
     value_format_name: percent_0
   }
 
+
+############# AOV metrics #############################
+
+measure: aov_last_week {
+  type: number
+  value_format_name: gbp_0
+  sql: ${transactionRevenue_total_gbp_last_week}/${transactions_last_week} ;;
+}
+
+  measure: aov_last_week_last_year {
+    type: number
+    value_format_name: gbp_0
+
+    sql: ${transactionRevenue_total_gbp_last_week_last_year}/${transactions_last_week_last_year} ;;
+  }
+
+measure: aov_diff_lw_vs_lwly {
+  type: number
+  sql: 1.0 * ${aov_last_week} / NULLIF(${aov_last_week_last_year},0) ;;
+  value_format_name: percent_0
+  }
 
 
 #################### Time on site metrics ##########################
