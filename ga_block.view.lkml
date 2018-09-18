@@ -971,6 +971,21 @@ view: device_base {
   dimension: operatingSystemVersion {label: "Operating System Version"}
   dimension: isMobile {label: "Is Mobile" type: yesno}
   dimension: deviceCategory {label: "Device Category"}
+
+  # Adds icons for device types
+  dimension: device_icon {
+    type: string
+    sql: CASE WHEN ${deviceCategory} = "mobile" then "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/mobile.png"
+              WHEN ${deviceCategory} = "tablet" then "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/Tablet.png"
+              WHEN ${deviceCategory} = "desktop" then "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/PC.png"
+              ELSE null
+              END;;
+
+    html: <img src="{{ value }}" style="height:70px;"/> ;;
+  }
+
+
+
   dimension: flashVersion {label: "Flash Version"}
   dimension: javaEnabled {
     label: "Java Enabled"
