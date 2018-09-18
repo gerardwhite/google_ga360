@@ -34,6 +34,7 @@ view: retail_next {
 dimension_group: date_and_times {
 
   type: time
+  description: "Date and times in UTC format"
   timeframes: [
     raw,
     date,
@@ -50,8 +51,42 @@ dimension_group: date_and_times {
   datatype: date
   sql: ${date_and_time} ;;
 
+}
+
+# Gets current time (UTC)
+  dimension: time_now {
+  type: date_time
+  sql: CURRENT_TIMESTAMP() ;;
+  }
+
+
+# Adjustment factor from UTC time to local time.  Needs completing for different office locations:
+# Looks like retail next may already have been converted to local times.  So use this logic for weather data.
+dimension: time_zone_adjustment {
+  type: number
+  sql: CASE WHEN ${city} = "San Francisco" THEN -7
+            WHEN ${city} = "New York" THEN -5
+            WHEN ${city} = "Tokyo" THEN +9
+            WHEN ${city} = "London" THEN +9
+            ELSE 0
+            END;;
+}
+
+# Converts hour of day into local equivalent
+dimension: local_hour_of_day {
+  hidden: no
+  type: number
+  sql: ${date_and_times_hour_of_day}+${time_zone_adjustment} ;;
+}
+
+
+# Converts minus amounts into 24 equivalents
+dimension: local_hour_of_day24 {
+  type: number
+  sql: if(${local_hour_of_day}<0,(24+${local_hour_of_day}),${local_hour_of_day}) ;;
 
 }
+
 
 
   dimension: location {
