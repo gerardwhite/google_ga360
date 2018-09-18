@@ -974,6 +974,7 @@ view: device_base {
 
   # Adds icons for device types
   dimension: device_icon {
+    label: "Device"
     type: string
     sql: CASE WHEN ${deviceCategory} = "mobile" then "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/mobile.png"
               WHEN ${deviceCategory} = "tablet" then "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/Tablet.png"
@@ -981,7 +982,7 @@ view: device_base {
               ELSE null
               END;;
 
-    html: <img src="{{ value }}" style="height:70px;"/> ;;
+    html: <img src="{{ value }}" style="height:30px;"/> ;;
   }
 
 
