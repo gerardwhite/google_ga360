@@ -59,14 +59,31 @@ view: weather_by_store {
   }
 
 
-
-
-
 # Gets current time (UTC)
   dimension: time_now {
     type: date_time
     sql: CURRENT_TIMESTAMP() ;;
   }
+
+
+  dimension_group: current_time {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      time_of_day,
+      hour,
+      hour_of_day,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: CURRENT_TIMESTAMP() ;;
+  }
+
+
 
 
 # Adjustment factor from UTC time to local time.  Needs completing for different office locations:
@@ -97,10 +114,12 @@ view: weather_by_store {
   }
 
 
-#   dimension: local_time_now {
-#     type: date_time
-#     sql: DATE_ADD(${time_now}, -7, "HOUR") ;;
-#   }
+
+ # Need to ask Gerard about UTC to regional timezones.
+  dimension: local_time_now {
+    type: date_time
+    sql: DATE_ADD(${time_now}, ${time_zone_adjustment}, "HOUR") ;;
+  }
 
 
 
