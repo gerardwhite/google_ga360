@@ -1,4 +1,4 @@
-view: robot_viz_contest {
+view: robot_viz_contest_gw {
   sql_table_name: ao_looker_test.robot_viz_contest ;;
 
 # Is there a way to calculate an end-time based on these duration fields and the start-time?
