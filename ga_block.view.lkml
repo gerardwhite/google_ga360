@@ -781,6 +781,15 @@ measure: aov_diff_lw_vs_lwly {
   type: number
   sql: 1.0 * ${aov_last_week} / NULLIF(${aov_last_week_last_year},0) ;;
   value_format_name: percent_0
+
+  html:
+  {% if value <= 20 %}
+  <div style="color: white; background-color: darkred; font-size: 100%; text-align:center">{{ rendered_value }}</div>
+  {% elsif value <= 50 %}
+  <div style="color: black; background-color: goldenrod; font-size: 100%; text-align:center">{{ rendered_value }}</div>
+  {% else %}
+  <div style="color: white; background-color: darkgreen; font-size: 100%; text-align:center">{{ rendered_value }}</div>
+  {% endif %} ;;
   }
 
 
@@ -821,6 +830,8 @@ measure: aov_diff_lw_vs_lwly {
     sql: 1.0 * ${timeonsite_total_last_week_last_year} / NULLIF(${ga_sessions.number_of_visitors_last_week_last_year},0) ;;
     value_format_name: decimal_2
   }
+
+
 
 
 
