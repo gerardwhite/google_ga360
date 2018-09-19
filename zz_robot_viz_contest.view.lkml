@@ -91,6 +91,7 @@ view: robot_viz_contest {
     sql: ${TABLE}.serial_ref ;;
   }
 
+  # Seems like they all have the same start location?  Not sure we can do much with this field.
   dimension: start_location {
     type: string
     sql: ${TABLE}.start_location ;;
@@ -101,6 +102,9 @@ view: robot_viz_contest {
     timeframes: [
       raw,
       time,
+      time_of_day,
+      hour,
+      hour_of_day,
       date,
       week,
       month,
@@ -119,6 +123,36 @@ view: robot_viz_contest {
     type: number
     sql: ${TABLE}.stuck_occurrences ;;
   }
+
+  #############   Calculated fields ##########
+
+  measure: number_of_machines {
+    type: count_distinct
+    sql: ${serial_ref} ;;
+  }
+
+  measure: number_of_cleans {
+    type: count_distinct
+    sql: ${cleanid} ;;
+  }
+
+  measure: average_cleans_per_machine {
+    type: number
+    sql: ${number_of_cleans}/${number_of_machines} ;;
+  }
+
+  # Can we convert this seconds number to hours and days?
+  measure: total_cleaning_time {
+    type: sum
+    sql: ${active_cleaning_duration} ;;
+  }
+
+  measure: total_cleaning_area {
+    type: sum
+    sql: ${estimated_coverage_area} ;;
+
+  }
+
 
   measure: count {
     type: count
