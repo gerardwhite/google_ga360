@@ -783,12 +783,10 @@ measure: aov_diff_lw_vs_lwly {
   value_format_name: percent_0
 
   html:
-  {% if value <= 20 %}
-  <div style="color: white; background-color: darkred; font-size: 100%; text-align:center">{{ rendered_value }}</div>
-  {% elsif value <= 50 %}
-  <div style="color: black; background-color: goldenrod; font-size: 100%; text-align:center">{{ rendered_value }}</div>
+  {% if value > 0 %}
+  <div style="color: #5f9524; "> ▲ {{ rendered_value }}</div>
   {% else %}
-  <div style="color: white; background-color: darkgreen; font-size: 100%; text-align:center">{{ rendered_value }}</div>
+  <div style="color: #dd4157; "> ▼ {{ rendered_value }}</div>
   {% endif %} ;;
   }
 
@@ -1097,9 +1095,6 @@ view: hits_base {
     fields: [ga_sessions.id, ga_sessions.visitnumber, ga_sessions.session_count, hits_page.pagePath, hits.pageTitle]
   }
 }
-
-
-
 
 
 
