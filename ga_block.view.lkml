@@ -234,6 +234,9 @@ view: ga_sessions_base {
     }
   }
 
+
+
+
   measure: number_of_visitors_last_week {
     type: count
     drill_fields: [fullVisitorId, visitnumber, session_count, totals.hits, totals.page_views, totals.timeonsite]
@@ -250,6 +253,12 @@ view: ga_sessions_base {
     sql: 1.0 * ((${number_of_visitors_last_week}-${number_of_visitors_last_week_last_year})/NULLIF(${number_of_visitors_last_week_last_year},0))  ;;
     value_format_name: percent_2
     drill_fields: [fullVisitorId, visitnumber, session_count, totals.hits, totals.page_views, totals.timeonsite]
+    html:
+    {% if value > 0 %}
+    <div style="color: #5f9524; "> ▲ {{ rendered_value }}</div>
+    {% else %}
+    <div style="color: #dd4157; "> ▼ {{ rendered_value }}</div>
+    {% endif %} ;;
   }
 
 
@@ -703,6 +712,13 @@ measure: conv_rate_last_week {
     type: number
     sql: ${conv_rate_last_week}-${conv_rate_last_week_last_year} ;;
     value_format_name: percent_2
+    html:
+    {% if value > 0 %}
+    <div style="color: #5f9524; "> ▲ {{ rendered_value }}</div>
+    {% else %}
+    <div style="color: #dd4157; "> ▼ {{ rendered_value }}</div>
+    {% endif %} ;;
+
   }
 
 
@@ -759,6 +775,13 @@ measure: conv_rate_last_week {
     type: number
     sql: 1.0 * ${transactionRevenue_total_gbp_last_week} / NULLIF(${transactionRevenue_total_gbp_last_week_last_year},0) ;;
     value_format_name: percent_0
+    html:
+    {% if value > 0 %}
+    <div style="color: #5f9524; "> ▲ {{ rendered_value }}</div>
+    {% else %}
+    <div style="color: #dd4157; "> ▼ {{ rendered_value }}</div>
+    {% endif %} ;;
+
   }
 
 
