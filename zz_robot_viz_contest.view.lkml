@@ -132,7 +132,7 @@ view: robot_viz_contest {
     sql: ${TABLE}.start_location ;;
   }
 
-  dimension_group: start_time_utc {
+  dimension_group: utc {
     type: time
     timeframes: [
       raw,
@@ -143,6 +143,7 @@ view: robot_viz_contest {
       date,
       week,
       month,
+      month_name,
       quarter,
       year
     ]
@@ -163,30 +164,62 @@ view: robot_viz_contest {
 
   measure: number_of_machines {
     type: count_distinct
+    group_label: "Custom fields"
     sql: ${serial_ref} ;;
   }
 
   measure: number_of_cleans {
     type: count_distinct
+    group_label: "Custom fields"
     sql: ${cleanid} ;;
   }
 
   measure: average_cleans_per_machine {
     type: number
+    group_label: "Custom fields"
     sql: ${number_of_cleans}/${number_of_machines} ;;
+    value_format_name: decimal_2
   }
+
 
   # Can we convert this seconds number to hours and days?
   measure: total_cleaning_time {
     type: sum
+    group_label: "Custom fields"
     sql: ${active_cleaning_duration} ;;
   }
 
   measure: total_cleaning_area {
     type: sum
+    group_label: "Custom fields"
     sql: ${estimated_coverage_area} ;;
 
   }
+
+
+  ######### Custom data-level measures ########
+
+  measure: cleans_last_month {
+    type: count_distinct
+    group_label: "Custom fields"
+    sql: ${cleanid} ;;
+    filters: {
+      field: utc_month
+      value: "last month"
+    }
+  }
+
+  measure: cleans_previous_month {
+    type: count_distinct
+    group_label: "Custom fields"
+    sql: ${cleanid} ;;
+    filters: {
+      field: utc_month
+      value: "2 months ago"
+    }
+  }
+
+
 
 
   measure: count {
