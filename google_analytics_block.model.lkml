@@ -371,6 +371,18 @@ explore: tmall_products {
   label: "Tmall | Product Performance"
 }
 
+################## Robot viz contest - DELETE AFTER SUMMIT ####
+
+
+explore: robot_viz_contest {
+  persist_for: "1 hour"
+  group_label: "Robot Viz Contest"
+  label: "Robot viz | Deletes after summit"
+}
+
+
+
+
 ################## DATA SCIENCE/BQML ########################
 
 
