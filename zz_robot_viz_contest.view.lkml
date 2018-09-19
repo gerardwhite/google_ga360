@@ -16,6 +16,23 @@ view: robot_viz_contest {
     sql: ${TABLE}.country_code ;;
   }
 
+  dimension: country {
+    sql: CASE
+    WHEN ${country_code} = "US" THEN "United States"
+    WHEN ${country_code} = "CN" THEN "China"
+    WHEN ${country_code} = "EU" THEN "Germany"
+    WHEN ${country_code} = "UK" THEN "United Kingdom"
+    WHEN ${country_code} = "CA" THEN "Canada"
+    WHEN ${country_code} = "JP" THEN "Japan"
+    WHEN ${country_code} = "XC" THEN "Malaysia"
+    ELSE ${country_code}
+    END
+
+
+    ;;
+  }
+
+
   dimension: detailed_timings_cleaning {
     type: number
     sql: ${TABLE}.detailed_timings_cleaning ;;
