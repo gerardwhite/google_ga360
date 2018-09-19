@@ -27,10 +27,28 @@ view: robot_viz_contest {
     WHEN ${country_code} = "XC" THEN "Malaysia"
     ELSE ${country_code}
     END
-
-
     ;;
   }
+
+
+
+
+  dimension: website {
+    type: string
+    sql: CASE
+                WHEN ${country} = "Canada" THEN "www.dysoncanada.ca"
+                WHEN ${country} = "China" THEN "www.dyson.cn"
+                WHEN ${country} = "United States" THEN "www.dyson.com"
+                WHEN ${country} = "Japan" THEN "www.dyson.co.jp"
+                WHEN ${country} = "Malaysia" THEN "www.dyson.kr"
+                WHEN ${country} = "United Kingdom" THEN "www.dyson.co.uk"
+                WHEN ${country} = "Germany" THEN "www.dyson.de"
+                ELSE NULL
+            END ;;
+  }
+
+
+
 
 
   dimension: detailed_timings_cleaning {
