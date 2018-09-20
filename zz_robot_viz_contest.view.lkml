@@ -110,7 +110,7 @@ view: robot_viz_contest {
 
     # Adds drill down links to SAP
     link: {
-      label: "{{robot_viz_contest._value}} SAP report"
+      label: "{{robot_viz_contest.country_value}} SAP report"
       url: "/dashboards/69?Country={{ robot_viz_contest._value | encode_uri }}"
       icon_url: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/SAPfavicon.ico"
     }
@@ -323,7 +323,12 @@ view: robot_viz_contest {
 
  }
 
-
+# Converts seconds foramt to days, hours, minutes and seconds.  Can we get a more human-readable version?
+measure: clean_time_days_hours_minutes_seconds {
+  type: number
+  sql:  ${total_cleaning_time} / 86400.0 ;;
+  value_format: "dd:hh:mm:ss"
+}
 
 
 
