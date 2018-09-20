@@ -60,6 +60,10 @@ dimension_group: date_and_times {
   }
 
 
+
+# TIME ZONE ADJUSTMENT NEEDS FIXING!!! ###
+
+
 # Adjustment factor from UTC time to local time.  Needs completing for different office locations:
 # Looks like retail next may already have been converted to local times.  So use this logic for weather data.
 dimension: time_zone_adjustment {
