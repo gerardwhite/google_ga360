@@ -31,8 +31,6 @@ view: robot_viz_contest {
   }
 
 
-
-
   dimension: website {
     type: string
     sql: CASE
@@ -47,6 +45,25 @@ view: robot_viz_contest {
             END ;;
   }
 
+
+# Flags AND drill-down to pre-created SAP reports
+
+  dimension: country_icon_large {
+    type: string
+    sql: case when ${country} = 'United Kingdom' then 'United-Kingdom'
+              when ${country} = 'United States' then 'United-States'
+              when ${country} = 'New Zealand' then 'New Zealand'
+              else ${country}
+          end;;
+    html: <img src="http://icons.iconarchive.com/icons/gosquared/flag/64/{{ value }}-icon.png" /> ;;
+
+    # Adds drill down links to country SAP report.
+    link: {
+      label: "{{sap_all.country._value}} SAP report"
+      url: "/dashboards/69?Country={{ sap_all.country._value | encode_uri }}"
+      icon_url: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/SAPfavicon.ico"
+    }
+  }
 
 
 

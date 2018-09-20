@@ -378,6 +378,14 @@ explore: robot_viz_contest {
   persist_for: "1 hour"
   group_label: "Robot Viz Contest"
   label: "Robot viz | Deletes after summit"
+
+  # Pre-filter added for date to keep queries running faster
+  always_filter: {
+    filters: {
+      field: robot_viz_contest.utc_date
+      value: "last month"
+    }
+  }
 }
 
 
