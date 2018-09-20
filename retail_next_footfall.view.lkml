@@ -67,7 +67,7 @@ dimension: time_zone_adjustment {
   sql: CASE WHEN ${city} = "San Francisco" THEN -7
             WHEN ${city} = "New York" THEN -5
             WHEN ${city} = "Tokyo" THEN +9
-            WHEN ${city} = "London" THEN +9
+            WHEN ${city} = "London" THEN +1
             ELSE 0
             END;;
 }
