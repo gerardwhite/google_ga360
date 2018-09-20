@@ -79,6 +79,7 @@ view: robot_viz_contest {
               when ${country} = 'Japan' then 'jpn'
               when ${country} = 'United States' then 'usa'
               when ${country} = 'Canada' then 'can'
+              when ${country} = 'Malaysia' then 'mys'
               when ${country} = 'Spain' then 'esp'
               when ${country} = 'Sweden' then 'swe'
               when ${country} = 'Norway' then 'nor'
@@ -289,7 +290,6 @@ view: robot_viz_contest {
     }
   }
 
-
   measure: change_in_cleans_lmmth_vs_previousmnth {
     type: number
     group_label: "Custom fields"
@@ -303,6 +303,27 @@ view: robot_viz_contest {
       <div style="color: #dd4157; "> ▼ {{ rendered_value }}</div>
       {% endif %} ;;
   }
+
+  # Used to calculate active machines last month
+   measure: number_of_active_machines_last_month {
+    type: count_distinct
+    group_label: "Custom fields"
+    sql: ${serial_ref} ;;
+    filters: {
+      field: utc_month
+      value: "last month"
+    }
+  }
+
+ measure: percent_of_machines_in_the_wild_active_last_month {
+   type: number
+   group_label: "Custom fields"
+  sql: 1.0 * ${number_of_active_machines_last_month} / NULLIF(${number_of_machines},0) ;;
+  value_format_name: percent_1
+
+ }
+
+
 
 
 
