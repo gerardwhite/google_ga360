@@ -46,9 +46,11 @@ view: robot_viz_contest {
   }
 
 
-# Flags AND drill-down to pre-created SAP reports
+################## FLAGS           ############################################
+################## LARGE PNG FLAG  ############################################
 
-  dimension: country_icon_large {
+  dimension: region_flag_large {
+    label: "Region (approx.)"
     type: string
     sql: case when ${country} = 'United Kingdom' then 'United-Kingdom'
               when ${country} = 'United States' then 'United-States'
@@ -59,11 +61,62 @@ view: robot_viz_contest {
 
     # Adds drill down links to country SAP report.
     link: {
-      label: "{{sap_all.country._value}} SAP report"
-      url: "/dashboards/69?Country={{ sap_all.country._value | encode_uri }}"
+      label: "{{robot_viz_contest.country._value}} SAP report"
+      url: "/dashboards/69?Country={{ robot_viz_contest.country._value | encode_uri }}"
       icon_url: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/SAPfavicon.ico"
     }
   }
+
+
+################## SMALL SVG FLAG  ############################################
+
+# SVGs more performant for the data tables.  We don't need all the region codes here.
+  dimension: country_icon {
+    type: string
+    sql: case when ${country} = 'United Kingdom' then 'gbr'
+              when ${country} = 'Germany' then 'deu'
+              when ${country} = 'France' then 'fra'
+              when ${country} = 'Japan' then 'jpn'
+              when ${country} = 'United States' then 'usa'
+              when ${country} = 'Canada' then 'can'
+              when ${country} = 'Spain' then 'esp'
+              when ${country} = 'Sweden' then 'swe'
+              when ${country} = 'Norway' then 'nor'
+              when ${country} = 'Denmark' then 'dnk'
+              when ${country} = 'Austria' then 'aut'
+              when ${country} = 'Australia' then 'aus'
+              when ${country} = 'Belguim' then 'bel'
+              when ${country} = 'Belgium' then 'bel'
+              when ${country} = 'Italy' then 'ita'
+              when ${country} = 'Korea' then 'kor'
+              when ${country} = 'China' then 'chn'
+              when ${country} = 'Switzerland' then 'che'
+              when ${country} = 'Russia' then 'rus'
+              when ${country} = 'Mexico' then 'mex'
+              when ${country} = 'Brazil' then 'bra'
+              when ${country} = 'Netherlands' then 'nld'
+              when ${country} = 'Poland' then 'pol'
+              when ${country} = 'India' then 'ind'
+              when ${country} = 'Hong Kong' then 'hkg'
+              when ${country} = 'Ireland' then 'irl'
+              when ${country} = 'Finland' then 'fin'
+              when ${country} = 'Singapore' then 'sgp'
+              when ${country} = 'New Zealand' then 'nzl'
+
+ else null
+          end;;
+    html: <img src="https://restcountries.eu/data/{{ value }}.svg" style="width:50px;height:30px;"/> ;;
+
+    # Adds drill down links to SAP
+    link: {
+      label: "{{robot_viz_contest._value}} SAP report"
+      url: "/dashboards/69?Country={{ robot_viz_contest._value | encode_uri }}"
+      icon_url: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/SAPfavicon.ico"
+    }
+  }
+
+
+#####################  END OF FLAGS  ###############################################################
 
 
 
@@ -216,7 +269,7 @@ view: robot_viz_contest {
 
   ######### Custom data-level measures ########
 
-  measure: cleans_last_month {
+  measure: total_cleans_last_month {
     type: count_distinct
     group_label: "Custom fields"
     sql: ${cleanid} ;;
@@ -226,7 +279,7 @@ view: robot_viz_contest {
     }
   }
 
-  measure: cleans_previous_month {
+  measure: total_cleans_previous_month {
     type: count_distinct
     group_label: "Custom fields"
     sql: ${cleanid} ;;
@@ -234,6 +287,21 @@ view: robot_viz_contest {
       field: utc_month
       value: "2 months ago"
     }
+  }
+
+
+  measure: change_in_cleans_lmmth_vs_previousmnth {
+    type: number
+    group_label: "Custom fields"
+    sql: 1.0 * ${total_cleans_last_month} / NULLIF(${total_cleans_previous_month},0) ;;
+    value_format_name: percent_1
+
+    html:
+      {% if value > 1 %}
+      <div style="color: #5f9524; "> ▲ {{ rendered_value }}</div>
+      {% else %}
+      <div style="color: #dd4157; "> ▼ {{ rendered_value }}</div>
+      {% endif %} ;;
   }
 
 
