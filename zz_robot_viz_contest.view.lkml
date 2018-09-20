@@ -262,9 +262,10 @@ view: robot_viz_contest {
 
   measure: total_cleaning_area {
     type: sum
+    value_format: "0.00,,\" M m2\""
     group_label: "Custom fields"
     sql: ${estimated_coverage_area} ;;
-
+    html: £{{rendered_value}} ;;
   }
 
 
@@ -325,6 +326,7 @@ view: robot_viz_contest {
 
 # Converts seconds foramt to days, hours, minutes and seconds.  Can we get a more human-readable version?
 measure: clean_time_days_hours_minutes_seconds {
+  label: "Total clean time: dd:hh:mm:ss"
   type: number
   sql:  ${total_cleaning_time} / 86400.0 ;;
   value_format: "dd:hh:mm:ss"
