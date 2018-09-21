@@ -212,6 +212,7 @@ view: robot_viz_contest {
       hour,
       hour_of_day,
       date,
+      day_of_week,
       week,
       month,
       month_name,
