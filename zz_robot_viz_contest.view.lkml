@@ -14,6 +14,13 @@ view: robot_viz_contest {
     sql: ${TABLE}.cleanid ;;
   }
 
+
+  dimension: months_since_first_run {
+    view_label: "Robot Facts"
+    type: number
+    sql: DATE_DIFF( ${utc_date}, ${robot_facts.first_clean_date}, month ) ;;
+  }
+
   dimension: country_code {
     description: "County code - based on serial number allocation"
     type: string

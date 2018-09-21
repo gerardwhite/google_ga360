@@ -379,6 +379,11 @@ explore: robot_viz_contest {
   group_label: "Robot Viz Contest"
   label: "Robot viz | Deletes after summit"
 
+  join: robot_facts {
+    relationship: many_to_one
+    sql_on: ${robot_viz_contest.serial_ref} = ${robot_facts.serial_ref} ;;
+  }
+
   # Pre-filter added for date to keep queries running faster
   always_filter: {
     filters: {

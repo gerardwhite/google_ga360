@@ -11,6 +11,9 @@ view: robot_viz_contest_gw {
     type: string
     sql: ${TABLE}.cleanid ;;
   }
+
+
+
 # https://raw.githubusercontent.com/brechtv/looker_map_layers/master/world-countries.json We can augment this to cover "countries" not in the set.
   dimension: country_code {
     type: string
