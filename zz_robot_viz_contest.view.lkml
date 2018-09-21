@@ -24,18 +24,30 @@ view: robot_viz_contest {
   dimension: country_code {
     description: "County code - based on serial number allocation"
     type: string
-    sql: ${TABLE}.country_code ;;
+    map_layer_name: countries
+    sql: CASE WHEN ${TABLE}.country_code = 'CN' THEN 'CHN'
+              WHEN ${TABLE}.country_code = 'CA' THEN 'CAN'
+              WHEN ${TABLE}.country_code = 'EU' THEN 'DEU'
+              WHEN ${TABLE}.country_code = 'UK' THEN 'GBR'
+              WHEN ${TABLE}.country_code = 'US' THEN 'USA'
+              else ${TABLE}.country_code
+              -- WHEN ${TABLE}.country_code = 'XC' THEN 'XXX' -- XC has no ISO3 code - odd that Ceuta in the set?
+              end
+    ;;
   }
+
+
+
 
   dimension: country {
     sql: CASE
-    WHEN ${country_code} = "US" THEN "United States"
-    WHEN ${country_code} = "CN" THEN "China"
-    WHEN ${country_code} = "EU" THEN "Germany"
-    WHEN ${country_code} = "UK" THEN "United Kingdom"
-    WHEN ${country_code} = "CA" THEN "Canada"
-    WHEN ${country_code} = "JP" THEN "Japan"
-    WHEN ${country_code} = "XC" THEN "Malaysia"
+    WHEN ${country_code} = "USA" THEN "United States"
+    WHEN ${country_code} = "CHN" THEN "China"
+    WHEN ${country_code} = "DEU" THEN "Germany"
+    WHEN ${country_code} = "GBR" THEN "United Kingdom"
+    WHEN ${country_code} = "CAN" THEN "Canada"
+    WHEN ${country_code} = "JPN" THEN "Japan"
+    WHEN ${country_code} = "MYS" THEN "Malaysia"
     ELSE ${country_code}
     END
     ;;
