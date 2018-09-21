@@ -31,6 +31,7 @@ view: robot_viz_contest {
               WHEN ${TABLE}.country_code = 'EU' THEN 'DEU'
               WHEN ${TABLE}.country_code = 'UK' THEN 'GBR'
               WHEN ${TABLE}.country_code = 'US' THEN 'USA'
+              WHEN ${TABLE}.country_code = 'XC' THEN 'MYS'
               else ${TABLE}.country_code
               -- WHEN ${TABLE}.country_code = 'XC' THEN 'XXX' -- XC has no ISO3 code - odd that Ceuta in the set?
               end
