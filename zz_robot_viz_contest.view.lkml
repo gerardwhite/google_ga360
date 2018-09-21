@@ -27,6 +27,7 @@ view: robot_viz_contest {
     map_layer_name: countries
     sql: CASE WHEN ${TABLE}.country_code = 'CN' THEN 'CHN'
               WHEN ${TABLE}.country_code = 'CA' THEN 'CAN'
+              WHEN ${TABLE}.country_code = 'JP' THEN 'JPN'
               WHEN ${TABLE}.country_code = 'EU' THEN 'DEU'
               WHEN ${TABLE}.country_code = 'UK' THEN 'GBR'
               WHEN ${TABLE}.country_code = 'US' THEN 'USA'
