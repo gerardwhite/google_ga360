@@ -385,12 +385,12 @@ explore: robot_viz_contest {
   }
 
   # Pre-filter added for date to keep queries running faster
-  always_filter: {
-    filters: {
-      field: robot_viz_contest.utc_date
-      value: "last month"
-    }
-  }
+#   always_filter: {
+#     filters: {
+#       field: robot_viz_contest.utc_date
+#       value: "last month"
+#     }
+#   }
 }
 
 
