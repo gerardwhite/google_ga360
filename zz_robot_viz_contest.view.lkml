@@ -2,16 +2,20 @@ view: robot_viz_contest {
   sql_table_name: ao_looker_test.robot_viz_contest ;;
 
   dimension: active_cleaning_duration {
+    description: "total time the robot was active excluding time paused and time spend on dock e.g. recharging (seconds)
+"
     type: number
     sql: ${TABLE}.active_cleaning_duration ;;
   }
 
   dimension: cleanid {
+    description: "Unique clean identifier"
     type: string
     sql: ${TABLE}.cleanid ;;
   }
 
   dimension: country_code {
+    description: "County code - based on serial number allocation"
     type: string
     sql: ${TABLE}.country_code ;;
   }
@@ -123,87 +127,106 @@ view: robot_viz_contest {
 
 
   dimension: detailed_timings_cleaning {
+    description: "total time in seconds when the robot believes it knows its location and is out cleaning"
     type: number
     sql: ${TABLE}.detailed_timings_cleaning ;;
   }
 
   dimension: detailed_timings_in_emergency {
+    description: "total time in seconds"
     type: number
     sql: ${TABLE}.detailed_timings_in_emergency ;;
   }
 
   dimension: detailed_timings_midclean_charge {
+    description: "total time in seconds spent on the dock during a cleaning run (not including time before or after a run)"
     type: number
     sql: ${TABLE}.detailed_timings_midclean_charge ;;
   }
 
   dimension: detailed_timings_paused {
+    description: "total time in seconds where the robot is visibly paused"
     type: number
     sql: ${TABLE}.detailed_timings_paused ;;
   }
 
   dimension: detailed_timings_returning_to_start {
+    description: "total time in seconds when the robot is returning its start location (either to recharge or end the clean)"
     type: number
     sql: ${TABLE}.detailed_timings_returning_to_start ;;
   }
 
   dimension: detailed_timings_stuck {
+    description: "total time in seconds when the robot is trying to free itself from a stuck condition"
     type: number
     sql: ${TABLE}.detailed_timings_stuck ;;
   }
 
   dimension: detailed_timings_user_recoverable_fault {
+    description: "total time in seconds where the robot is waiting on the user to recover it from a 'user-recoverable' fault"
     type: number
     sql: ${TABLE}.detailed_timings_user_recoverable_fault ;;
   }
 
   dimension: detailed_timings_waiting_to_start {
+    description: "total time in seconds between the user telling the robot to start clean and the time it statrs moving"
     type: number
     sql: ${TABLE}.detailed_timings_waiting_to_start ;;
   }
 
   dimension: emergency_occurrences {
+    description: "count of times the robot enters emergency mode"
     type: number
     sql: ${TABLE}.emergency_occurrences ;;
   }
 
   dimension: end_condition_description {
+    description: "detailed End state of the clean"
     type: string
     sql: ${TABLE}.end_condition_description ;;
   }
 
   dimension: end_condition_group {
+    drill_fields: [end_condition_description]
+    description: "High level end state of the clean"
     type: string
     sql: ${TABLE}.end_condition_group ;;
   }
 
   dimension: estimated_coverage_area {
+    description: "Coverage area for the clean in m^2 tiles"
     type: number
     sql: ${TABLE}.estimated_coverage_area ;;
   }
 
   dimension: powermode {
+    description: "powermode used for the clean. Mixed implies a change during the course of the clean
+"
     type: string
     sql: ${TABLE}.powermode ;;
   }
 
   dimension: recharge_events {
+    description: "number of times the robot recharges on the dock during a clean"
     type: number
     sql: ${TABLE}.recharge_events ;;
   }
 
   dimension: serial_ref {
+    description: "Unique numeric reference to a product (in lieu of a serialnumber – to ensure anonymisation)"
     type: number
     sql: ${TABLE}.serial_ref ;;
   }
 
   # Seems like they all have the same start location?  Not sure we can do much with this field.
   dimension: start_location {
+    description: "where the robot starts its clean (on dock/off dock)"
     type: string
     sql: ${TABLE}.start_location ;;
   }
 
   dimension_group: utc {
+    description: "Start time in UTC"
     type: time
     timeframes: [
       raw,
@@ -222,11 +245,14 @@ view: robot_viz_contest {
   }
 
   dimension: startmode {
+    description: "Method in which the clean started"
     type: string
     sql: ${TABLE}.startmode ;;
   }
 
   dimension: stuck_occurrences {
+    description: "count of times the robot attempts recovery from physical stuck
+"
     type: number
     sql: ${TABLE}.stuck_occurrences ;;
   }
