@@ -384,6 +384,13 @@ explore: robot_viz_contest {
     sql_on: ${robot_viz_contest.serial_ref} = ${robot_facts.serial_ref} ;;
   }
 
+ join: robot_reference_data  {
+   relationship: many_to_one
+  sql_on: ${robot_viz_contest.country} = ${robot_reference_data.country} ;;
+ }
+
+
+
   # Pre-filter added for date to keep queries running faster
 #   always_filter: {
 #     filters: {

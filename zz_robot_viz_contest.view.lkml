@@ -435,6 +435,27 @@ measure: total_recharge_events {
 }
 
 
+  measure: percent_average_humidity {
+    type: average
+    sql: ${robot_reference_data.average_humidity} ;;
+    value_format_name: percent_1
+  }
+
+  measure: liquid_average_humidity {
+    type: average
+    sql: ${robot_reference_data.average_humidity}*100 ;;
+    value_format_name: percent_1
+  }
+
+
+  measure: average_pollution_index {
+    type: average
+    sql: ${robot_reference_data.pollution_index} ;;
+    value_format_name: percent_1
+  }
+
+
+
 
   measure: count {
     type: count
