@@ -53,6 +53,22 @@ view: robot_viz_contest {
     ELSE ${country_code}
     END
     ;;
+
+
+    # Adds drill down links to country SAP report.
+    link: {
+      label: "{{robot_viz_contest.country._value}} single region report"
+      url: "/dashboards/105?Region={{ robot_viz_contest.country._value | encode_uri }}"
+      icon_url: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/dyson-fav.ico"
+    }
+
+    link: {
+      label: "{{robot_viz_contest.country._value}} SAP performance report"
+      url: "/dashboards/69?Country={{ robot_viz_contest.country._value | encode_uri }}"
+      icon_url: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/SAPfavicon.ico"
+    }
+
+
   }
 
 
@@ -412,6 +428,11 @@ measure: clean_time_days_hours_minutes_seconds {
   value_format: "dd:hh:mm:ss"
 }
 
+measure: total_recharge_events {
+  type: sum
+  group_label: "Custom fields"
+  sql: ${recharge_events} ;;
+}
 
 
 
