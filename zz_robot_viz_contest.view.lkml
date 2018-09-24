@@ -140,10 +140,16 @@ view: robot_viz_contest {
           end;;
     html: <img src="https://restcountries.eu/data/{{ value }}.svg" style="width:50px;height:30px;"/> ;;
 
-    # Adds drill down links to SAP
+    # Adds drill down links to country SAP report.
     link: {
-      label: "{{robot_viz_contest.country_value}} SAP report"
-      url: "/dashboards/69?Country={{ robot_viz_contest._value | encode_uri }}"
+      label: "{{robot_viz_contest.country._value}} single region report"
+      url: "/dashboards/105?Region={{ robot_viz_contest.country._value | encode_uri }}"
+      icon_url: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/dyson-fav.ico"
+    }
+
+    link: {
+      label: "{{robot_viz_contest.country._value}} SAP performance report"
+      url: "/dashboards/69?Country={{ robot_viz_contest.country._value | encode_uri }}"
       icon_url: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/SAPfavicon.ico"
     }
   }
