@@ -320,7 +320,19 @@ measure: number_of_times_stuck {
     group_label: "Custom fields"
     sql: ${estimated_coverage_area} ;;
 
+
   }
+
+
+# Based on travelling 3m to clean 1 square meter.
+  measure: total_cleaning_distance {
+    type: sum
+
+    group_label: "Custom fields"
+    sql: ${estimated_coverage_area} * 3 ;;
+
+  }
+
 
 
   ######### Custom data-level measures ########
