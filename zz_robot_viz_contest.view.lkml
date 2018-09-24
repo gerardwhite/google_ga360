@@ -293,6 +293,12 @@ view: robot_viz_contest {
     sql: ${cleanid} ;;
   }
 
+measure: number_of_times_stuck {
+  type: sum
+  group_label: "Custom fields"
+  sql: ${stuck_occurrences} ;;
+}
+
   measure: average_cleans_per_machine {
     type: number
     group_label: "Custom fields"
@@ -313,7 +319,7 @@ view: robot_viz_contest {
     value_format: "0.00,,\" M m2\""
     group_label: "Custom fields"
     sql: ${estimated_coverage_area} ;;
-    html: £{{rendered_value}} ;;
+
   }
 
 
@@ -328,6 +334,7 @@ view: robot_viz_contest {
       value: "last month"
     }
   }
+
 
   measure: total_cleans_previous_month {
     type: count_distinct
