@@ -196,7 +196,6 @@ view: ga_sessions_base {
 
 
 
-
   measure: total_visitors {
     type: count
     drill_fields: [fullVisitorId, visitnumber, session_count, totals.hits, totals.page_views, totals.timeonsite]
@@ -619,6 +618,8 @@ measure: bounces_last_week {
 }
 
 measure: bounce_rate_last_week {
+  group_label: "Filtered KPIs"
+
   type: number
   sql: 1.0 * ${bounces_last_week} / NULLIF(${ga_sessions.number_of_visitors_last_week},0) ;;
   value_format_name: percent_2
@@ -626,6 +627,8 @@ measure: bounce_rate_last_week {
 
 
   measure: bounces_last_week_last_year {
+    group_label: "Filtered KPIs"
+
     type: sum
     sql: ${TABLE}.bounces ;;
     filters: {
@@ -635,6 +638,8 @@ measure: bounce_rate_last_week {
   }
 
   measure: bounce_rate_last_week_last_year {
+    group_label: "Filtered KPIs"
+
     type: number
     sql: 1.0 * ${bounces_last_week_last_year} / NULLIF(${ga_sessions.number_of_visitors_last_week_last_year},0) ;;
     value_format_name: percent_2
@@ -642,6 +647,8 @@ measure: bounce_rate_last_week {
 
 
 measure: bounce_rate_diff_last_week_vs_last_week_last_year {
+  group_label: "Filtered KPIs"
+
   type: number
   sql: ${bounce_rate_last_week}-${bounce_rate_last_week_last_year} ;;
   value_format_name: percent_2
@@ -667,6 +674,7 @@ measure: bounce_rate_diff_last_week_vs_last_week_last_year {
   }
 
   measure: transactions_last_week {
+    group_label: "Filtered KPIs"
     type: sum
     sql: ${TABLE}.transactions ;;
     filters: {
@@ -676,6 +684,7 @@ measure: bounce_rate_diff_last_week_vs_last_week_last_year {
   }
 
   measure: transactions_last_week_last_year {
+    group_label: "Filtered KPIs"
     type: sum
     sql: ${TABLE}.transactions ;;
     filters: {
@@ -686,6 +695,7 @@ measure: bounce_rate_diff_last_week_vs_last_week_last_year {
 
 
   measure: transactions_diff_lw_vs_lwly {
+    group_label: "Filtered KPIs"
     type: number
     sql: 1.0 * ${transactions_last_week} / NULLIF(${transactions_last_week_last_year},0) ;;
     value_format_name: percent_0
@@ -695,6 +705,7 @@ measure: bounce_rate_diff_last_week_vs_last_week_last_year {
 
 
 measure: conv_rate_last_week {
+  group_label: "Filtered KPIs"
   type: number
   sql: 1.0 * ${transactions_last_week} / NULLIF(${ga_sessions.number_of_visitors_last_week},0) ;;
   value_format_name: percent_2
@@ -702,6 +713,7 @@ measure: conv_rate_last_week {
 
 
   measure: conv_rate_last_week_last_year {
+    group_label: "Filtered KPIs"
     type: number
     sql: 1.0 * ${transactions_last_week_last_year} / NULLIF(${ga_sessions.number_of_visitors_last_week_last_year},0) ;;
     value_format_name: percent_2
@@ -709,6 +721,7 @@ measure: conv_rate_last_week {
 
 
   measure: conv_rate_diff_lw_vs_lwly {
+    group_label: "Filtered KPIs"
     type: number
     sql: ${conv_rate_last_week}-${conv_rate_last_week_last_year} ;;
     value_format_name: percent_2
@@ -745,6 +758,7 @@ measure: conv_rate_last_week {
 
 
   measure: transactionRevenue_total_gbp_last_week {
+    group_label: "Filtered KPIs"
     description: "This is in GBP"
     label: "Transaction Revenue Total (£) Last Week"
     value_format_name: gbp_0
@@ -759,6 +773,7 @@ measure: conv_rate_last_week {
 
 
   measure: transactionRevenue_total_gbp_last_week_last_year {
+    group_label: "Filtered KPIs"
     description: "This is in GBP"
     label: "Transaction Revenue Total (£) Last Week Last Year"
     value_format_name: gbp_0
@@ -772,6 +787,7 @@ measure: conv_rate_last_week {
   }
 
   measure: revenue_diff_lw_vs_lwly {
+    group_label: "Filtered KPIs"
     type: number
     sql: 1.0 * ${transactionRevenue_total_gbp_last_week} / NULLIF(${transactionRevenue_total_gbp_last_week_last_year},0) ;;
     value_format_name: percent_0
@@ -788,12 +804,14 @@ measure: conv_rate_last_week {
 ############# AOV metrics #############################
 
 measure: aov_last_week {
+  group_label: "Filtered KPIs"
   type: number
   value_format_name: gbp_0
   sql: ${transactionRevenue_total_gbp_last_week}/${transactions_last_week} ;;
 }
 
   measure: aov_last_week_last_year {
+    group_label: "Filtered KPIs"
     type: number
     value_format_name: gbp_0
 
@@ -801,6 +819,7 @@ measure: aov_last_week {
   }
 
 measure: aov_diff_lw_vs_lwly {
+  group_label: "Filtered KPIs"
   type: number
   sql: 1.0 * ${aov_last_week} / NULLIF(${aov_last_week_last_year},0) ;;
   value_format_name: percent_0
@@ -818,6 +837,7 @@ measure: aov_diff_lw_vs_lwly {
 
 
   measure: timeonsite_total_last_week {
+    group_label: "Filtered KPIs"
     label: "Time On Site Last Week"
     type: sum
     sql: ${TABLE}.timeonsite ;;
@@ -829,6 +849,7 @@ measure: aov_diff_lw_vs_lwly {
 
 
   measure: timeonsite_total_last_week_last_year {
+    group_label: "Filtered KPIs"
     label: "Time On Site Last Week Last Year"
     type: sum
     sql: ${TABLE}.timeonsite ;;
@@ -839,6 +860,7 @@ measure: aov_diff_lw_vs_lwly {
   }
 
   measure: timeonsite_average_per_session_last_week {
+    group_label: "Filtered KPIs"
     label: "Time On Site Average Per Session Last Week"
     type: number
     sql: 1.0 * ${timeonsite_total_last_week} / NULLIF(${ga_sessions.number_of_visitors_last_week},0) ;;
@@ -846,6 +868,7 @@ measure: aov_diff_lw_vs_lwly {
   }
 
   measure: timeonsite_average_per_session_last_week_last_year {
+    group_label: "Filtered KPIs"
     label: "Time On Site Average Per Session Last Week Last Year"
     type: number
     sql: 1.0 * ${timeonsite_total_last_week_last_year} / NULLIF(${ga_sessions.number_of_visitors_last_week_last_year},0) ;;
@@ -857,6 +880,7 @@ measure: aov_diff_lw_vs_lwly {
 
 
   measure: average_time_on_site_diff_lw_vs_lwly {
+    group_label: "Filtered KPIs"
     type: number
     sql: 1.0 * ${timeonsite_average_per_session_last_week} / NULLIF(${timeonsite_average_per_session_last_week_last_year},0) ;;
     value_format_name: percent_0
@@ -910,6 +934,7 @@ measure: value_per_session {
 
 
   measure: average_order_value_gbp {
+    label: "Average Order value (GBP)"
     value_format_name: gbp
     type: average
     sql: (${TABLE}.transactionRevenue/1000000)/${tax_xrates_by_country_2018_v2.xrate} ;;
