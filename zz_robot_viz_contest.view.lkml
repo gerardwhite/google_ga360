@@ -26,6 +26,35 @@ view: robot_viz_contest {
     view_label: "Robot Facts"
     type: number
     sql: DATE_DIFF( ${utc_date}, ${robot_facts.first_clean_date}, week ) ;;
+
+    action: {
+      label: "Email RDD team"
+      url: "https://nonononono"
+      icon_url: "https://sendgrid.com/favicon.ico"
+      param: {
+        name: "some_auth_code"
+        value: "abc123456"
+      }
+      form_param: {
+        name: "Subject"
+        required: yes
+        default: "Robot cleaning life expectancy / retention issue"
+      }
+      form_param: {
+        name: "Body"
+        type: textarea
+        required: yes
+        default:
+        "ALERT
+
+        There is a retention issue with our 360 eye robots on or after the 1st week of initial activation.  This accounts for a retention drop of 27% in the United States.  Please can you investgate further.
+
+        See this link for more detail:
+
+        ~{{ _user_attributes.first_name}}"
+      }
+    }
+
   }
 
 
@@ -75,6 +104,7 @@ view: robot_viz_contest {
       url: "/dashboards/69?Country={{ robot_viz_contest.country._value | encode_uri }}"
       icon_url: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/SAPfavicon.ico"
     }
+
 
 
   }
