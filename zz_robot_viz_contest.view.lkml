@@ -47,7 +47,13 @@ view: robot_viz_contest {
         default:
         "ALERT
 
-        There is a retention issue with our 360 eye robots on or after the 1st week of initial activation.  This accounts for a retention drop of 27% in the United States.  Please can you investgate further.
+        There is a retention issue with our 360 eye robots on or after the 1st week of initial activation.  This accounts for a retention drop of 27% in the United States.
+
+        Possible causes:
+          - Is this a gifting issue (e.g. Christmas/Valentines?)
+          - Are envirnomnental factors at play (temperature/humidy)?
+
+        Please can you investgate further?
 
         See this link for more detail:
 
