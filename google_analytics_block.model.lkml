@@ -400,6 +400,11 @@ explore: robot_viz_contest {
 #   }
 }
 
+explore: weather_by_store {
+  group_label: "Reference Data"
+  label: "Weather"
+}
+
 
 
 

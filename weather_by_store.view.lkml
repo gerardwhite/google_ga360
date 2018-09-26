@@ -42,6 +42,18 @@ view: weather_by_store {
     sql: ${TABLE}.Temperature ;;
   }
 
+  measure: average_temperature {
+    type: average
+    value_format_name: decimal_2
+    sql: ${temperature} ;;
+  }
+
+  measure: average_pressure {
+    value_format_name: decimal_2
+    type: average
+    sql: ${pressure} ;;
+  }
+
   dimension_group: time_of_entry {
     type: time
     timeframes: [
