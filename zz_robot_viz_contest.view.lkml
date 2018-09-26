@@ -97,7 +97,6 @@ view: robot_viz_contest {
     END
     ;;
 
-
     # Adds drill down links to country SAP report.
     link: {
       label: "{{robot_viz_contest.country._value}} single region report"
@@ -110,8 +109,6 @@ view: robot_viz_contest {
       url: "/dashboards/69?Country={{ robot_viz_contest.country._value | encode_uri }}"
       icon_url: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1615306/SAPfavicon.ico"
     }
-
-
 
   }
 
@@ -354,6 +351,9 @@ view: robot_viz_contest {
 
   #############   Calculated fields ##########
 
+
+# test comment
+
   measure: number_of_machines {
     type: count_distinct
     group_label: "Custom fields"
@@ -500,17 +500,30 @@ measure: total_recharge_events {
 
 
  measure: weeks_cleaning_life_expectancy {
-   type: number
+   type: average
    group_label: "Custom fields"
   sql: CASE
   WHEN ${country} = "China" THEN 10
   WHEN ${country} = "Canada" THEN 14
   WHEN ${country} = "United Kingdom" THEN 18
+  WHEN ${country} = "United States" THEN 12
   WHEN ${country} = "Germany" THEN 17
   WHEN ${country} = "Japan" THEN 22
+  else null
+  END
 
   ;;
  }
+
+
+# Owner cost per week
+measure: average_cost_per_week {
+  type: number
+  group_label: "Custom fields"
+  sql: 800/${weeks_cleaning_life_expectancy} ;;
+  value_format_name: gbp_0
+}
+
 
 
 

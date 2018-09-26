@@ -19,6 +19,8 @@ view: robot_reference_data {
 
   dimension: life_expectancy {
     type: number
+    label: "Human life expectancy (year)"
+    description: "This is the human life expectancy. Data source = wikipedia"
     sql: ${TABLE}.lifeExpectancy ;;
   }
 
