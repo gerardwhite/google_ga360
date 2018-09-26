@@ -463,6 +463,19 @@ measure: total_recharge_events {
   }
 
 
+ measure: weeks_cleaning_life_expectancy {
+   type: number
+   group_label: "Custom fields"
+  sql: CASE
+  WHEN ${country} = "China" THEN 10
+  WHEN ${country} = "Canada" THEN 14
+  WHEN ${country} = "United Kingdom" THEN 18
+  WHEN ${country} = "Germany" THEN 17
+  WHEN ${country} = "Japan" THEN 22
+
+  ;;
+ }
+
 
 
   measure: count {
