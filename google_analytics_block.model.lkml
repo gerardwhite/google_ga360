@@ -66,24 +66,26 @@ explore: ga_sessions {
     sql_on: ${ga_sessions.website_selector} = ${tax_xrates_by_country_2018_v2.website} ;;
   }
 
-  join: uk_temperatures {
-    relationship: many_to_one
-    sql_on: ${ga_sessions.visitStart_date} = ${uk_temperatures.temp_date} ;;
-  }
+
+ # Old join when using static temp data
+  # join: uk_temperatures {
+  #   relationship: many_to_one
+  #   sql_on: ${ga_sessions.visitStart_date} = ${uk_temperatures.temp_date} ;;
+  # }
 }
 
 
-#not used in demo but keep code
-explore: weekly_global_stats {
-  label: "Google Analytics: Global"
-  group_label: "E-Commerce"
-  description: "Used to compare markets on a high level before drilling. Based on aggregate table"
-  join: tax_xrates_by_country_2018_v2 {
-    relationship: many_to_one
-    sql_on: ${weekly_global_stats.ga_sessions_website_selector} = ${tax_xrates_by_country_2018_v2.website} ;;
-    fields: [tax_xrates_by_country_2018_v2.country, tax_xrates_by_country_2018_v2.country_icon, tax_xrates_by_country_2018_v2.country_and_icon]
-  }
-}
+# #not used in demo but keep code
+# explore: weekly_global_stats {
+#   label: "Google Analytics: Global"
+#   group_label: "E-Commerce"
+#   description: "Used to compare markets on a high level before drilling. Based on aggregate table"
+#   join: tax_xrates_by_country_2018_v2 {
+#     relationship: many_to_one
+#     sql_on: ${weekly_global_stats.ga_sessions_website_selector} = ${tax_xrates_by_country_2018_v2.website} ;;
+#     fields: [tax_xrates_by_country_2018_v2.country, tax_xrates_by_country_2018_v2.country_icon, tax_xrates_by_country_2018_v2.country_and_icon]
+#   }
+# }
 
 
 
@@ -176,20 +178,20 @@ explore: retail_next {
 
 ########### Marketplaces ###################
 
-explore: tmall {
-  group_label: "Marketplaces"
-  label: "Marketplaces | Tmall"
+# explore: tmall {
+#   group_label: "Marketplaces"
+#   label: "Marketplaces | Tmall"
 
-}
+# }
 
 
 ########## GA Realtime ####################
 
-explore: ga_realtime_today {
-  group_label: "E-Commerce"
-  label: "Google Analytics | Realtime"
+# explore: ga_realtime_today {
+#   group_label: "E-Commerce"
+#   label: "Google Analytics | Realtime"
 
-}
+# }
 
 
 # Joins pages on lookup to URL
@@ -249,15 +251,15 @@ explore: age_gender {
 
 
 
-# Adhoc analysis for Japanese trade-in campaign
-explore: adhoc_jp_trade_in_campaign {
-  group_label: "_Adhoc analysis"
-  label: "Trade in campaign explorer | Japan"
-  join: tax_xrates_by_country_2018_v2 {
-    relationship: many_to_one
-    sql_on: ${adhoc_jp_trade_in_campaign.website} = ${tax_xrates_by_country_2018_v2.website} ;;
-  }
-}
+# # Adhoc analysis for Japanese trade-in campaign
+# explore: adhoc_jp_trade_in_campaign {
+#   group_label: "_Adhoc analysis"
+#   label: "Trade in campaign explorer | Japan"
+#   join: tax_xrates_by_country_2018_v2 {
+#     relationship: many_to_one
+#     sql_on: ${adhoc_jp_trade_in_campaign.website} = ${tax_xrates_by_country_2018_v2.website} ;;
+#   }
+# }
 
 
 ################## THESE EXPLORES NEED TO DELETE POST POC ######################
@@ -266,49 +268,46 @@ explore: adhoc_jp_trade_in_campaign {
 
 # This will be replaced with the new connection block to DoubelClick once we have access.
 
-explore: adwords_us {
-  persist_for: "4 hours"
-  group_label: "E-Commerce"
-  label: "Adwords | US"
-}
+# explore: adwords_us {
+#   persist_for: "4 hours"
+#   group_label: "E-Commerce"
+#   label: "Adwords | US"
+# }
 
-explore: usadwords_merge  {
-  persist_for: "4 hours"
-  group_label: "E-Commerce"
-  label: "Adwords | US Merge"
-}
+# explore: usadwords_merge  {
+#   persist_for: "4 hours"
+#   group_label: "E-Commerce"
+#   label: "Adwords | US Merge"
+# }
 
-explore: adwords_jp2 {
-  persist_for: "4 hours"
-  group_label: "E-Commerce"
-  label: "Adwords | JP Merge"
-}
+# explore: adwords_jp2 {
+#   persist_for: "4 hours"
+#   group_label: "E-Commerce"
+#   label: "Adwords | JP Merge"
+# }
 
-explore: tmall_products {
-  persist_for: "4 hours"
-  group_label: "Marketplaces"
-  label: "Tmall | Product Performance"
-}
+# explore: tmall_products {
+#   persist_for: "4 hours"
+#   group_label: "Marketplaces"
+#   label: "Tmall | Product Performance"
+# }
 
 ################## Robot viz contest - DELETE AFTER SUMMIT ####
 
 
-explore: robot_viz_contest {
-  persist_for: "1 hour"
-  group_label: "Robot Viz Contest"
-  label: "Robot viz | Deletes after summit"
+# explore: robot_viz_contest {
+#   persist_for: "1 hour"
+#   group_label: "Robot Viz Contest"
+#   label: "Robot viz | Deletes after summit"
 
-  join: robot_facts {
-    relationship: many_to_one
-    sql_on: ${robot_viz_contest.serial_ref} = ${robot_facts.serial_ref} ;;
-  }
+#   join: robot_facts {
+#     relationship: many_to_one
+#     sql_on: ${robot_viz_contest.serial_ref} = ${robot_facts.serial_ref} ;;
+#   }
 
- join: robot_reference_data  {
-   relationship: many_to_one
-  sql_on: ${robot_viz_contest.country} = ${robot_reference_data.country} ;;
- }
+# join: robot_reference_data  {
+#   relationship: many_to_one
+#   sql_on: ${robot_viz_contest.country} = ${robot_reference_data.country} ;;
+# }
 
-
-
-
-}
+# }
