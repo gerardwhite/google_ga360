@@ -752,7 +752,7 @@ FROM  ${sap_budget_daily.SQL_TABLE_NAME} --the calculated daily values
     sql: ${sales} ;;
     filters: {
       field: date_month
-      value: "13 months ago"
+      value: "12 months ago"
     }
     filters: {
       field: source

@@ -46,8 +46,6 @@ view: ga_realtime_uk {
 
 
 
-
-
   dimension: visits {
     type: number
     sql: ${TABLE}.visits ;;
