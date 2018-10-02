@@ -7,6 +7,7 @@ view: gfk {
     sql: ${TABLE}.Country ;;
   }
 
+
   dimension: currency {
     type: string
     sql: ${TABLE}.Currency ;;
@@ -135,9 +136,6 @@ view: gfk {
 
 
 
-
-
-
       dimension: stock {
         type: yesno
         sql: ${TABLE}.Stock ;;
@@ -192,21 +190,7 @@ view: gfk {
         }
       }
 
-# Trying to get Dyson price as dimension.  Needs work
 
-      # dimension: dyson_price_as_dim {
-      #   type: string
-      #   sql: ${dyson_price} ;;
-      # }
-
-
-
-
-# #Removing the http|http from url. This needs work.
-#   dimension: url_short {
-#     type: string
-#     sql: REGEXP_EXTRACT(${url},`((?:http|https)://(?:[\w_-]+(?:(?:\.[\w_-]+)+))(?:[\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-]))`)   ;;
-#   }
 
 
 
@@ -234,32 +218,7 @@ view: gfk {
       }
 
 
-      # Use this format if we have the images stored in URLs
-      # dimension: dyson_stored_image {
-      #   type: string
-      #   sql: ${image_url};;
-      #   html: <img src="{{value}}" /> ;;
-      # }
 
-
-
-# Places GA measures inside GFK view. Not sure if we need to do this?
-
-      # dimension: visits {
-      #   type: number
-      #   sql: ${view_pages_last30days_allmarkets.visits} ;;
-      # }
-
-      # measure: number_of_visits {
-      #   type: sum
-      #   sql: ${visits} ;;
-      # }
-
-
-      # measure: number_of_transactions {
-      #   type: sum
-      #   sql: ${products_historical_allmarkets.product_quantity} ;;
-      # }
 
 
       measure: count {

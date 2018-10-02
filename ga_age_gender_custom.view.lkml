@@ -72,14 +72,6 @@ measure: value_per_visit {
   }
 
 
-
-
-# AOV?
-
-
-
-# Gender stuff
-
   measure: male_visits  {
     type: sum
     sql: ${sessions} ;;
