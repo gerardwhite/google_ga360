@@ -19,7 +19,7 @@ view: tax_xrates_by_country_2018_v2 {
   }
 
 
-# Change to Sean's bevelled example when I can.
+# These are small (file size) SVG images.
 
   dimension: country_icon {
     type: string
@@ -54,6 +54,8 @@ view: tax_xrates_by_country_2018_v2 {
   }
 
 
+# Larger images. Slightly bigger file sizes too.
+
   dimension: country_icon_large {
     type: string
     sql: case when ${country} = 'United Kingdom' then 'United-Kingdom'
@@ -68,10 +70,6 @@ view: tax_xrates_by_country_2018_v2 {
     type: string
     sql: concat(${country_icon},' ', ${country}) ;;
   }
-
-
-
-
 
 
 

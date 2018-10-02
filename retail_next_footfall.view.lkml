@@ -153,9 +153,6 @@ measure: total_values {
     }
   }
 
-
-
-
   measure: count {
     type: count
     drill_fields: []
