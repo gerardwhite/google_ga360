@@ -57,6 +57,13 @@ explore: adobe_product_performance {
 
 
 
+explore: ga_realtime_uk {
+  label: "Realtime UK"
+  group_label: "E-Commerce"
+}
+
+
+
 explore: ga_sessions {
   label: "Google Analytics"
   group_label: "E-Commerce"
@@ -65,14 +72,8 @@ explore: ga_sessions {
     relationship: many_to_one
     sql_on: ${ga_sessions.website_selector} = ${tax_xrates_by_country_2018_v2.website} ;;
   }
+ }
 
-
- # Old join when using static temp data
-  # join: uk_temperatures {
-  #   relationship: many_to_one
-  #   sql_on: ${ga_sessions.visitStart_date} = ${uk_temperatures.temp_date} ;;
-  # }
-}
 
 
 # #not used in demo but keep code
