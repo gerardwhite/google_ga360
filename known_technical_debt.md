@@ -12,3 +12,5 @@ As we've rushed to complete presentations and the POC we have accrued technical 
 * Worth rolling up some views, as has been done in the ga_block to reduce junk and/or add folders when these are available.
 * Currency symbols have been manually added to some KPI blocks and charts, to suit the POC/presentation. We need to create a lookup table for currency symbol by country (and local analytics logic)
 * Country rank needs to be converted into 1st, 2nd, 3rd, 4th + nth fields.  For text 'insights' tiles
+* Red and green style reports should be converted to up/down arrows rather than blocks of red and green.  An example for which sits on dashboard 99 (KPI change by device).
+*
